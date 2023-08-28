@@ -9,24 +9,27 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun LotteryBalanceCard(titulo: String, valor: Double){
+fun GanadoCard(titulo: String, valor: Double){
     Card(
         modifier = Modifier
             .size(180.dp, 80.dp)
             .padding(8.dp),
         colors = CardDefaults.cardColors(
-            containerColor = Color(0xFFF0F4C3)
+            containerColor = Color(0xFFF1F8E9)
         )
     ) {
         Text(
             text = titulo,
             modifier = Modifier
+                .padding(2.dp)
                 .fillMaxWidth(),
             textAlign = TextAlign.Center,
+            fontWeight = FontWeight.Black,
             color = Color.Black
         )
 
@@ -34,6 +37,7 @@ fun LotteryBalanceCard(titulo: String, valor: Double){
             text = "$valor ${Typography.euro}",
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Center,
+            fontWeight = FontWeight.Bold,
             color = Color.Black
         )
     }

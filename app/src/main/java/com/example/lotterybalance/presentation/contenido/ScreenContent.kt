@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.layout.ContentScale
@@ -33,6 +34,7 @@ fun Content(boletoModel: BoletoViewModel = hiltViewModel(), ) {
     }
 
     Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .paint(
                 painter = painterResource(id = R.drawable.fondo2),
@@ -43,16 +45,17 @@ fun Content(boletoModel: BoletoViewModel = hiltViewModel(), ) {
 
         Row(
             modifier = Modifier
-                .padding(top = 100.dp)
+                .padding(top = 80.dp)
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.Center
         ) {
 
-            LotteryBalanceCard(titulo = "GANADO", valor = 0.0)
-            LotteryBalanceCard(titulo = "GASTADO", valor = gastado )
-
+            GanadoCard(titulo = "GANADO", valor = 20.0)
+            GastadoCard(titulo = "GASTADO", valor = gastado )
 
         }
+        BalanceCard(titulo = "BALANCE", valor = 20.0 - gastado )
+
         LazyFila(lista = boletosEntity, boletoModel = boletoModel)
 
 
