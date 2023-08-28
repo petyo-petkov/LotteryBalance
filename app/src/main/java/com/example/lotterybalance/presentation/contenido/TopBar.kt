@@ -37,7 +37,7 @@ fun TopBar() {
 
 
     CenterAlignedTopAppBar(
-        title = { Text(text = "Loto App", fontWeight = FontWeight.Bold) },
+        title = { Text(text = "Loto Balance", fontWeight = FontWeight.Bold) },
         modifier = Modifier,
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = Color(0xFFFFCCBC),
