@@ -13,6 +13,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Date
 import javax.inject.Inject
 
 
@@ -59,6 +61,13 @@ class MainViewModel @Inject constructor(
         val combinaciones = info[4].split(".").drop(1)
         var precio = 0.0
         var tipo = ""
+        var date = ""
+
+        val fechaFormat = SimpleDateFormat("ddMMMyy")
+        if (fecha.isNotBlank()){
+            date = fechaFormat.parse(fecha)?.toString() ?: ""  // ??? es para tanto?
+        }
+
 
         when (info[1]) {
             "P=1" -> {
@@ -84,6 +93,6 @@ class MainViewModel @Inject constructor(
 
         }
 
-        return BoletoEntity(numero_serie = numero_serie, tipo = tipo, fecha = fecha, precio = precio)
+        return BoletoEntity(numero_serie = numero_serie, tipo = tipo, fecha = date, precio = precio)
     }
 }

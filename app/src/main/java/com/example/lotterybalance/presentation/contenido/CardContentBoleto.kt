@@ -14,6 +14,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import java.util.Date
 import kotlin.text.Typography.euro
 
 
@@ -33,7 +34,7 @@ fun MostrarFecha(texto: String, valor: String){
     )
     Spacer(modifier = Modifier.height(2.dp))
     Text(
-        text = valor,
+        text = valor.toString(),
         fontSize = 20.sp,
         fontWeight = FontWeight.SemiBold,
         modifier = Modifier.fillMaxWidth(),

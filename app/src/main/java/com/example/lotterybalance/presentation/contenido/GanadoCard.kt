@@ -12,12 +12,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun GanadoCard(titulo: String, valor: Double){
     Card(
         modifier = Modifier
-            .size(180.dp, 80.dp)
+            .size(180.dp, 90.dp)
             .padding(8.dp),
         colors = CardDefaults.cardColors(
             containerColor = Color(0xFFF1F8E9)
@@ -26,7 +27,7 @@ fun GanadoCard(titulo: String, valor: Double){
         Text(
             text = titulo,
             modifier = Modifier
-                .padding(2.dp)
+                .padding(4.dp)
                 .fillMaxWidth(),
             textAlign = TextAlign.Center,
             fontWeight = FontWeight.Black,
@@ -35,8 +36,10 @@ fun GanadoCard(titulo: String, valor: Double){
 
         Text(
             text = "$valor ${Typography.euro}",
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth()
+                .padding(4.dp),
             textAlign = TextAlign.Center,
+            fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
             color = Color.Black
         )

@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun BalanceCard(titulo: String, valor: Double){
@@ -24,11 +25,9 @@ fun BalanceCard(titulo: String, valor: Double){
         colorMayor
     }else colorMenor
 
-
-
     Card(
         modifier = Modifier
-            .size(180.dp, 80.dp)
+            .size(180.dp, 90.dp)
             .padding(8.dp),
         colors = color
 
@@ -36,7 +35,7 @@ fun BalanceCard(titulo: String, valor: Double){
         Text(
             text = titulo,
             modifier = Modifier
-                .padding(2.dp)
+                .padding(4.dp)
                 .fillMaxWidth(),
             textAlign = TextAlign.Center,
             fontWeight = FontWeight.Black,
@@ -45,7 +44,9 @@ fun BalanceCard(titulo: String, valor: Double){
 
         Text(
             text = "$valor ${Typography.euro}",
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth()
+                .padding(4.dp),
+            fontSize = 20.sp,
             textAlign = TextAlign.Center,
             fontWeight = FontWeight.Bold,
             color = Color.Black
@@ -53,10 +54,3 @@ fun BalanceCard(titulo: String, valor: Double){
     }
 
 }
-
-/*
-colors = CardDefaults.cardColors(
-            containerColor = Color(0xFFF0F4C3)
-        )
-
- */
