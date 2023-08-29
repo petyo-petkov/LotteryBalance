@@ -1,6 +1,7 @@
 package com.example.lotterybalance.presentation.contenido
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -38,16 +39,15 @@ fun Content(boletoModel: BoletoViewModel = hiltViewModel(), ) {
         modifier = Modifier
             .paint(
                 painter = painterResource(id = R.drawable.fondo2),
-                contentScale = ContentScale.FillBounds
-            ),
-
-        ) {
-
+                contentScale = ContentScale.FillBounds)
+        )
+    {
         Row(
             modifier = Modifier
                 .padding(top = 80.dp)
                 .fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
         ) {
 
             GanadoCard(titulo = "GANADO", valor = 20.0)

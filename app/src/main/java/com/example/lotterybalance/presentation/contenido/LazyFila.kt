@@ -51,7 +51,7 @@ fun LazyFila(lista: List<BoletoEntity>, boletoModel: BoletoViewModel) {
     val context = LocalContext.current
 
     LazyRow(
-        modifier = Modifier.padding(1.dp, 90.dp)
+        modifier = Modifier.padding(1.dp, 70.dp)
     ) {
         items(lista) { boleto ->
 
