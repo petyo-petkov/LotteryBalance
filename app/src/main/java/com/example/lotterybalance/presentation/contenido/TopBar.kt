@@ -3,6 +3,7 @@ package com.example.lotterybalance.presentation.contenido
 import android.annotation.SuppressLint
 import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Info
@@ -21,6 +22,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDatePickerState
+import androidx.compose.material3.rememberDateRangePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -35,6 +37,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.lotterybalance.viewModels.BoletoViewModel
 import kotlinx.coroutines.launch
@@ -52,12 +55,12 @@ fun TopBar() {
     // DatePicker
     val snackState = remember { SnackbarHostState() }
     val snackScope = rememberCoroutineScope()
-    SnackbarHost(hostState = snackState, Modifier)
+    SnackbarHost(hostState = snackState, Modifier.zIndex(1f))
     val openDialog = rememberSaveable { mutableStateOf(false) }
     if (openDialog.value) {
         val datePickerState = rememberDatePickerState()
         val confirmEnabled = derivedStateOf { datePickerState.selectedDateMillis != null }
-
+        val state = rememberDateRangePickerState()
         // DatePicker
         DatePickerDialog(
             onDismissRequest = {
@@ -66,16 +69,17 @@ fun TopBar() {
             confirmButton = {
                 TextButton(
                     onClick = {
-                        openDialog.value = false
                         snackScope.launch {
                             snackState.showSnackbar(
-                                "Selected date timestamp: ${datePickerState.selectedDateMillis}"
+                                "Saved range (timestamps): " +
+                                        "${state.selectedStartDateMillis!!..state.selectedEndDateMillis!!}"
                             )
                         }
+                        openDialog.value = false
                     },
-                    enabled = confirmEnabled.value
+                    enabled = state.selectedEndDateMillis != null
                 ) {
-                    Text("OK", color = Color.White)
+                    Text(text = "Save", color = Color.White)
                 }
             },
             dismissButton = {
@@ -88,7 +92,12 @@ fun TopBar() {
                 }
             }
         ) {
-            DatePicker(state = datePickerState)
+            DateRangePicker(state = state,
+                modifier = Modifier.weight(1f),
+                headline = {
+                    Text(text = "Seleccionar el rango de fechas")
+                }
+            )
         }
 
     }
