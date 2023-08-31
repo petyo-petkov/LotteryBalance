@@ -3,13 +3,15 @@ package com.example.lotterybalance.presentation.contenido
 import android.annotation.SuppressLint
 import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.DatePicker
+import androidx.compose.material3.DatePickerColors
+import androidx.compose.material3.DatePickerDefaults
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.DateRangePicker
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -41,6 +43,7 @@ import androidx.compose.ui.zIndex
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.lotterybalance.viewModels.BoletoViewModel
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 
 @SuppressLint("UnrememberedMutableState")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -57,6 +60,7 @@ fun TopBar() {
     val snackScope = rememberCoroutineScope()
     SnackbarHost(hostState = snackState, Modifier.zIndex(1f))
     val openDialog = rememberSaveable { mutableStateOf(false) }
+    val formatter = SimpleDateFormat("dd MMMM yyyy")
     if (openDialog.value) {
         val datePickerState = rememberDatePickerState()
         val confirmEnabled = derivedStateOf { datePickerState.selectedDateMillis != null }
@@ -71,8 +75,8 @@ fun TopBar() {
                     onClick = {
                         snackScope.launch {
                             snackState.showSnackbar(
-                                "Saved range (timestamps): " +
-                                        "${state.selectedStartDateMillis!!..state.selectedEndDateMillis!!}"
+                                "Desde: ${formatter.format(state.selectedStartDateMillis)} " +
+                                        " Hasta: ${formatter.format(state.selectedEndDateMillis)}"
                             )
                         }
                         openDialog.value = false
@@ -92,8 +96,14 @@ fun TopBar() {
                 }
             }
         ) {
-            DateRangePicker(state = state,
+            DateRangePicker(
+                state = state,
                 modifier = Modifier.weight(1f),
+                colors = DatePickerDefaults.colors(
+                    selectedDayContainerColor = Color(0xFFFFAB91),
+                    dayInSelectionRangeContainerColor = Color(0xFFFFCCBC),
+                    dayInSelectionRangeContentColor = Color(0xFF5F5D5D)
+                ),
                 headline = {
                     Text(text = "Seleccionar el rango de fechas")
                 }
@@ -101,6 +111,8 @@ fun TopBar() {
         }
 
     }
+
+
 
     CenterAlignedTopAppBar(
         title = { Text(text = "Loto Balance", fontWeight = FontWeight.Bold) },
