@@ -1,6 +1,5 @@
-package com.example.lotterybalance.presentation.contenido
+package com.example.lotterybalance.presentation.secondScreen
 
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -20,7 +19,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -30,8 +28,14 @@ import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -40,23 +44,39 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.lotterybalance.R
 import com.example.lotterybalance.database.entities.BoletoEntity
+import com.example.lotterybalance.presentation.firstScreen.InfoDialog
+import com.example.lotterybalance.presentation.firstScreen.MostrarFecha
+import com.example.lotterybalance.presentation.firstScreen.MostrarPrecio
 import com.example.lotterybalance.viewModels.BoletoViewModel
-
+import kotlinx.coroutines.launch
 
 @Composable
-fun LazyFila(lista: List<BoletoEntity>, boletoModel: BoletoViewModel) {
-
+fun SecLazyFila(
+    lista: List<BoletoEntity>,
+    boletoModel: BoletoViewModel = hiltViewModel()
+) {
+    boletoModel.getPremios()
+    val coroutineScope = rememberCoroutineScope()
     val context = LocalContext.current
 
+    // Dialogo al pulsar el icono "info"
+    var showInfo by rememberSaveable { mutableStateOf(false) }
+    val _boleto = boletoModel.boleto
+    val _premio = boletoModel.premio
+
+
+    // Lista horizontal de boletos
     LazyRow(
-        modifier = Modifier.padding(1.dp, 70.dp)
+        modifier = Modifier.padding(1.dp, 6.dp)
     ) {
         items(lista) { boleto ->
 
             Card(
                 modifier = Modifier
+                    .alpha(0.9f)
                     .size(220.dp, 320.dp)
                     .padding(4.dp),
                 shape = AbsoluteRoundedCornerShape(20.dp),
@@ -125,7 +145,8 @@ fun LazyFila(lista: List<BoletoEntity>, boletoModel: BoletoViewModel) {
 
                         MostrarFecha(
                             texto = "Fecha:",
-                            valor = boleto.fecha
+                            valor = boleto.fecha.toString()
+
                         )
 
                         Spacer(modifier = Modifier.height(20.dp))
@@ -138,35 +159,35 @@ fun LazyFila(lista: List<BoletoEntity>, boletoModel: BoletoViewModel) {
                     // Barra inferior
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.Center,
+                        horizontalArrangement = Arrangement.End,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
+
                         // Botones
                         IconButton(
-                            onClick = { },
-                            modifier = Modifier,
+                            onClick = {
+                                showInfo = true
+                                coroutineScope.launch {
+                                    boletoModel.loadBoletoByID(boleto.numero_serie)
+                                    boletoModel.loadPremioById(boleto.numero_serie)
+                                }
+
+                            },
+                            modifier = Modifier.padding(end = 12.dp),
                             colors = IconButtonDefaults.iconButtonColors(contentColor = Color.Black)
                         ) {
                             Icon(Icons.Default.Info, contentDescription = "info")
                         }
 
-                        Spacer(modifier = Modifier.width(100.dp))
-
-                        IconButton(
-                            onClick = {
-                                boletoModel.deleteOne(boleto)
-                                Toast.makeText(context, "Boleto borrado", Toast.LENGTH_SHORT).show()
-                            },
-                            modifier = Modifier,
-                            colors = IconButtonDefaults.iconButtonColors(contentColor = Color.Black)
-                        ) {
-                            Icon(Icons.Default.Delete, contentDescription = "delete")
-                        }
-
                     }
+
                 }
             }
-
         }
     }
+    InfoDialog(show = showInfo,
+        onDismiss = { showInfo = false },
+        boleto = _boleto,
+        premio = _premio
+    )
 }

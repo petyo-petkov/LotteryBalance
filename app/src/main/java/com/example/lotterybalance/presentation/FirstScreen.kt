@@ -1,27 +1,24 @@
-package com.example.lotterybalance
+package com.example.lotterybalance.presentation
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.example.lotterybalance.presentation.contenido.Content
-import com.example.lotterybalance.presentation.contenido.FAB
-import com.example.lotterybalance.presentation.contenido.TopBar
+import androidx.navigation.NavController
+import com.example.lotterybalance.presentation.firstScreen.BottomBar
+import com.example.lotterybalance.presentation.firstScreen.Content
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun MainScreen()
+fun FirstScreen(navController: NavController)
 {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         containerColor = Color(0xFF4D4646),
-        topBar = { TopBar() },
         content = { Content() },
-        floatingActionButton = { FAB() },
-        floatingActionButtonPosition = FabPosition.End
+        bottomBar = { BottomBar(navController) },
 
     )
 }

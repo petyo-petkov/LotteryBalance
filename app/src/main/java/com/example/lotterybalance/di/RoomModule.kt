@@ -26,6 +26,10 @@ object RoomModule {
 
     @Singleton
     @Provides
-    fun provideBoletoDao(db: BoletoDatabase) = db.getBoletoDao()
+    fun provideBoletoDao(db: BoletoDatabase) = db.BoletoDao()
+
+    @Singleton
+    @Provides
+    fun providePremioDao(db: BoletoDatabase) = db.PremioDao()
 
 }

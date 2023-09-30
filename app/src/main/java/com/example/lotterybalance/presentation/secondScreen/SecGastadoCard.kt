@@ -1,10 +1,9 @@
-package com.example.lotterybalance.presentation.contenido
+package com.example.lotterybalance.presentation.secondScreen
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,21 +15,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun BalanceCard(titulo: String, valor: Double){
-    val colorMayor = CardDefaults.cardColors(containerColor = Color(0xFFA5D6A7))
-    val colorMenor = CardDefaults.cardColors(containerColor = Color(0xFFEF9A9A))
-    val color: CardColors
-
-    color = if (valor >= 0.0){
-        colorMayor
-    }else colorMenor
-
+fun SecGastadoCard(titulo: String, valor: String){
     Card(
         modifier = Modifier
             .size(180.dp, 90.dp)
             .padding(8.dp),
-        colors = color
-
+        colors = CardDefaults.cardColors(
+            containerColor = Color(0xFFFFEBEE)
+        )
     ) {
         Text(
             text = titulo,
@@ -44,10 +36,11 @@ fun BalanceCard(titulo: String, valor: Double){
 
         Text(
             text = "$valor ${Typography.euro}",
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(4.dp),
-            fontSize = 20.sp,
             textAlign = TextAlign.Center,
+            fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
             color = Color.Black
         )

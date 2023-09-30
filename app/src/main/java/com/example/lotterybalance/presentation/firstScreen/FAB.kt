@@ -1,7 +1,6 @@
-package com.example.lotterybalance.presentation.contenido
+package com.example.lotterybalance.presentation.firstScreen
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.runtime.Composable
@@ -19,14 +18,14 @@ fun FAB(viewModel: MainViewModel = hiltViewModel()) {
 
     FloatingActionButton(
         onClick = { viewModel.startScanning() },
-        modifier = Modifier.padding(horizontal = 10.dp, vertical = 30.dp ),
+        modifier = Modifier,
         containerColor = Color(0xFFFFAB91),
         contentColor = Color.Black,
         elevation = FloatingActionButtonDefaults.elevation(8.dp)
     ) {
         Image(
             painter = painterResource(id = R.drawable.add),
-            contentDescription = "logo scanner",
+            contentDescription = "add",
             alignment = Alignment.Center
         )
 

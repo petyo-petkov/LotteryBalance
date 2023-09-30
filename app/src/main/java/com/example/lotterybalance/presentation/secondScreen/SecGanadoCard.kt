@@ -1,4 +1,4 @@
-package com.example.lotterybalance.presentation.contenido
+package com.example.lotterybalance.presentation.secondScreen
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -15,13 +15,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun GastadoCard(titulo: String, valor: Double){
+fun SecGanadoCard(titulo: String, valor: String){
     Card(
         modifier = Modifier
             .size(180.dp, 90.dp)
             .padding(8.dp),
         colors = CardDefaults.cardColors(
-            containerColor = Color(0xFFFFEBEE)
+            containerColor = Color(0xFFF1F8E9)
         )
     ) {
         Text(
@@ -36,8 +36,7 @@ fun GastadoCard(titulo: String, valor: Double){
 
         Text(
             text = "$valor ${Typography.euro}",
-            modifier = Modifier
-                .fillMaxWidth()
+            modifier = Modifier.fillMaxWidth()
                 .padding(4.dp),
             textAlign = TextAlign.Center,
             fontSize = 20.sp,

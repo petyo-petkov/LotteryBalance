@@ -1,20 +1,25 @@
 package com.example.lotterybalance.viewModels
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
-import androidx.lifecycle.MutableLiveData
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.lotterybalance.database.dao.BoletoDao
 import com.example.lotterybalance.database.entities.BoletoEntity
 import com.example.lotterybalance.repo.MainRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 import javax.inject.Inject
 
 
@@ -27,46 +32,85 @@ class MainViewModel @Inject constructor(
 
     ) : ViewModel() {
 
-    val scannState = MutableLiveData<String>()
-
+    private var state by mutableStateOf("")
 
     fun startScanning() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             repo.startScanning()
+                /*
                 .onEach { data ->
                     if (!data.isNullOrBlank()) {
                         dao.insertOne(crearBoletoEntity(data))
                     }
                 }
-
+                */
+                .flowOn(Dispatchers.IO)
                 .catch { error ->
                     Log.i("tag", "Error: ${error.message}")
                     Toast.makeText(context, "codigo no compatible o ya existe", Toast.LENGTH_LONG)
                         .show()
+
                 }
+                .flowOn(Dispatchers.IO)
                 .collect { data ->
                     if (!data.isNullOrBlank()) {
-                        scannState.postValue(data)
+                        state = data
+                        dao.insertOneBoleto(crearBoletoEntity(data))
+
                         Log.i("rawData", data)
+
                     }
                 }
         }
     }
+    @SuppressLint("SimpleDateFormat")
     private fun crearBoletoEntity(data: String): BoletoEntity {
 
         val info = data.split(";")
-        val numero_serie = info[0]
+        val raw_numero_serie = info[0].slice(2..11)
+        val numero_serie = raw_numero_serie.toLong()
         val fecha = info[2].slice(5..11)
         val semana = info[2].last().digitToInt()
         val combinaciones = info[4].split(".").drop(1)
         var precio = 0.0
         var tipo = ""
-        var date = ""
+        var numeroLoteria = mutableListOf<String>()
+        var reintegro = ""
+        var numerosSeparados = mutableListOf<String>()
 
-        val fechaFormat = SimpleDateFormat("ddMMMyy")
-        if (fecha.isNotBlank()){
-            date = fechaFormat.parse(fecha)?.toString() ?: ""  // ??? es para tanto?
+        info.forEach { i ->
+            if(i.startsWith("R=")){
+                reintegro = i.last().toString()
+            }
+            if (i.startsWith("N=")){
+                numeroLoteria = listOf(i).toMutableList()
+            }
         }
+
+        combinaciones.forEach { combinacion ->
+            numerosSeparados.add(convertirString(combinacion))
+        }
+
+        val mesesEnEspanol = mapOf(
+            "ENE" to "JAN",
+            "FEB" to "FEB",
+            "MAR" to "MAR",
+            "ABR" to "APR",
+            "MAY" to "MAY",
+            "JUN" to "JUN",
+            "JUL" to "JUL",
+            "AGO" to "AUG",
+            "SEP" to "SEP",
+            "OCT" to "OCT",
+            "NOV" to "NOV",
+            "DIC" to "DEC"
+        )
+        val fechaStringEnIngles = fecha.replace(Regex("[A-Z]{3}")) {
+            mesesEnEspanol[it.value] ?: it.value
+        }
+
+       val formatter = SimpleDateFormat("ddMMMyy",  Locale.ENGLISH)
+       val date = formatter.parse(fechaStringEnIngles)
 
 
         when (info[1]) {
@@ -89,10 +133,31 @@ class MainViewModel @Inject constructor(
             "P=10" -> {
                 tipo = "Loteria Nacional"
                 precio = 3.0
+                numerosSeparados = numeroLoteria
             }
 
         }
 
-        return BoletoEntity(numero_serie = numero_serie, tipo = tipo, fecha = date, precio = precio)
+        return BoletoEntity(
+            numero_serie = numero_serie,
+            tipo = tipo,
+            fecha = date,
+            precio = precio,
+            combinaciones = numerosSeparados,
+            reintegro = reintegro
+        )
+    }
+
+    // Convierte "1=1234567890" en "12 34 56 78 90"
+    private fun convertirString(input: String): String {
+        val regex = Regex("(\\d{2})")
+        val matches = regex.findAll(input)
+
+        val numeros = mutableListOf<String>()
+        for (match in matches) {
+            numeros.add(match.value)
+        }
+
+        return numeros.joinToString(" ")
     }
 }

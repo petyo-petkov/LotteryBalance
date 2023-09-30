@@ -1,4 +1,4 @@
-package com.example.lotterybalance.presentation.contenido
+package com.example.lotterybalance.presentation.firstScreen
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,7 +14,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import java.util.Date
 import kotlin.text.Typography.euro
 
 
