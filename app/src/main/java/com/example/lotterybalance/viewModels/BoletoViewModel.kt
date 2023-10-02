@@ -15,6 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.time.LocalDate
 import java.util.Date
 import javax.inject.Inject
 
@@ -25,7 +26,7 @@ class BoletoViewModel @Inject constructor(
     private val boletoDao: BoletoDao,
     private val premioDao: PremioDao,
 
-) : ViewModel() {
+    ) : ViewModel() {
 
     //VARIABLES BOLETO
     var boletos by mutableStateOf<List<BoletoEntity>>(listOf())
@@ -56,8 +57,6 @@ class BoletoViewModel @Inject constructor(
         private set
 
 
-
-
     // FUNC BOLETO
     fun getBoletoEntity() {
         viewModelScope.launch {
@@ -71,7 +70,8 @@ class BoletoViewModel @Inject constructor(
         }
     }
 
-    fun sortBoletosByDate(startDay: String, endDay: String) {
+
+    fun sortBoletosByDate(startDay: Date, endDay: Date) {
         viewModelScope.launch {
             boletoDao.getSelectedDates(startDay, endDay)
                 .flowOn(Dispatchers.IO)
@@ -82,6 +82,8 @@ class BoletoViewModel @Inject constructor(
                 }
         }
     }
+
+
 
     fun getOneBoleto() {
         viewModelScope.launch {
@@ -132,8 +134,8 @@ class BoletoViewModel @Inject constructor(
         viewModelScope.launch {
             boletoDao.getAllBoletosConPremio()
                 .flowOn(Dispatchers.IO)
-                .collect{result ->
-                    if (result.isNotEmpty()){
+                .collect { result ->
+                    if (result.isNotEmpty()) {
                         boletosPremio = result
                     }
                 }
@@ -156,7 +158,7 @@ class BoletoViewModel @Inject constructor(
         }
     }
 
-    suspend fun updatePremio(premio: PremioEntity){
+    suspend fun updatePremio(premio: PremioEntity) {
         viewModelScope.launch {
             premioDao.updatePremio(premio)
         }
@@ -166,8 +168,8 @@ class BoletoViewModel @Inject constructor(
         viewModelScope.launch {
             premioDao.getPremios()
                 .flowOn(Dispatchers.IO)
-                .collect {result ->
-                    if (result.isNotEmpty()){
+                .collect { result ->
+                    if (result.isNotEmpty()) {
                         premios = result
                     }
                 }
@@ -178,19 +180,19 @@ class BoletoViewModel @Inject constructor(
         viewModelScope.launch {
             premioDao.getPremio()
                 .flowOn(Dispatchers.IO)
-                .collect {result ->
+                .collect { result ->
                     premio = result
                 }
         }
     }
 
-    fun deletePremios(){
+    fun deletePremios() {
         viewModelScope.launch {
             premioDao.deletePremios(premios)
             premioDao.getPremios()
                 .flowOn(Dispatchers.IO)
-                .collect {result ->
-                    if (result.isEmpty()){
+                .collect { result ->
+                    if (result.isEmpty()) {
                         premios = result
                     }
 
@@ -199,13 +201,13 @@ class BoletoViewModel @Inject constructor(
         }
     }
 
-    fun deletePremio(premio: PremioEntity){
+    fun deletePremio(premio: PremioEntity) {
         viewModelScope.launch {
             premioDao.deletePremio(premio)
             premioDao.getPremios()
                 .flowOn(Dispatchers.IO)
-                .collect {result ->
-                    if (result.isEmpty()){
+                .collect { result ->
+                    if (result.isEmpty()) {
                         premios = result
                     }
                 }

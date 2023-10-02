@@ -8,11 +8,13 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.DatePickerDefaults
 import androidx.compose.material3.DatePickerDialog
@@ -27,6 +29,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -39,10 +42,13 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.lotterybalance.navigation.AppScreens
 import com.example.lotterybalance.viewModels.BoletoViewModel
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 
-@SuppressLint("UnrememberedMutableState", "SimpleDateFormat")
+@SuppressLint("UnrememberedMutableState", "SimpleDateFormat", "CoroutineCreationDuringComposition")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BottomBar(navController: NavController) {
@@ -54,87 +60,11 @@ fun BottomBar(navController: NavController) {
 
     // DatePicker
     var openDialog by rememberSaveable { mutableStateOf(false) }
-    val formatter = SimpleDateFormat("dd/MM/yy")
+    val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
     val state = rememberDateRangePickerState()
-    val startDay = state.selectedStartDateMillis
-    val endDay = state.selectedEndDateMillis
+    val startDay = state.selectedStartDateMillis?.let { Date(it) }
+    val endDay = state.selectedEndDateMillis?.let { Date(it) }
     val confirmEnabled by derivedStateOf { state.selectedEndDateMillis != null }
-    val selectedBoletos = boletoModel.sortidoBoletos
-
-    if (openDialog) {
-
-        if (confirmEnabled){
-            boletoModel.sortBoletosByDate(formatter.format(startDay), formatter.format(endDay))
-            Log.i("range", "$selectedBoletos")
-        }
-
-        DatePickerDialog(
-            onDismissRequest = {
-                openDialog = false
-            },
-            confirmButton = {
-                TextButton(
-                    onClick = {
-                        openDialog = false
-                        navController.navigate(route = AppScreens.SecondScreen.route)
-                    },
-                    enabled = state.selectedEndDateMillis != null
-                ) {
-                    Text(text = "Ok", color = Color.White)
-                }
-            },
-            dismissButton = {
-                TextButton(
-                    onClick = {
-                        openDialog = false
-                    }
-                ) {
-                    Text("Cancel", color = Color.White)
-                }
-            }
-        ) {
-            DateRangePicker(
-                state = state,
-                modifier = Modifier.weight(1f),
-                colors = DatePickerDefaults.colors(
-                    todayContentColor = Color.White,
-                    todayDateBorderColor = Color(0xFFFFAB91),
-                    selectedDayContainerColor = Color(0xFFFFAB91),
-                    dayInSelectionRangeContainerColor = Color(0xFFFFCCBC),
-                    dayInSelectionRangeContentColor = Color(0xFF5F5D5D),
-
-
-                    ),
-                title = {
-                    Text(text = "Selecionar el rango de fechas", modifier = Modifier
-                        .padding(16.dp)
-                        .fillMaxWidth(),
-                        fontSize = 20.sp,
-                        textAlign = TextAlign.Center)
-                },
-                headline = {
-                    Row(modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp)) {
-                        Box(Modifier.weight(1f)) {
-                            (if(state.selectedStartDateMillis!=null)
-                                state.selectedStartDateMillis?.let { formatter.format(it) }
-                            else "Fecha inicial")?.let { Text(text = it, fontSize = 16.sp) }
-                        }
-                        Box(Modifier.weight(1f)) {
-                            (if(state.selectedEndDateMillis!=null)
-                                state.selectedEndDateMillis?.let { formatter.format(it) }
-                            else "Fecha final")?.let { Text(text = it, fontSize = 16.sp) }
-                        }
-                        Box(Modifier.weight(0.2f)) {
-                            Icon(imageVector = Icons.Default.Done, contentDescription = "Okk")
-                        }
-                    }
-                }
-            )
-        }
-
-    }
 
     BottomAppBar(
         actions = {
@@ -161,7 +91,95 @@ fun BottomBar(navController: NavController) {
         containerColor = Color(0xFFFFCCBC),
         contentColor = Color.Black,
         contentPadding = PaddingValues(horizontal = 6.dp)
-        )
+    )
+
+    if (openDialog) {
+
+        if (confirmEnabled) {
+            if (startDay != null) {
+                if (endDay != null) {
+                        boletoModel.sortBoletosByDate(startDay, endDay)
+                }
+            }
+            Log.i("range", boletoModel.sortidoBoletos.toString())
+            Log.i("start", "$startDay")
+            Log.i("end", "$endDay")
+
+        }
+
+        DatePickerDialog(
+            onDismissRequest = {
+                openDialog = false
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        openDialog = false
+                        navController.navigate(route = AppScreens.SecondScreen.route)
+                    },
+                    enabled = state.selectedEndDateMillis != null
+                ) {
+                    Text(text = "Ok", color = Color.White)
+                }
+            },
+            modifier = Modifier,
+            dismissButton = {
+                TextButton(
+                    onClick = {
+                        openDialog = false
+                    }
+                ) {
+                    Text("Cancel", color = Color.White)
+                }
+            }
+        ) {
+            DateRangePicker(
+                state = state,
+                modifier = Modifier.weight(1f),
+                colors = DatePickerDefaults.colors(
+                    todayContentColor = Color.White,
+                    todayDateBorderColor = Color(0xFFFFAB91),
+                    selectedDayContainerColor = Color(0xFFFFAB91),
+                    dayInSelectionRangeContainerColor = Color(0xFFFFCCBC),
+                    dayInSelectionRangeContentColor = Color(0xFF5F5D5D),
+
+
+                    ),
+                title = {
+                    Text(
+                        text = "Selecionar el rango de fechas", modifier = Modifier
+                            .padding(16.dp)
+                            .fillMaxWidth(),
+                        fontSize = 20.sp,
+                        textAlign = TextAlign.Center
+                    )
+                },
+                headline = {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp)
+                    ) {
+                        Box(Modifier.weight(1f)) {
+                            (if (state.selectedStartDateMillis != null)
+                                state.selectedStartDateMillis?.let { formatter.format(it) }
+                            else "Fecha inicial")?.let { Text(text = it, fontSize = 16.sp) }
+                        }
+                        Box(Modifier.weight(1f)) {
+                            (if (state.selectedEndDateMillis != null)
+                                state.selectedEndDateMillis?.let { formatter.format(it) }
+                            else "Fecha final")?.let { Text(text = it, fontSize = 16.sp) }
+                        }
+                        Box(Modifier.weight(0.2f)) {
+                            Icon(imageVector = Icons.Default.Done, contentDescription = "Okk")
+                        }
+                    }
+                }
+            )
+        }
+    }
+
+
     DialogoBorrar(
         showDialog,                              // val show: Boolean
         { showDialog = false },                  // onDismiss()

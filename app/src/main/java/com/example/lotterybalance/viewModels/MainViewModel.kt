@@ -18,7 +18,6 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
-import java.util.Date
 import java.util.Locale
 import javax.inject.Inject
 
@@ -69,7 +68,7 @@ class MainViewModel @Inject constructor(
         val info = data.split(";")
         val raw_numero_serie = info[0].slice(2..11)
         val numero_serie = raw_numero_serie.toLong()
-        val fecha = info[2].slice(5..11)
+        val rawFecha = info[2].slice(5..11)
         val semana = info[2].last().digitToInt()
         val combinaciones = info[4].split(".").drop(1)
         var precio = 0.0
@@ -91,7 +90,7 @@ class MainViewModel @Inject constructor(
             numerosSeparados.add(convertirString(combinacion))
         }
 
-        val mesesEnEspanol = mapOf(
+        val meses = mapOf(
             "ENE" to "JAN",
             "FEB" to "FEB",
             "MAR" to "MAR",
@@ -105,13 +104,12 @@ class MainViewModel @Inject constructor(
             "NOV" to "NOV",
             "DIC" to "DEC"
         )
-        val fechaStringEnIngles = fecha.replace(Regex("[A-Z]{3}")) {
-            mesesEnEspanol[it.value] ?: it.value
+        val fechaEng = rawFecha.replace(Regex("[A-Z]{3}")) {
+            meses[it.value] ?: it.value
         }
 
-       val formatter = SimpleDateFormat("ddMMMyy",  Locale.ENGLISH)
-       val date = formatter.parse(fechaStringEnIngles)
-
+       val formatter = SimpleDateFormat("ddMMMyy", Locale.ENGLISH)
+       val fecha = formatter.parse(fechaEng)
 
         when (info[1]) {
             "P=1" -> {
@@ -141,7 +139,7 @@ class MainViewModel @Inject constructor(
         return BoletoEntity(
             numero_serie = numero_serie,
             tipo = tipo,
-            fecha = date,
+            fecha = fecha,
             precio = precio,
             combinaciones = numerosSeparados,
             reintegro = reintegro

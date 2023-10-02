@@ -12,7 +12,7 @@ class Converters {
         if (date == null) {
             return null
         }
-        val format = SimpleDateFormat("ddMMMyy", Locale.getDefault())
+        val format = SimpleDateFormat("ddMMMyy", Locale.ENGLISH)
         return format.format(date)
     }
 
@@ -21,7 +21,7 @@ class Converters {
         if (dateString == null) {
             return null
         }
-        val format = SimpleDateFormat("ddMMMyy", Locale.getDefault())
+        val format = SimpleDateFormat("ddMMMyy", Locale.ENGLISH)
         return format.parse(dateString)
     }
 

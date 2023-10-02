@@ -11,12 +11,13 @@ import com.example.lotterybalance.database.entities.BoletoConPremio
 import com.example.lotterybalance.database.entities.BoletoEntity
 import com.example.lotterybalance.database.entities.PremioEntity
 import kotlinx.coroutines.flow.Flow
+import java.util.Date
 
 @Dao
 interface BoletoDao {
 
     @Query("SELECT * FROM boletos_table WHERE fecha BETWEEN :startDay AND :endDay")
-    fun getSelectedDates(startDay: String, endDay: String): Flow<List<BoletoEntity>>
+    fun getSelectedDates(startDay: Date, endDay: Date): Flow<List<BoletoEntity>>
 
     @Query("SELECT * FROM boletos_table")
     fun getAllBoletos(): Flow<List<BoletoEntity>>
