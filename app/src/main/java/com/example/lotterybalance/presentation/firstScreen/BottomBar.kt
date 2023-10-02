@@ -8,13 +8,11 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.filled.Info
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.DatePickerDefaults
 import androidx.compose.material3.DatePickerDialog
@@ -29,7 +27,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -42,7 +39,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.lotterybalance.navigation.AppScreens
 import com.example.lotterybalance.viewModels.BoletoViewModel
-import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
