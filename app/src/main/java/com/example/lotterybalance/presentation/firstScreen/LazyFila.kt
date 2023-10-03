@@ -170,8 +170,8 @@ fun LazyFila(
                             onClick = {
                                 showInfo = true
                                 coroutineScope.launch {
-                                   boletoModel.loadBoletoByID(boleto.numero_serie)
-                                    boletoModel.loadPremioById(boleto.numero_serie)
+                                   boletoModel.loadBoletoByID(boleto.numeroSerie)
+                                    boletoModel.loadPremioById(boleto.numeroSerie)
                                 }
 
                             },

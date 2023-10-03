@@ -6,7 +6,7 @@ import androidx.room.Relation
 data class BoletoConPremio(
     @Embedded val boleto: BoletoEntity,
     @Relation(
-        parentColumn = "numero_serie",
+        parentColumn = "numeroSerie",
         entityColumn = "boletoId"
     )
     val premio: PremioEntity

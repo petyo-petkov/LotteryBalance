@@ -31,18 +31,11 @@ class MainViewModel @Inject constructor(
 
     ) : ViewModel() {
 
-    private var state by mutableStateOf("")
+        private var state by mutableStateOf("")
 
     fun startScanning() {
         viewModelScope.launch(Dispatchers.IO) {
             repo.startScanning()
-                /*
-                .onEach { data ->
-                    if (!data.isNullOrBlank()) {
-                        dao.insertOne(crearBoletoEntity(data))
-                    }
-                }
-                */
                 .flowOn(Dispatchers.IO)
                 .catch { error ->
                     Log.i("tag", "Error: ${error.message}")
@@ -66,8 +59,8 @@ class MainViewModel @Inject constructor(
     private fun crearBoletoEntity(data: String): BoletoEntity {
 
         val info = data.split(";")
-        val raw_numero_serie = info[0].slice(2..11)
-        val numero_serie = raw_numero_serie.toLong()
+        val rawNumeroSerie = info[0].slice(2..11)
+        val numeroSerie = rawNumeroSerie.toLong()
         val rawFecha = info[2].slice(5..11)
         val semana = info[2].last().digitToInt()
         val combinaciones = info[4].split(".").drop(1)
@@ -138,7 +131,7 @@ class MainViewModel @Inject constructor(
         }
 
         return BoletoEntity(
-            numero_serie = numero_serie,
+            numeroSerie = numeroSerie,
             tipo = tipo,
             fecha = fechaMili,
             precio = precio,

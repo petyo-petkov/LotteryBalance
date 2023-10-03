@@ -143,7 +143,7 @@ fun InfoDialog(
                         }
                         item {
                             Text(
-                                text = boleto.numero_serie.toString(),
+                                text = boleto.numeroSerie.toString(),
                                 fontSize = 20.sp,
                                 fontWeight = FontWeight.Bold
                             )

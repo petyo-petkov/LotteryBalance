@@ -15,7 +15,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.util.Date
 import javax.inject.Inject
 
 
@@ -32,7 +31,7 @@ class BoletoViewModel @Inject constructor(
         private set
     var boleto by mutableStateOf(
         BoletoEntity(
-            numero_serie = 0,
+            numeroSerie = 0,
             tipo = "",
             precio = 0.0,
             fecha = 0,
@@ -214,7 +213,7 @@ class BoletoViewModel @Inject constructor(
     }
 
     private fun makePremioEntity(data: Double?): PremioEntity? {
-        return data?.let { PremioEntity(premio = it, boletoId = boleto.numero_serie) }
+        return data?.let { PremioEntity(premio = it, boletoId = boleto.numeroSerie) }
     }
 
 }

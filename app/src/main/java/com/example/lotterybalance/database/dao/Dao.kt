@@ -11,7 +11,6 @@ import com.example.lotterybalance.database.entities.BoletoConPremio
 import com.example.lotterybalance.database.entities.BoletoEntity
 import com.example.lotterybalance.database.entities.PremioEntity
 import kotlinx.coroutines.flow.Flow
-import java.util.Date
 
 @Dao
 interface BoletoDao {
@@ -25,7 +24,7 @@ interface BoletoDao {
     @Query("SELECT * FROM boletos_table")
     fun loadOneBoleto(): Flow<BoletoEntity>
 
-    @Query("SELECT * FROM boletos_table WHERE numero_serie=:id")
+    @Query("SELECT * FROM boletos_table WHERE numeroSerie=:id")
     suspend fun loadBoletoByID(id: Long): BoletoEntity
 
 
