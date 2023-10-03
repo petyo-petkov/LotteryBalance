@@ -35,7 +35,7 @@ class BoletoViewModel @Inject constructor(
             numero_serie = 0,
             tipo = "",
             precio = 0.0,
-            fecha = Date(),
+            fecha = 0,
             combinaciones = listOf(),
             reintegro = ""
         )
@@ -70,7 +70,7 @@ class BoletoViewModel @Inject constructor(
     }
 
 
-    fun sortBoletosByDate(startDay: Date, endDay: Date) {
+    fun sortBoletosByDate(startDay: Long, endDay: Long) {
         viewModelScope.launch {
             boletoDao.getSelectedDates(startDay, endDay)
                 .flowOn(Dispatchers.IO)

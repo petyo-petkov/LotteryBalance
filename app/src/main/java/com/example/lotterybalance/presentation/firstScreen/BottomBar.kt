@@ -40,7 +40,6 @@ import androidx.navigation.NavController
 import com.example.lotterybalance.navigation.AppScreens
 import com.example.lotterybalance.viewModels.BoletoViewModel
 import java.text.SimpleDateFormat
-import java.util.Date
 import java.util.Locale
 
 
@@ -58,8 +57,8 @@ fun BottomBar(navController: NavController) {
     var openDialog by rememberSaveable { mutableStateOf(false) }
     val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
     val state = rememberDateRangePickerState()
-    val startDay = state.selectedStartDateMillis?.let { Date(it) }
-    val endDay = state.selectedEndDateMillis?.let { Date(it) }
+    val startDay = state.selectedStartDateMillis
+    val endDay = state.selectedEndDateMillis
     val confirmEnabled by derivedStateOf { state.selectedEndDateMillis != null }
 
     BottomAppBar(
@@ -94,9 +93,10 @@ fun BottomBar(navController: NavController) {
         if (confirmEnabled) {
             if (startDay != null) {
                 if (endDay != null) {
-                        boletoModel.sortBoletosByDate(startDay, endDay)
+                    boletoModel.sortBoletosByDate(startDay, endDay)
                 }
             }
+
             Log.i("range", boletoModel.sortidoBoletos.toString())
             Log.i("start", "$startDay")
             Log.i("end", "$endDay")

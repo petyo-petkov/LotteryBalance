@@ -10,7 +10,7 @@ data class BoletoEntity(
    // val id: Int = 0,
     @PrimaryKey val numero_serie: Long,
     val tipo: String,
-    val fecha: Date,
+    val fecha: Long,
     val precio: Double,
     val combinaciones: List<String>,
     val reintegro: String

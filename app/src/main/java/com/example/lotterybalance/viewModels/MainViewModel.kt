@@ -110,6 +110,7 @@ class MainViewModel @Inject constructor(
 
        val formatter = SimpleDateFormat("ddMMMyy", Locale.ENGLISH)
        val fecha = formatter.parse(fechaEng)
+        val fechaMili = fecha!!.time
 
         when (info[1]) {
             "P=1" -> {
@@ -139,7 +140,7 @@ class MainViewModel @Inject constructor(
         return BoletoEntity(
             numero_serie = numero_serie,
             tipo = tipo,
-            fecha = fecha,
+            fecha = fechaMili,
             precio = precio,
             combinaciones = numerosSeparados,
             reintegro = reintegro

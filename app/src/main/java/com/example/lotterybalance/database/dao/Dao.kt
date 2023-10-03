@@ -17,7 +17,7 @@ import java.util.Date
 interface BoletoDao {
 
     @Query("SELECT * FROM boletos_table WHERE fecha BETWEEN :startDay AND :endDay")
-    fun getSelectedDates(startDay: Date, endDay: Date): Flow<List<BoletoEntity>>
+    fun getSelectedDates(startDay: Long, endDay: Long): Flow<List<BoletoEntity>>
 
     @Query("SELECT * FROM boletos_table")
     fun getAllBoletos(): Flow<List<BoletoEntity>>
