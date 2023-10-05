@@ -18,10 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import com.example.lotterybalance.R
-import com.example.lotterybalance.database.entities.BoletoEntity
 import com.example.lotterybalance.viewModels.BoletoViewModel
 import java.util.Locale
 

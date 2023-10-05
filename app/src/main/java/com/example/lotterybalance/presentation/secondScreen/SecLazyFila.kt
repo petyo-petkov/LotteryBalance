@@ -44,14 +44,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.lotterybalance.R
 import com.example.lotterybalance.database.entities.BoletoEntity
-import com.example.lotterybalance.presentation.firstScreen.InfoDialog
 import com.example.lotterybalance.presentation.firstScreen.MostrarFecha
 import com.example.lotterybalance.presentation.firstScreen.MostrarPrecio
-import com.example.lotterybalance.viewModels.BoletoViewModel
-import kotlinx.coroutines.launch
 
 @Composable
 fun SecLazyFila(
