@@ -97,10 +97,6 @@ fun BottomBar(navController: NavController) {
                 }
             }
 
-            Log.i("range", boletoModel.sortidoBoletos.toString())
-            Log.i("start", "$startDay")
-            Log.i("end", "$endDay")
-
         }
 
         DatePickerDialog(

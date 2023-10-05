@@ -56,16 +56,14 @@ import kotlinx.coroutines.launch
 @Composable
 fun SecLazyFila(
     lista: List<BoletoEntity>,
-    boletoModel: BoletoViewModel = hiltViewModel()
 ) {
-    boletoModel.getPremios()
     val coroutineScope = rememberCoroutineScope()
     val context = LocalContext.current
 
     // Dialogo al pulsar el icono "info"
     var showInfo by rememberSaveable { mutableStateOf(false) }
-    val _boleto = boletoModel.boleto
-    val _premio = boletoModel.premio
+   // val _boleto = boletoModel.boleto
+    //val _premio = boletoModel.premio
 
 
     // Lista horizontal de boletos
@@ -167,11 +165,12 @@ fun SecLazyFila(
                         IconButton(
                             onClick = {
                                 showInfo = true
+                                /*
                                 coroutineScope.launch {
                                     boletoModel.loadBoletoByID(boleto.numeroSerie)
                                     boletoModel.loadPremioById(boleto.numeroSerie)
                                 }
-
+                                 */
                             },
                             modifier = Modifier.padding(end = 12.dp),
                             colors = IconButtonDefaults.iconButtonColors(contentColor = Color.Black)
@@ -185,9 +184,5 @@ fun SecLazyFila(
             }
         }
     }
-    InfoDialog(show = showInfo,
-        onDismiss = { showInfo = false },
-        boleto = _boleto,
-        premio = _premio
-    )
+
 }

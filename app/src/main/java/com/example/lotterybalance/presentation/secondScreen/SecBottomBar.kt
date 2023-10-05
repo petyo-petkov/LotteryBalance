@@ -23,7 +23,9 @@ fun SecBottomBar(navController: NavController) {
             // delete
             IconButton(
                 onClick = {
-                    navController.navigate(route = AppScreens.FirstScreen.route)
+                    navController.navigate(route = AppScreens.FirstScreen.route){
+                        popUpTo("first_screen"){inclusive=true}
+                    }
                 }
             ) {
                 Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null)

@@ -21,26 +21,23 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.lotterybalance.R
+import com.example.lotterybalance.database.entities.BoletoEntity
 import com.example.lotterybalance.viewModels.BoletoViewModel
 import java.util.Locale
 
 @Composable
-fun SecScreenContent(
-    navController: NavController,
-    boletoModel: BoletoViewModel = hiltViewModel()
-){
-    boletoModel.getBoletoEntity()
-    boletoModel.getPremios()
+fun SecScreenContent(lista: List<BoletoEntity>
 
-    val selectedBoletos = boletoModel.sortidoBoletos
+    ){
 
+    val listaSortidoBoletos = lista
     var gastado = 0.0
     val ganado = 0.0
 
-    selectedBoletos.forEach {boleto ->
-        gastado += boleto.precio
-
+    listaSortidoBoletos.forEach{
+        gastado += it.precio
     }
+
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -79,7 +76,7 @@ fun SecScreenContent(
             fontWeight = FontWeight.Bold
         )
 
-        SecLazyFila(lista = selectedBoletos)
+        SecLazyFila(lista = listaSortidoBoletos)
 
     }
 }
