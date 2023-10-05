@@ -1,7 +1,6 @@
 package com.example.lotterybalance.presentation.firstScreen
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -89,14 +88,10 @@ fun BottomBar(navController: NavController) {
     )
 
     if (openDialog) {
-
         if (confirmEnabled) {
-            if (startDay != null) {
-                if (endDay != null) {
-                    boletoModel.sortBoletosByDate(startDay, endDay)
-                }
+            if (startDay != null && endDay != null) {
+                boletoModel.sortBoletosByDate(startDay, endDay)
             }
-
         }
 
         DatePickerDialog(

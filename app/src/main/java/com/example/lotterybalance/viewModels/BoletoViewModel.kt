@@ -81,7 +81,6 @@ class BoletoViewModel @Inject constructor(
     }
 
 
-
     fun getOneBoleto() {
         viewModelScope.launch {
             boletoDao.loadOneBoleto()
