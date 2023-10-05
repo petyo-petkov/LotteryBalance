@@ -23,7 +23,6 @@ import com.example.lotterybalance.viewModels.BoletoViewModel
 fun AppNavigation() {
     val navController = rememberNavController()
     val boletoModel: BoletoViewModel = hiltViewModel()
-    val lista = boletoModel.sortidoBoletos
     NavHost(navController = navController, startDestination = AppScreens.FirstScreen.route) {
 
         composable(route = AppScreens.FirstScreen.route) {
@@ -32,7 +31,7 @@ fun AppNavigation() {
         }
         composable(
             route = AppScreens.SecondScreen.route ) {
-            SecondScreen(navController, lista)
+            SecondScreen(navController, boletoModel)
 
         }
     }

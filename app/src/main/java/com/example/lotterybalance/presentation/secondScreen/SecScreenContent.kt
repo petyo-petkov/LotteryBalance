@@ -26,15 +26,15 @@ import com.example.lotterybalance.viewModels.BoletoViewModel
 import java.util.Locale
 
 @Composable
-fun SecScreenContent(lista: List<BoletoEntity>
-
-    ){
-
-    val listaSortidoBoletos = lista
+fun SecScreenContent(
+    boletoModel: BoletoViewModel
+) {
+    boletoModel.getBoletoEntity()
+    val listaSortidoBoletos = boletoModel.sortidoBoletos
     var gastado = 0.0
     val ganado = 0.0
 
-    listaSortidoBoletos.forEach{
+    listaSortidoBoletos.forEach {
         gastado += it.precio
     }
 
@@ -56,15 +56,20 @@ fun SecScreenContent(lista: List<BoletoEntity>
             verticalAlignment = Alignment.CenterVertically
         ) {
 
-            SecGanadoCard(titulo = "GANADO",
-                valor = String.format(locale = Locale.ENGLISH, "%.2f", ganado))
-            SecGastadoCard(titulo = "GASTADO",
-                valor = String.format(locale = Locale.ENGLISH, "%.2f", gastado))
+            SecGanadoCard(
+                titulo = "GANADO",
+                valor = String.format(locale = Locale.ENGLISH, "%.2f", ganado)
+            )
+            SecGastadoCard(
+                titulo = "GASTADO",
+                valor = String.format(locale = Locale.ENGLISH, "%.2f", gastado)
+            )
 
         }
         SecBalanceCard(
             titulo = "BALANCE",
-            valor = String.format(locale = Locale.ENGLISH, "%.2f", (ganado - gastado)))
+            valor = String.format(locale = Locale.ENGLISH, "%.2f", (ganado - gastado))
+        )
 
         Spacer(modifier = Modifier.padding(36.dp))
         Text(

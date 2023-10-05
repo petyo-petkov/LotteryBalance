@@ -15,11 +15,11 @@ import com.example.lotterybalance.viewModels.BoletoViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun SecondScreen(navController: NavController, lista: List<BoletoEntity>){
+fun SecondScreen(navController: NavController, boletoModel: BoletoViewModel){
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         containerColor = Color(0xFF4D4646),
-        content = { SecScreenContent(lista) },
+        content = { SecScreenContent(boletoModel) },
         bottomBar = { SecBottomBar(navController) },
 
         )
