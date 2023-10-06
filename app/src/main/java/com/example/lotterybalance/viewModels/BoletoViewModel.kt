@@ -46,6 +46,7 @@ class BoletoViewModel @Inject constructor(
     var sortidoBoletos by mutableStateOf<List<BoletoEntity>>(listOf())
         private set
 
+
     // VARIABLES PREMIO
     var premios by mutableStateOf<List<PremioEntity>>(listOf())
         private set
@@ -213,5 +214,7 @@ class BoletoViewModel @Inject constructor(
     private fun makePremioEntity(data: Double?): PremioEntity? {
         return data?.let { PremioEntity(premio = it, boletoId = boleto.numeroSerie) }
     }
+
+
 
 }

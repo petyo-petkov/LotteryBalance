@@ -46,24 +46,24 @@ import com.example.lotterybalance.R
 import com.example.lotterybalance.database.entities.BoletoEntity
 import com.example.lotterybalance.presentation.firstScreen.MostrarFecha
 import com.example.lotterybalance.presentation.firstScreen.MostrarPrecio
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 @Composable
 fun SecLazyFila(
     lista: List<BoletoEntity>,
 ) {
+    val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
 
     // Dialogo al pulsar el icono "info"
     var showInfo by rememberSaveable { mutableStateOf(false) }
-   // val _boleto = boletoModel.boleto
-    //val _premio = boletoModel.premio
-
 
     // Lista horizontal de boletos
     LazyRow(
         modifier = Modifier.padding(1.dp, 6.dp)
     ) {
-        items(lista) { boleto ->
 
+        items(lista) { boleto ->
             Card(
                 modifier = Modifier
                     .alpha(0.9f)
@@ -135,7 +135,7 @@ fun SecLazyFila(
 
                         MostrarFecha(
                             texto = "Fecha:",
-                            valor = boleto.fecha.toString()
+                            valor = formatter.format(boleto.fecha)
 
                         )
 

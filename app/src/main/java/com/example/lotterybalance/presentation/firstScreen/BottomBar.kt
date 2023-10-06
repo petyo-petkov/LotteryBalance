@@ -1,6 +1,7 @@
 package com.example.lotterybalance.presentation.firstScreen
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -102,7 +103,7 @@ fun BottomBar(navController: NavController) {
                 TextButton(
                     onClick = {
                         openDialog = false
-                        navController.navigate(route = AppScreens.SecondScreen.route)
+                        navController.navigate(route = "${AppScreens.SecondScreen.route}/${startDay}/${endDay}" )
                     },
                     enabled = state.selectedEndDateMillis != null
                 ) {

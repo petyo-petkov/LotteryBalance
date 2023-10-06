@@ -24,9 +24,14 @@ import java.util.Locale
 
 @Composable
 fun SecScreenContent(
-    boletoModel: BoletoViewModel
+    boletoModel: BoletoViewModel,
+    startDay: Long,
+    endDay: Long
+
 ) {
-    boletoModel.getBoletoEntity()
+
+    boletoModel.sortBoletosByDate(startDay, endDay )
+
     val listaSortidoBoletos = boletoModel.sortidoBoletos
     var gastado = 0.0
     val ganado = 0.0
@@ -40,7 +45,7 @@ fun SecScreenContent(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .paint(
-                painter = painterResource(id = R.drawable.fondo2),
+                painter = painterResource(id = R.drawable.fondo1),
                 contentScale = ContentScale.FillBounds
             )
     )
