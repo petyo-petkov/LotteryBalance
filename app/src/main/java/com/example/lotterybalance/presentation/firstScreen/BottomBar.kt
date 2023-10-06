@@ -1,7 +1,6 @@
 package com.example.lotterybalance.presentation.firstScreen
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -24,7 +23,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDateRangePickerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -59,7 +57,6 @@ fun BottomBar(navController: NavController) {
     val state = rememberDateRangePickerState()
     val startDay = state.selectedStartDateMillis
     val endDay = state.selectedEndDateMillis
-    val confirmEnabled by derivedStateOf { state.selectedEndDateMillis != null }
 
     BottomAppBar(
         actions = {
@@ -89,12 +86,6 @@ fun BottomBar(navController: NavController) {
     )
 
     if (openDialog) {
-        if (confirmEnabled) {
-            if (startDay != null && endDay != null) {
-                boletoModel.sortBoletosByDate(startDay, endDay)
-            }
-        }
-
         DatePickerDialog(
             onDismissRequest = {
                 openDialog = false
@@ -131,7 +122,6 @@ fun BottomBar(navController: NavController) {
                     dayInSelectionRangeContainerColor = Color(0xFFFFCCBC),
                     dayInSelectionRangeContentColor = Color(0xFF5F5D5D),
 
-
                     ),
                 title = {
                     Text(
@@ -162,7 +152,8 @@ fun BottomBar(navController: NavController) {
                             Icon(imageVector = Icons.Default.Done, contentDescription = "Okk")
                         }
                     }
-                }
+                },
+
             )
         }
     }

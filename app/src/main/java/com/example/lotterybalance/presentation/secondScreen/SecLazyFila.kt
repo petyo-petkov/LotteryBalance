@@ -50,9 +50,8 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 @Composable
-fun SecLazyFila(
-    lista: List<BoletoEntity>,
-) {
+fun SecLazyFila( lista: List<BoletoEntity> ) {
+
     val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
 
     // Dialogo al pulsar el icono "info"
@@ -60,7 +59,7 @@ fun SecLazyFila(
 
     // Lista horizontal de boletos
     LazyRow(
-        modifier = Modifier.padding(1.dp, 6.dp)
+        modifier = Modifier.padding(1.dp, 18.dp)
     ) {
 
         items(lista) { boleto ->

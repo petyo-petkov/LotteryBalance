@@ -48,7 +48,7 @@ fun Content(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .paint(
-                painter = painterResource(id = R.drawable.fondo2),
+                painter = painterResource(id = R.drawable.fondo1),
                 contentScale = ContentScale.FillBounds
             )
     )
