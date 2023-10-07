@@ -19,6 +19,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.lotterybalance.R
+import com.example.lotterybalance.presentation.firstScreen.BalanceCard
+import com.example.lotterybalance.presentation.firstScreen.GanadoCard
+import com.example.lotterybalance.presentation.firstScreen.GastadoCard
+import com.example.lotterybalance.presentation.firstScreen.LazyFila
 import com.example.lotterybalance.viewModels.BoletoViewModel
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -30,13 +34,20 @@ fun SecScreenContent(
     endDay: Long
 
 ) {
+    boletoModel.sortBoletosByDate(startDay, endDay)
+    boletoModel.getPremios()
 
-    boletoModel.sortBoletosByDate(startDay, endDay )
     val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
 
     val listaSortidoBoletos = boletoModel.sortidoBoletos
+    val premios = boletoModel.premios
+
     var gastado = 0.0
-    val ganado = 0.0
+    var ganado = 0.0
+
+    premios.forEach {
+        ganado += it.premio!!
+    }
 
     listaSortidoBoletos.forEach {
         gastado += it.precio
@@ -60,43 +71,47 @@ fun SecScreenContent(
             verticalAlignment = Alignment.CenterVertically
         ) {
 
-            SecGanadoCard(
+            GanadoCard(
                 titulo = "GANADO",
                 valor = String.format(locale = Locale.ENGLISH, "%.2f", ganado)
             )
-            SecGastadoCard(
+            GastadoCard(
                 titulo = "GASTADO",
                 valor = String.format(locale = Locale.ENGLISH, "%.2f", gastado)
             )
 
         }
-        SecBalanceCard(
+        BalanceCard(
             titulo = "BALANCE",
             valor = String.format(locale = Locale.ENGLISH, "%.2f", (ganado - gastado))
         )
 
         Spacer(modifier = Modifier.padding(18.dp))
 
-        Column{
+        Column {
             Text(
                 color = Color.White,
                 text = "Desde: ${formatter.format(startDay)} ",
-                modifier = Modifier.fillMaxWidth().padding(2.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(2.dp),
                 textAlign = TextAlign.Center,
-                fontSize = 22.sp,
+                fontSize = 18.sp,
                 fontWeight = FontWeight.Bold
             )
             Text(
                 color = Color.White,
                 text = "Hasta: ${formatter.format(endDay)}",
-                modifier = Modifier.fillMaxWidth().padding(2.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(2.dp),
                 textAlign = TextAlign.Center,
-                fontSize = 22.sp,
+                fontSize = 18.sp,
                 fontWeight = FontWeight.Bold
             )
         }
 
-        SecLazyFila(lista = listaSortidoBoletos)
+        LazyFila(lista = listaSortidoBoletos)
 
     }
 }

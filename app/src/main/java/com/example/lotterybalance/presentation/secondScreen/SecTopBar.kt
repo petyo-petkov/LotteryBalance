@@ -13,18 +13,20 @@ import androidx.compose.ui.text.font.FontWeight
 @Composable
 fun TopBar() {
     CenterAlignedTopAppBar(
-        title = { Text(
-            text = "Boletos seleccionados",
-            modifier = Modifier,
-            fontWeight = FontWeight.Bold
-        ) },
+        title = {
+            Text(
+                text = "Boletos seleccionados",
+                modifier = Modifier,
+                fontWeight = FontWeight.Bold
+            )
+        },
 
         modifier = Modifier,
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = Color(0xFFFFCCBC),
             actionIconContentColor = Color.Black,
             titleContentColor = Color.Black
-            )
+        )
 
     )
 
