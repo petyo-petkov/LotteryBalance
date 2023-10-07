@@ -24,9 +24,7 @@ import com.example.lotterybalance.viewModels.BoletoViewModel
 import java.util.Locale
 
 @Composable
-fun Content(
-    boletoModel: BoletoViewModel = hiltViewModel()
-) {
+fun Content( boletoModel: BoletoViewModel = hiltViewModel() ) {
 
     boletoModel.getBoletoEntity()
     boletoModel.getPremios()

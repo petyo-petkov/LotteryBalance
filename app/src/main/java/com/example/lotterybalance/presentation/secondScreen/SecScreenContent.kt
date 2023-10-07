@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
@@ -24,6 +25,7 @@ import com.example.lotterybalance.presentation.firstScreen.GanadoCard
 import com.example.lotterybalance.presentation.firstScreen.GastadoCard
 import com.example.lotterybalance.presentation.firstScreen.LazyFila
 import com.example.lotterybalance.viewModels.BoletoViewModel
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -35,12 +37,13 @@ fun SecScreenContent(
 
 ) {
     boletoModel.sortBoletosByDate(startDay, endDay)
-    boletoModel.getPremios()
-
+    val coroutine = rememberCoroutineScope()
     val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
 
     val listaSortidoBoletos = boletoModel.sortidoBoletos
     val premios = boletoModel.premios
+
+
 
     var gastado = 0.0
     var ganado = 0.0
