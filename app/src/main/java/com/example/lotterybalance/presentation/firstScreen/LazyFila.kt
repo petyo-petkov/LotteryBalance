@@ -31,7 +31,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -46,9 +45,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.lotterybalance.R
+import com.example.lotterybalance.database.entities.BoletoConPremio
 import com.example.lotterybalance.database.entities.BoletoEntity
 import com.example.lotterybalance.viewModels.BoletoViewModel
-import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -56,11 +55,10 @@ import java.util.Locale
 @SuppressLint("SimpleDateFormat")
 @Composable
 fun LazyFila(
-    lista: List<BoletoEntity>,
+    lista: List<BoletoConPremio>,
     boletoModel: BoletoViewModel = hiltViewModel()
 ) {
     boletoModel.getPremios()
-    val coroutineScope = rememberCoroutineScope()
     val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
 
 
@@ -123,7 +121,7 @@ fun LazyFila(
                             contentAlignment = Alignment.Center
                         ) {
                             Text(
-                                text = boleto.tipo,
+                                text = boleto.boleto.tipo,
                                 fontWeight = FontWeight.Bold,
                                 style = MaterialTheme.typography.titleLarge,
                                 color = Color.Black,
@@ -147,13 +145,13 @@ fun LazyFila(
 
                         MostrarFecha(
                             texto = "Fecha:",
-                            valor = formatter.format(boleto.fecha)
+                            valor = formatter.format(boleto.boleto.fecha)
 
                         )
 
                         Spacer(modifier = Modifier.height(20.dp))
 
-                        MostrarPrecio(valor = boleto.precio)
+                        MostrarPrecio(valor = boleto.boleto.precio)
                     }
 
                     Spacer(modifier = Modifier.height(0.dp))
@@ -168,11 +166,10 @@ fun LazyFila(
                         // Botones
                         IconButton(
                             onClick = {
+
                                 showInfo = true
-                                coroutineScope.launch {
-                                   boletoModel.loadBoletoByID(boleto.numeroSerie)
-                                    boletoModel.loadPremioById(boleto.numeroSerie)
-                                }
+                                boletoModel.loadBoletoByID(boleto.boleto.numeroSerie)
+                                boletoModel.loadPremioById(boleto.boleto.numeroSerie)
 
                             },
                             modifier = Modifier.padding(end = 12.dp),

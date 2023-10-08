@@ -8,7 +8,7 @@ import com.example.lotterybalance.database.dao.PremioDao
 import com.example.lotterybalance.database.entities.BoletoEntity
 import com.example.lotterybalance.database.entities.PremioEntity
 
-@Database(entities = [BoletoEntity::class, PremioEntity::class], version = 28)
+@Database(entities = [BoletoEntity::class, PremioEntity::class], version = 30)
 @TypeConverters(Converters::class)
 abstract class BoletoDatabase: RoomDatabase() {
 

@@ -43,15 +43,20 @@ class BoletoViewModel @Inject constructor(
     var boletosPremio by mutableStateOf<List<BoletoConPremio>>(listOf())
         private set
 
+    var sortidoBoletos by mutableStateOf<List<BoletoConPremio>>(listOf())
+
+    /*
     var sortidoBoletos by mutableStateOf<List<BoletoEntity>>(listOf())
         private set
 
+ */
 
     // VARIABLES PREMIO
     var premios by mutableStateOf<List<PremioEntity>>(listOf())
         private set
 
-    var premio by mutableStateOf(PremioEntity(premio = 0.0, boletoId = 0))
+
+    var premio by mutableStateOf(PremioEntity(boletoId = 0L, premio = 0.0))
         private set
 
 
@@ -92,9 +97,13 @@ class BoletoViewModel @Inject constructor(
         }
     }
 
-    suspend fun loadBoletoByID(id: Long) {
-        return withContext(Dispatchers.IO) {
-            boleto = boletoDao.loadBoletoByID(id)
+    fun loadBoletoByID(id: Long) {
+        viewModelScope.launch {
+            boletoDao.loadBoletoByID(id)
+                .flowOn(Dispatchers.IO)
+                .collect{ result ->
+                    boleto = result
+                }
         }
     }
 
@@ -149,10 +158,16 @@ class BoletoViewModel @Inject constructor(
 
     }
 
-    suspend fun loadPremioById(id: Long) {
-        return withContext(Dispatchers.IO) {
-            premio = premioDao.loadPremioByID(id)
+    fun loadPremioById(id: Long) {
+        viewModelScope.launch {
+            premioDao.loadPremioByID(id)
+                .flowOn(Dispatchers.IO)
+                .collect { result ->
+                    premio = result
+
+                }
         }
+
     }
 
     suspend fun updatePremio(premio: PremioEntity) {
@@ -214,7 +229,6 @@ class BoletoViewModel @Inject constructor(
     private fun makePremioEntity(data: Double?): PremioEntity? {
         return data?.let { PremioEntity(premio = it, boletoId = boleto.numeroSerie) }
     }
-
 
 
 }

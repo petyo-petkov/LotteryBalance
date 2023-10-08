@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.Flow
 interface BoletoDao {
 
     @Query("SELECT * FROM boletos_table WHERE fecha BETWEEN :startDay AND :endDay")
-    fun getSelectedDates(startDay: Long, endDay: Long): Flow<List<BoletoEntity>>
+    fun getSelectedDates(startDay: Long, endDay: Long): Flow<List<BoletoConPremio>>
 
     @Query("SELECT * FROM boletos_table")
     fun getAllBoletos(): Flow<List<BoletoEntity>>
@@ -25,7 +25,7 @@ interface BoletoDao {
     fun loadOneBoleto(): Flow<BoletoEntity>
 
     @Query("SELECT * FROM boletos_table WHERE numeroSerie=:id")
-    suspend fun loadBoletoByID(id: Long): BoletoEntity
+    fun loadBoletoByID(id: Long): Flow<BoletoEntity>
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -59,7 +59,7 @@ interface PremioDao {
     fun getPremio(): Flow<PremioEntity>
 
     @Query("SELECT * FROM premio_table WHERE boletoId=:id")
-    suspend fun loadPremioByID(id: Long): PremioEntity
+    fun loadPremioByID(id: Long): Flow<PremioEntity>
 
     @Delete
     suspend fun deletePremios(premios: List<PremioEntity>)
