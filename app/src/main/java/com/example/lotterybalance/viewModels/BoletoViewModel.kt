@@ -14,7 +14,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -44,17 +43,12 @@ class BoletoViewModel @Inject constructor(
         private set
 
     var sortidoBoletos by mutableStateOf<List<BoletoConPremio>>(listOf())
-
-    /*
-    var sortidoBoletos by mutableStateOf<List<BoletoEntity>>(listOf())
         private set
 
- */
 
     // VARIABLES PREMIO
-    var premios by mutableStateOf<List<PremioEntity>>(listOf())
+   var premios by mutableStateOf<List<PremioEntity>>(listOf())
         private set
-
 
     var premio by mutableStateOf(PremioEntity(boletoId = 0L, premio = 0.0))
         private set
@@ -87,15 +81,6 @@ class BoletoViewModel @Inject constructor(
     }
 
 
-    fun getOneBoleto() {
-        viewModelScope.launch {
-            boletoDao.loadOneBoleto()
-                .flowOn(Dispatchers.IO)
-                .collect { result ->
-                    boleto = result
-                }
-        }
-    }
 
     fun loadBoletoByID(id: Long) {
         viewModelScope.launch {
@@ -229,6 +214,8 @@ class BoletoViewModel @Inject constructor(
     private fun makePremioEntity(data: Double?): PremioEntity? {
         return data?.let { PremioEntity(premio = it, boletoId = boleto.numeroSerie) }
     }
+
+
 
 
 }

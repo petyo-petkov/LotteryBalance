@@ -1,9 +1,7 @@
 package com.example.lotterybalance.presentation.secondScreen
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -20,9 +18,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.lotterybalance.R
-import com.example.lotterybalance.presentation.firstScreen.BalanceCard
-import com.example.lotterybalance.presentation.firstScreen.GanadoCard
-import com.example.lotterybalance.presentation.firstScreen.GastadoCard
 import com.example.lotterybalance.presentation.firstScreen.LazyFila
 import com.example.lotterybalance.viewModels.BoletoViewModel
 import java.text.SimpleDateFormat
@@ -48,8 +43,6 @@ fun SecScreenContent(
         ganado += boleto.premio.premio!!
     }
 
-
-
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -59,32 +52,13 @@ fun SecScreenContent(
             )
     )
     {
-        Row(
-            modifier = Modifier
-                .padding(top = 90.dp)
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
+        Spacer(modifier = Modifier.padding(10.dp))
 
-            GanadoCard(
-                titulo = "GANADO",
-                valor = String.format(locale = Locale.ENGLISH, "%.2f", ganado)
-            )
-            GastadoCard(
-                titulo = "GASTADO",
-                valor = String.format(locale = Locale.ENGLISH, "%.2f", gastado)
-            )
+        InfoBalanceCard(gastado = gastado, ganado = ganado)
 
-        }
-        BalanceCard(
-            titulo = "BALANCE",
-            valor = String.format(locale = Locale.ENGLISH, "%.2f", (ganado - gastado))
-        )
+        Spacer(modifier = Modifier.padding(6.dp))
 
-        Spacer(modifier = Modifier.padding(18.dp))
-
-        Column {
+        Column(modifier = Modifier.padding(vertical = 26.dp)) {
             Text(
                 color = Color.White,
                 text = "Desde: ${formatter.format(startDay)} ",

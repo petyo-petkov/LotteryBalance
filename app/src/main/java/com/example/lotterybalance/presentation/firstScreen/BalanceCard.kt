@@ -43,7 +43,8 @@ fun BalanceCard(titulo: String, valor: String){
 
         Text(
             text = "$valor ${Typography.euro}",
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(4.dp),
             fontSize = 20.sp,
             textAlign = TextAlign.Center,
