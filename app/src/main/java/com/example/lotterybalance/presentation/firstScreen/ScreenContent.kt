@@ -30,18 +30,12 @@ fun Content( boletoModel: BoletoViewModel = hiltViewModel() ) {
     boletoModel.getPremios()
     boletoModel.getAllboletosConPremios()
 
-  //  val boletos = boletoModel.boletos
-  //  val premios = boletoModel.premios
+
     val boletos = boletoModel.boletosPremio
 
     var gastado = 0.0
     var ganado = 0.0
 
-    /*
-    premios.forEach{ i->
-        ganado += i.premio!!
-    }
-     */
     boletos.forEach { boleto ->
         gastado += boleto.boleto.precio
         ganado += boleto.premio.premio!!
