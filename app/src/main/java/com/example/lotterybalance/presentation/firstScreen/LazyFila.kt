@@ -1,7 +1,6 @@
 package com.example.lotterybalance.presentation.firstScreen
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -14,11 +13,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.Card
@@ -35,18 +32,13 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.lotterybalance.R
 import com.example.lotterybalance.database.entities.BoletoConPremio
-import com.example.lotterybalance.database.entities.BoletoEntity
 import com.example.lotterybalance.viewModels.BoletoViewModel
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -56,8 +48,8 @@ import java.util.Locale
 @Composable
 fun LazyFila(
     lista: List<BoletoConPremio>,
-    boletoModel: BoletoViewModel = hiltViewModel()
-) {
+    boletoModel: BoletoViewModel = hiltViewModel(),
+    ) {
     boletoModel.getPremios()
     val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
 
@@ -76,7 +68,6 @@ fun LazyFila(
 
             Card(
                 modifier = Modifier
-                    .alpha(0.9f)
                     .size(220.dp, 320.dp)
                     .padding(4.dp),
                 shape = AbsoluteRoundedCornerShape(20.dp),
@@ -92,44 +83,22 @@ fun LazyFila(
                         )
                 )
                 {
+
                     // Barra superior
-                    Row(
-                        Modifier
+                    Box(
+                        modifier = Modifier
                             .fillMaxWidth()
-                            .padding(8.dp),
-                        horizontalArrangement = Arrangement.Start,
-                        verticalAlignment = Alignment.CenterVertically
+                            .padding(vertical = 16.dp),
+                        contentAlignment = Alignment.Center
                     ) {
-                        // Miniatura
-                        Box(
-                            modifier = Modifier
-                                .background(color = Color.Black, shape = CircleShape)
-                                .size(40.dp),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Image(
-                                painter = painterResource(R.drawable.logo),
-                                contentDescription = null,
-                                contentScale = ContentScale.FillBounds
-                            )
-                        }
-                        Spacer(modifier = Modifier.width(10.dp))
-
-                        // Encabezado
-                        Box(
-                            modifier = Modifier.size(130.dp, 41.dp),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Text(
-                                text = boleto.boleto.tipo,
-                                fontWeight = FontWeight.Bold,
-                                style = MaterialTheme.typography.titleLarge,
-                                color = Color.Black,
-                                textAlign = TextAlign.Center,
-                                lineHeight = 18.sp
-                            )
-                        }
-
+                        Text(
+                            text = boleto.boleto.tipo,
+                            fontWeight = FontWeight.Bold,
+                            style = MaterialTheme.typography.titleLarge,
+                            color = Color.Black,
+                            textAlign = TextAlign.Center,
+                            lineHeight = 18.sp
+                        )
                     }
 
                     // Multimedia

@@ -85,7 +85,7 @@ fun InfoDialog(
                     .wrapContentHeight(),
                 shape = ShapeDefaults.ExtraLarge,
                 tonalElevation = AlertDialogDefaults.TonalElevation,
-                border = BorderStroke(width = 5.dp, Color(0xFFFFCCBC))
+                border = BorderStroke(width = 2.dp, Color(0xFFFFCCBC))
             ) {
                 Column(
                     modifier = Modifier
