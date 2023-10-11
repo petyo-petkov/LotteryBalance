@@ -9,5 +9,5 @@ data class BoletoConPremio(
         parentColumn = "numeroSerie",
         entityColumn = "boletoId"
     )
-    val premio: PremioEntity
+    val premioEntity: PremioEntity?
 )

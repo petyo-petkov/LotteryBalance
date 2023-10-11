@@ -66,7 +66,7 @@ fun InfoDialog(
     val context = LocalContext.current
     var showBorrar by rememberSaveable { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()
-    val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
+    val formatter = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
 
     if (show) {
 
