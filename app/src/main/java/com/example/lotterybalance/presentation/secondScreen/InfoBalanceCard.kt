@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CardElevation
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.Text
@@ -44,6 +46,7 @@ fun InfoBalanceCard(gastado: Double, ganado: Double) {
         modifier = Modifier
             .size(360.dp, 200.dp),
         shape = ShapeDefaults.ExtraLarge,
+        elevation = CardDefaults.cardElevation(20.dp),
         border = BorderStroke(1.dp, color = Color.DarkGray)
 
     ) {

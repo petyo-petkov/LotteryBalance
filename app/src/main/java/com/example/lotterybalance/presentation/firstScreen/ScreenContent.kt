@@ -30,15 +30,21 @@ fun Content( boletoModel: BoletoViewModel = hiltViewModel() ) {
     boletoModel.getPremios()
     boletoModel.getAllboletosConPremios()
 
-
-    val boletos = boletoModel.boletosPremio
+    val boletosPremio = boletoModel.boletosPremio
+    val boletos = boletoModel.boletos
+    val premios = boletoModel.premios
 
     var gastado = 0.0
     var ganado = 0.0
 
     boletos.forEach { boleto ->
-        gastado += boleto.boleto.precio
-        ganado += boleto.premio.premio!!
+        gastado += boleto.precio
+    }
+    premios.forEach { premio ->
+        if (premio.premio != null){
+            ganado += premio.premio!!
+        }
+
     }
 
     Column(
@@ -78,7 +84,7 @@ fun Content( boletoModel: BoletoViewModel = hiltViewModel() ) {
             fontWeight = FontWeight.Bold
         )
 
-        LazyFila(lista = boletos.takeLast(10))
+        LazyFila(lista = boletosPremio.takeLast(10))
 
     }
 

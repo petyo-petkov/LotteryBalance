@@ -1,8 +1,10 @@
 package com.example.lotterybalance.presentation.secondScreen
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
@@ -33,23 +35,25 @@ fun SecScreenContent(
     boletoModel.sortBoletosByDate(startDay, endDay)
     boletoModel.getAllboletosConPremios()
 
-    val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
+    val formatter = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
     val listaSortidoBoletos = boletoModel.sortidoBoletos
     var gastado = 0.0
     var ganado = 0.0
 
     listaSortidoBoletos.forEach {boleto ->
         gastado += boleto.boleto.precio
-        ganado += boleto.premio.premio!!
+        if (boleto.premioEntity != null){
+            ganado += boleto.premioEntity.premio!!
+        }
+
     }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .paint(
-                painter = painterResource(id = R.drawable.fondo1),
-                contentScale = ContentScale.FillBounds
-            )
+            .fillMaxSize()
+            .background(color = Color(0xFF80DEEA))
+
     )
     {
         Spacer(modifier = Modifier.padding(10.dp))
@@ -60,7 +64,7 @@ fun SecScreenContent(
 
         Column(modifier = Modifier.padding(vertical = 26.dp)) {
             Text(
-                color = Color.White,
+                color = Color.Black,
                 text = "Desde: ${formatter.format(startDay)} ",
                 modifier = Modifier
                     .fillMaxWidth()
@@ -70,7 +74,7 @@ fun SecScreenContent(
                 fontWeight = FontWeight.Bold
             )
             Text(
-                color = Color.White,
+                color = Color.Black,
                 text = "Hasta: ${formatter.format(endDay)}",
                 modifier = Modifier
                     .fillMaxWidth()
