@@ -5,8 +5,6 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "boletos_table")
 data class BoletoEntity(
-   // @PrimaryKey(autoGenerate = true)
-   // val id: Int = 0,
     @PrimaryKey val numeroSerie: Long,
     val tipo: String,
     val fecha: Long,
@@ -19,9 +17,8 @@ data class BoletoEntity(
 
 @Entity(tableName = "premio_table")
 data class PremioEntity(
-    //@PrimaryKey(autoGenerate = true) val id: Int = 0,
     @PrimaryKey val boletoId: Long,
-    var premio: Double?
+    val premio: Double?
 
 )
 

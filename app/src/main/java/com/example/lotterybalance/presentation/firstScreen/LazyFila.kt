@@ -49,7 +49,7 @@ fun LazyFila(
     lista: List<BoletoConPremio>,
     boletoModel: BoletoViewModel = hiltViewModel(),
     ) {
-    boletoModel.getPremios()
+
     val formatter = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
 
 
@@ -70,7 +70,7 @@ fun LazyFila(
                     .size(200.dp, 300.dp)
                     .padding(4.dp),
                 shape = AbsoluteRoundedCornerShape(20.dp),
-                colors = CardDefaults.cardColors(containerColor = Color(0xFFFFF9C4))
+                colors = CardDefaults.cardColors(containerColor = Color(0xFF413535))
             ) {
                 Column(
                     modifier = Modifier
@@ -94,7 +94,7 @@ fun LazyFila(
                             text = boleto.boleto.tipo,
                             fontWeight = FontWeight.Bold,
                             style = MaterialTheme.typography.titleLarge,
-                            color = Color.Black,
+                            color = Color(0xFFF8EDD5),
                             textAlign = TextAlign.Center
                         )
                     }
@@ -103,7 +103,7 @@ fun LazyFila(
                     Column(
                         modifier = Modifier
                             .border(1.dp, Color(0xFF000000))
-                            .background(color = Color(0xFFF3E5F5))
+                            .background(color = Color(0xFF665454))
                             .fillMaxWidth()
                             .size(180.dp),
                         verticalArrangement = Arrangement.Center
@@ -140,7 +140,7 @@ fun LazyFila(
 
                             },
                             modifier = Modifier.padding(end = 12.dp),
-                            colors = IconButtonDefaults.iconButtonColors(contentColor = Color.Black)
+                            colors = IconButtonDefaults.iconButtonColors(contentColor = Color(0xFFF8EDD5))
                         ) {
                             Icon(Icons.Default.Info, contentDescription = "info")
                         }

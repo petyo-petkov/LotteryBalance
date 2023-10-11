@@ -56,7 +56,7 @@ interface PremioDao {
     fun getPremios(): Flow<List<PremioEntity>>
 
     @Query("SELECT * FROM premio_table")
-    fun getPremio(): Flow<PremioEntity>
+    fun getPremio(): Flow<PremioEntity>?
 
     @Query("SELECT * FROM premio_table WHERE boletoId=:id")
     fun loadPremioByID(id: Long): Flow<PremioEntity>

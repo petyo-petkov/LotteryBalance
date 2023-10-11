@@ -24,7 +24,7 @@ fun MostrarFecha(texto: String, valor: String){
         fontSize = 22.sp,
         textDecoration = TextDecoration.Underline,
         fontWeight = FontWeight.Bold,
-        color = Color.Black,
+        color = Color(0xFFF8EDD5),
         textAlign = TextAlign.Center,
         modifier = Modifier
             .fillMaxWidth()
@@ -38,7 +38,7 @@ fun MostrarFecha(texto: String, valor: String){
         fontWeight = FontWeight.SemiBold,
         modifier = Modifier.fillMaxWidth(),
         textAlign = TextAlign.Center,
-        color = Color.Black,
+        color = Color(0xFFF8EDD5),
 
     )
 }
@@ -50,7 +50,7 @@ fun MostrarPrecio(valor: Double){
         fontSize = 22.sp,
         textDecoration = TextDecoration.Underline,
         fontWeight = FontWeight.Bold,
-        color = Color.Black,
+        color = Color(0xFFF8EDD5),
         textAlign = TextAlign.Center,
         modifier = Modifier
             .fillMaxWidth()
@@ -64,7 +64,7 @@ fun MostrarPrecio(valor: Double){
         fontWeight = FontWeight.SemiBold,
         modifier = Modifier.fillMaxWidth(),
         textAlign = TextAlign.Center,
-        color = Color.Black,
+        color = Color(0xFFF8EDD5),
 
         )
 }

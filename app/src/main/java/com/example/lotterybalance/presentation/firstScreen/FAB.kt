@@ -18,8 +18,8 @@ fun FAB(viewModel: MainViewModel = hiltViewModel()) {
     FloatingActionButton(
         onClick = { viewModel.startScanning() },
         modifier = Modifier,
-        containerColor = Color(0xFFFFAB91),
-        contentColor = Color.Black,
+        containerColor = Color(0xFF665454),
+        contentColor = Color(0xFFF8EDD5),
         elevation = FloatingActionButtonDefaults.elevation(8.dp)
     ) {
         Icon(Icons.Filled.Add, null)

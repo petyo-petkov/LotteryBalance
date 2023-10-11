@@ -11,8 +11,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -80,12 +78,12 @@ fun InfoDialog(
             }
         ) {
             Surface(
-                modifier = Modifier
-                    .wrapContentWidth()
-                    .wrapContentHeight(),
+                modifier = Modifier,
                 shape = ShapeDefaults.ExtraLarge,
+                color = Color(0xFF413535),
+                contentColor = Color(0xFFF8EDD5),
                 tonalElevation = AlertDialogDefaults.TonalElevation,
-                border = BorderStroke(width = 2.dp, Color(0xFFFFCCBC))
+                border = BorderStroke(width = 2.dp, Color(0xFF665454))
             ) {
                 Column(
                     modifier = Modifier
