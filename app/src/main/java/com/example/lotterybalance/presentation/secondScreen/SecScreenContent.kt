@@ -1,17 +1,19 @@
 package com.example.lotterybalance.presentation.secondScreen
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -48,38 +50,44 @@ fun SecScreenContent(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxSize()
-            .background(color = Color(0xFF80DEEA))
-
+            .paint(
+                painter = painterResource(id = com.example.lotterybalance.R.drawable.fondo1),
+                contentScale = ContentScale.FillBounds
+            )
+            //.background(color = Color(0xFF110F0F))
     )
     {
         Spacer(modifier = Modifier.padding(10.dp))
 
         InfoBalanceCard(gastado = gastado, ganado = ganado)
 
-        Spacer(modifier = Modifier.padding(6.dp))
+        Spacer(modifier = Modifier.padding(vertical = 24.dp))
 
-        Column(modifier = Modifier.padding(vertical = 26.dp)) {
+        Row(modifier = Modifier.padding(0.dp)) {
             Text(
-                color = Color.Black,
-                text = "Desde: ${formatter.format(startDay)} ",
+                color = Color(0xFFF8EDD5),
+                text = "Desde:  ${formatter.format(startDay)} ",
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(2.dp),
+
+                    .padding(8.dp),
                 textAlign = TextAlign.Center,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold
             )
             Text(
-                color = Color.Black,
-                text = "Hasta: ${formatter.format(endDay)}",
+                color = Color(0xFFF8EDD5),
+                text = "Hasta:  ${formatter.format(endDay)}",
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(2.dp),
+
+                    .padding( 8.dp),
                 textAlign = TextAlign.Center,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold
             )
+
         }
+
+        Spacer(modifier = Modifier.padding(vertical = 4.dp))
 
         LazyFila(lista = listaSortidoBoletos)
 

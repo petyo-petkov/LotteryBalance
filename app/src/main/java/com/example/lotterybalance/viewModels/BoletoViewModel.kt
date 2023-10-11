@@ -176,8 +176,8 @@ class BoletoViewModel @Inject constructor(
     fun getPremio() {
         viewModelScope.launch {
             premioDao.getPremio()
-                .flowOn(Dispatchers.IO)
-                .collect { result ->
+                ?.flowOn(Dispatchers.IO)
+                ?.collect { result ->
                     premio = result
                 }
         }

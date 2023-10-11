@@ -80,8 +80,8 @@ fun BottomBar(navController: NavController) {
         },
         modifier = Modifier,
         floatingActionButton = { FAB() },
-        containerColor = Color(0xFFFFCCBC),
-        contentColor = Color.Black,
+        containerColor = Color(0xFF413535),
+        contentColor = Color(0xFFF8EDD5),
         contentPadding = PaddingValues(horizontal = 6.dp)
     )
 
@@ -160,9 +160,9 @@ fun BottomBar(navController: NavController) {
 
 
     DialogoBorrar(
-        showDialog,                              // val show: Boolean
-        { showDialog = false },                  // onDismiss()
-        {                                  // onConfirm()
+        showDialog,
+        { showDialog = false },
+        {
             boletoModel.deleteAllBoletos()
             boletoModel.deletePremios()
             Toast.makeText(context, "Se han borrado todos los boletos", Toast.LENGTH_SHORT)

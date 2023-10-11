@@ -1,9 +1,8 @@
 package com.example.lotterybalance.presentation.firstScreen
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
@@ -21,14 +20,9 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.lotterybalance.R
 import com.example.lotterybalance.viewModels.BoletoViewModel
-import java.util.Locale
 
 @Composable
 fun Content( boletoModel: BoletoViewModel = hiltViewModel() ) {
-
-    boletoModel.getBoletoEntity()
-    boletoModel.getPremios()
-    boletoModel.getAllboletosConPremios()
 
     val boletosPremio = boletoModel.boletosPremio
     val boletos = boletoModel.boletos
@@ -42,7 +36,7 @@ fun Content( boletoModel: BoletoViewModel = hiltViewModel() ) {
     }
     premios.forEach { premio ->
         if (premio.premio != null){
-            ganado += premio.premio!!
+            ganado += premio.premio
         }
 
     }
@@ -50,39 +44,29 @@ fun Content( boletoModel: BoletoViewModel = hiltViewModel() ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
+            .fillMaxSize()
             .paint(
                 painter = painterResource(id = R.drawable.fondo1),
                 contentScale = ContentScale.FillBounds
             )
     )
     {
-        Row(
-            modifier = Modifier
-                .padding(top = 20.dp)
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
 
-            GanadoCard(titulo = "GANADO",
-                valor = String.format(locale = Locale.ENGLISH, "%.2f", ganado))
-            GastadoCard(titulo = "GASTADO",
-                valor = String.format(locale = Locale.ENGLISH, "%.2f", gastado))
+        Spacer(modifier = Modifier.padding(10.dp))
 
-        }
-        BalanceCard(
-            titulo = "BALANCE",
-            valor = String.format(locale = Locale.ENGLISH, "%.2f", (ganado - gastado)))
+        BalanceCard(gastado = gastado, ganado = ganado)
 
-        Spacer(modifier = Modifier.padding(36.dp))
+        Spacer(modifier = Modifier.padding(18.dp))
+
         Text(
-            color = Color.White,
+            color = Color(0xFFF8EDD5),
             text = "Últimos Boletos :",
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Center,
             fontSize = 22.sp,
             fontWeight = FontWeight.Bold
         )
+        Spacer(modifier = Modifier.padding(10.dp))
 
         LazyFila(lista = boletosPremio.takeLast(10))
 

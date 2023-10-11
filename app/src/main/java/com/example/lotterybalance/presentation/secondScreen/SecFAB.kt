@@ -22,9 +22,9 @@ fun SecFAB(navController: NavController) {
             }
         },
         modifier = Modifier.padding(bottom = 24.dp, end = 18.dp),
-        containerColor = Color(0xFFFFAB91),
-        contentColor = Color.Black,
-        elevation = FloatingActionButtonDefaults.elevation(8.dp)
+        containerColor = Color(0xFF665454),
+        contentColor = Color(0xFFF8EDD5),
+        elevation = FloatingActionButtonDefaults.elevation(4.dp)
 
     ) {
         Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
