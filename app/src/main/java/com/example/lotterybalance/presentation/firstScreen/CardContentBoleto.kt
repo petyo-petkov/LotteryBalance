@@ -1,9 +1,8 @@
 package com.example.lotterybalance.presentation.firstScreen
 
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -11,9 +10,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import kotlin.text.Typography.euro
 
 
@@ -21,24 +18,22 @@ import kotlin.text.Typography.euro
 fun MostrarFecha(texto: String, valor: String){
     Text(
         text = texto,
-        fontSize = 22.sp,
-        textDecoration = TextDecoration.Underline,
         fontWeight = FontWeight.Bold,
         color = Color(0xFFF8EDD5),
         textAlign = TextAlign.Center,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(6.dp),
-        fontFamily = FontFamily.Default
+            .padding(2.dp),
+        fontFamily = FontFamily.Default,
+        style = MaterialTheme.typography.titleMedium
     )
-    Spacer(modifier = Modifier.height(2.dp))
     Text(
-        text = valor.toString(),
-        fontSize = 20.sp,
+        text = valor,
         fontWeight = FontWeight.SemiBold,
         modifier = Modifier.fillMaxWidth(),
         textAlign = TextAlign.Center,
         color = Color(0xFFF8EDD5),
+        style = MaterialTheme.typography.bodyMedium
 
     )
 }
@@ -47,24 +42,22 @@ fun MostrarFecha(texto: String, valor: String){
 fun MostrarPrecio(valor: Double){
     Text(
         text = "Precio:",
-        fontSize = 22.sp,
-        textDecoration = TextDecoration.Underline,
         fontWeight = FontWeight.Bold,
         color = Color(0xFFF8EDD5),
         textAlign = TextAlign.Center,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(6.dp),
-        fontFamily = FontFamily.Default
+            .padding(2.dp),
+        fontFamily = FontFamily.Default,
+        style = MaterialTheme.typography.titleMedium
     )
-    Spacer(modifier = Modifier.height(2.dp))
     Text(
         text = "$valor $euro",
-        fontSize = 20.sp,
         fontWeight = FontWeight.SemiBold,
         modifier = Modifier.fillMaxWidth(),
         textAlign = TextAlign.Center,
         color = Color(0xFFF8EDD5),
+        style = MaterialTheme.typography.bodyMedium
 
         )
 }
