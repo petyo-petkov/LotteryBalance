@@ -2,7 +2,6 @@ package com.example.lotterybalance.presentation.firstScreen
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,7 +16,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -55,31 +54,26 @@ fun LazyFila(
 
     // Dialogo al pulsar el icono "info"
     var showInfo by rememberSaveable { mutableStateOf(false) }
-    val _boleto = boletoModel.boleto
-    val _premio = boletoModel.premio
+    val boleto = boletoModel.boleto
+    val premio = boletoModel.premio
 
 
     // Lista horizontal de boletos
     LazyRow(
         modifier = Modifier.padding(1.dp, 6.dp)
     ) {
-        items(lista) { boleto ->
+        items(lista) { boletoPremio ->
 
             Card(
                 modifier = Modifier
-                    .size(200.dp, 300.dp)
+                    .size(180.dp, 280.dp)
                     .padding(4.dp),
                 shape = AbsoluteRoundedCornerShape(20.dp),
                 colors = CardDefaults.cardColors(containerColor = Color(0xFF413535))
             ) {
                 Column(
                     modifier = Modifier
-                        .fillMaxSize()
-                        .border(
-                            1.dp,
-                            Color(0xFF000000),
-                            shape = AbsoluteRoundedCornerShape(20.dp)
-                        )
+                        .fillMaxSize(),
                 )
                 {
 
@@ -87,13 +81,13 @@ fun LazyFila(
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(vertical = 16.dp),
+                            .padding(vertical = 11.dp),
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = boleto.boleto.tipo,
+                            text = boletoPremio.boleto.tipo,
                             fontWeight = FontWeight.Bold,
-                            style = MaterialTheme.typography.titleLarge,
+                            style = MaterialTheme.typography.titleMedium,
                             color = Color(0xFFF8EDD5),
                             textAlign = TextAlign.Center
                         )
@@ -102,7 +96,6 @@ fun LazyFila(
                     // Multimedia
                     Column(
                         modifier = Modifier
-                            .border(1.dp, Color(0xFF000000))
                             .background(color = Color(0xFF665454))
                             .fillMaxWidth()
                             .size(180.dp),
@@ -112,16 +105,15 @@ fun LazyFila(
 
                         MostrarFecha(
                             texto = "Fecha:",
-                            valor = formatter.format(boleto.boleto.fecha)
+                            valor = formatter.format(boletoPremio.boleto.fecha)
 
                         )
 
-                        Spacer(modifier = Modifier.height(20.dp))
+                        Spacer(modifier = Modifier.height(40.dp))
 
-                        MostrarPrecio(valor = boleto.boleto.precio)
+                        MostrarPrecio(valor = boletoPremio.boleto.precio)
                     }
 
-                    Spacer(modifier = Modifier.height(0.dp))
 
                     // Barra inferior
                     Row(
@@ -135,14 +127,14 @@ fun LazyFila(
                             onClick = {
 
                                 showInfo = true
-                                boletoModel.loadBoletoByID(boleto.boleto.numeroSerie)
-                                boletoModel.loadPremioById(boleto.boleto.numeroSerie)
+                                boletoModel.loadBoletoByID(boletoPremio.boleto.numeroSerie)
+                                boletoModel.loadPremioById(boletoPremio.boleto.numeroSerie)
 
                             },
                             modifier = Modifier.padding(end = 12.dp),
                             colors = IconButtonDefaults.iconButtonColors(contentColor = Color(0xFFF8EDD5))
                         ) {
-                            Icon(Icons.Default.Info, contentDescription = "info")
+                            Icon(Icons.Outlined.Info, contentDescription = "info")
                         }
 
                     }
@@ -153,7 +145,7 @@ fun LazyFila(
     }
     InfoDialog(show = showInfo,
         onDismiss = { showInfo = false },
-        boleto = _boleto,
-        premio = _premio
+        boleto = boleto,
+        premio = premio
         )
 }

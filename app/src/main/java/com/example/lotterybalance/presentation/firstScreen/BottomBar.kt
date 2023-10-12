@@ -8,10 +8,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Done
-import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.outlined.DateRange
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.DatePickerDefaults
 import androidx.compose.material3.DatePickerDialog
@@ -19,6 +19,7 @@ import androidx.compose.material3.DateRangePicker
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDateRangePickerState
@@ -60,29 +61,39 @@ fun BottomBar(navController: NavController) {
 
     BottomAppBar(
         actions = {
-            // delete
-            IconButton(
-                onClick = { showDialog = true }
-            ) {
-                Icon(Icons.Filled.Delete, contentDescription = null)
-            }
-            // sel. fechas
-            IconButton(onClick = { openDialog = true }) {
-                Icon(Icons.Filled.DateRange, contentDescription = null)
-            }
             // info
             IconButton(onClick = {
                 Toast.makeText(context, "Lottery Balance App v.1.0", Toast.LENGTH_LONG).show()
             }
             ) {
-                Icon(Icons.Filled.Info, contentDescription = null)
+                Icon(Icons.Outlined.Info, contentDescription = null)
             }
+
+            // sel. fechas
+            IconButton(onClick = { openDialog = true },
+                colors = IconButtonDefaults.iconButtonColors(
+                    contentColor = Color(0xFF388E3C)
+                )
+
+            ){
+                Icon(Icons.Outlined.DateRange, contentDescription = null)
+            }
+
+            // delete
+            IconButton(onClick = { showDialog = true },
+                colors = IconButtonDefaults.iconButtonColors(
+                    contentColor = Color(0xFFF44336)
+                )
+            ) {
+                Icon(Icons.Filled.Delete, contentDescription = null)
+            }
+
         },
         modifier = Modifier,
         floatingActionButton = { FAB() },
         containerColor = Color(0xFF413535),
         contentColor = Color(0xFFF8EDD5),
-        contentPadding = PaddingValues(horizontal = 6.dp)
+        contentPadding = PaddingValues(horizontal = 12.dp)
     )
 
     if (openDialog) {
@@ -116,10 +127,10 @@ fun BottomBar(navController: NavController) {
                 state = state,
                 modifier = Modifier.weight(1f),
                 colors = DatePickerDefaults.colors(
-                    todayContentColor = Color.White,
-                    todayDateBorderColor = Color(0xFFFFAB91),
-                    selectedDayContainerColor = Color(0xFFFFAB91),
-                    dayInSelectionRangeContainerColor = Color(0xFFFFCCBC),
+                    todayContentColor = Color(0xFFF8EDD5),
+                    todayDateBorderColor = Color(0xFFF8EDD5),
+                    selectedDayContainerColor = Color(0xFFF8EDD5),
+                    dayInSelectionRangeContainerColor = Color(0xFFF8EDD5),
                     dayInSelectionRangeContentColor = Color(0xFF5F5D5D),
 
                     ),
