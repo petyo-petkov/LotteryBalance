@@ -5,18 +5,15 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Transaction
 import androidx.room.Update
-import com.example.lotterybalance.database.entities.BoletoConPremio
 import com.example.lotterybalance.database.entities.BoletoEntity
-import com.example.lotterybalance.database.entities.PremioEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface BoletoDao {
 
     @Query("SELECT * FROM boletos_table WHERE fecha BETWEEN :startDay AND :endDay")
-    fun getSelectedDates(startDay: Long, endDay: Long): Flow<List<BoletoConPremio>>
+    fun getSelectedDates(startDay: Long, endDay: Long): Flow<List<BoletoEntity>>
 
     @Query("SELECT * FROM boletos_table")
     fun getAllBoletos(): Flow<List<BoletoEntity>>
@@ -38,33 +35,8 @@ interface BoletoDao {
     @Delete
     suspend fun deleteAllBoletos(boletos: List<BoletoEntity>)
 
-    @Transaction
-    @Query("SELECT * FROM boletos_table")
-    fun getAllBoletosConPremio(): Flow<List<BoletoConPremio>>
-
-}
-
-@Dao
-interface PremioDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertPremio(premio: PremioEntity)
-
     @Update
-    suspend fun updatePremio(premio: PremioEntity)
+    suspend fun updatePremio(boleto: BoletoEntity)
 
-    @Query("SELECT * FROM premio_table")
-    fun getPremios(): Flow<List<PremioEntity>>
 
-    @Query("SELECT * FROM premio_table")
-    fun getPremio(): Flow<PremioEntity>?
-
-    @Query("SELECT * FROM premio_table WHERE boletoId=:id")
-    fun loadPremioByID(id: Long): Flow<PremioEntity>
-
-    @Delete
-    suspend fun deletePremios(premios: List<PremioEntity>)
-
-    @Delete
-    suspend fun deletePremio(premio: PremioEntity)
 }
-

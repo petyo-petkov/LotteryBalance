@@ -22,7 +22,7 @@ fun AppNavigation() {
     ){
 
         composable(route = AppScreens.FirstScreen.route) {
-            FirstScreen(navController)
+            FirstScreen(navController, boletoModel)
 
         }
         composable(

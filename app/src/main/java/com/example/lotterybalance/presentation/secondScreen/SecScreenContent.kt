@@ -27,10 +27,11 @@ import java.util.Locale
 fun SecScreenContent(
     boletoModel: BoletoViewModel,
     startDay: Long,
-    endDay: Long
+    endDay: Long,
+
 ) {
     boletoModel.sortBoletosByDate(startDay, endDay)
-    boletoModel.getAllboletosConPremios()
+    boletoModel.getAllBoletos()
 
     val formatter = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
     val listaSortidoBoletos = boletoModel.sortidoBoletos
@@ -38,11 +39,10 @@ fun SecScreenContent(
     var ganado = 0.0
 
     listaSortidoBoletos.forEach { boleto ->
-        gastado += boleto.boleto.precio
-        if (boleto.premioEntity != null) {
-            ganado += boleto.premioEntity.premio!!
+        gastado += boleto.precio
+        if (boleto.premio != null){
+            ganado += boleto.premio!!
         }
-
     }
 
     Column(
@@ -53,7 +53,6 @@ fun SecScreenContent(
                 painter = painterResource(id = com.example.lotterybalance.R.drawable.fondo1),
                 contentScale = ContentScale.FillBounds
             )
-        //.background(color = Color(0xFF110F0F))
     )
     {
         Spacer(modifier = Modifier.padding(10.dp))
@@ -77,7 +76,7 @@ fun SecScreenContent(
 
         Spacer(modifier = Modifier.padding(vertical = 6.dp))
 
-        LazyFila(lista = listaSortidoBoletos)
+        LazyFila(lista = listaSortidoBoletos, boletoModel)
 
     }
 }

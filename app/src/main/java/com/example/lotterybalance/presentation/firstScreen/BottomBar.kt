@@ -26,6 +26,7 @@ import androidx.compose.material3.rememberDateRangePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -48,6 +49,7 @@ import java.util.Locale
 fun BottomBar(navController: NavController) {
     val boletoModel: BoletoViewModel = hiltViewModel()
     val context = LocalContext.current
+    val coroutine = rememberCoroutineScope()
 
     // dialogo Borrar
     var showDialog by rememberSaveable { mutableStateOf(false) }
@@ -72,7 +74,7 @@ fun BottomBar(navController: NavController) {
             // sel. fechas
             IconButton(onClick = { openDialog = true },
                 colors = IconButtonDefaults.iconButtonColors(
-                    contentColor = Color(0xFF388E3C)
+                    contentColor = Color(0xFFF8EDD5)
                 )
 
             ){
@@ -175,7 +177,6 @@ fun BottomBar(navController: NavController) {
         { showDialog = false },
         {
             boletoModel.deleteAllBoletos()
-            boletoModel.deletePremios()
             Toast.makeText(context, "Se han borrado todos los boletos", Toast.LENGTH_SHORT)
                 .show()
         }
