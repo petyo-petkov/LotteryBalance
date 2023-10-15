@@ -16,7 +16,6 @@ object RoomModule {
 
     private val BOLETO_DATABASE_NAME = "boleto_database"
 
-
     @Singleton
     @Provides
     fun provadeRoom(@ApplicationContext context: Context) =
@@ -28,8 +27,5 @@ object RoomModule {
     @Provides
     fun provideBoletoDao(db: BoletoDatabase) = db.BoletoDao()
 
-    @Singleton
-    @Provides
-    fun providePremioDao(db: BoletoDatabase) = db.PremioDao()
 
 }

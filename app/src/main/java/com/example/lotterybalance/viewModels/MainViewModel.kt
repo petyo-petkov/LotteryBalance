@@ -69,6 +69,7 @@ class MainViewModel @Inject constructor(
         var numeroLoteria = mutableListOf<String>()
         var reintegro = ""
         var numerosSeparados = mutableListOf<String>()
+        var premio = 0.0
 
         info.forEach { i ->
             if(i.startsWith("R=")){
@@ -136,7 +137,8 @@ class MainViewModel @Inject constructor(
             fecha = fechaMili,
             precio = precio,
             combinaciones = numerosSeparados,
-            reintegro = reintegro
+            reintegro = reintegro,
+            premio = premio
         )
     }
 

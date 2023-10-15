@@ -43,9 +43,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.lotterybalance.database.entities.BoletoEntity
-import com.example.lotterybalance.database.entities.PremioEntity
 import com.example.lotterybalance.viewModels.BoletoViewModel
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -55,11 +53,10 @@ import kotlin.text.Typography.euro
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun InfoDialog(
-    boletoModel: BoletoViewModel = hiltViewModel(),
+    boletoModel: BoletoViewModel,
     show: Boolean,
     onDismiss: () -> Unit,
     boleto: BoletoEntity,
-    premio: PremioEntity?
 ) {
     val context = LocalContext.current
     var showBorrar by rememberSaveable { mutableStateOf(false) }
@@ -70,6 +67,7 @@ fun InfoDialog(
 
         var valor by rememberSaveable { mutableStateOf("") }
         val ganado = valor.toDoubleOrNull()
+
 
         AlertDialog(
             modifier = Modifier,
@@ -236,7 +234,7 @@ fun InfoDialog(
                         }
 
                         // Reintegro
-                        if (boleto.reintegro.isNotEmpty()) {
+                        if (boleto.reintegro.isEmpty()) {
                             item {
                                 Text(
                                     text = "Reintegro:",
@@ -276,9 +274,10 @@ fun InfoDialog(
                         }
                         item {
                             var texto = "0.0"
-                            if (premio?.premio != null) {
-                                texto = premio.premio.toString()
+                            if (boleto.premio != null) {
+                                texto = boleto.premio.toString()
                             }
+
                             Text(
                                 text = "$texto $euro",
                                 fontSize = 20.sp,
@@ -290,7 +289,12 @@ fun InfoDialog(
                         }
                         item {
                             OutlinedTextField(
-                                leadingIcon = { Icon(imageVector = Icons.Default.Create, contentDescription = null)},
+                                leadingIcon = {
+                                    Icon(
+                                        imageVector = Icons.Default.Create,
+                                        contentDescription = null
+                                    )
+                                },
                                 value = valor,
                                 onValueChange = {
                                     if (it.isEmpty() || it.toDoubleOrNull() != null) {
@@ -327,18 +331,16 @@ fun InfoDialog(
 
                 ) {
                     TextButton(onClick = {
+                        boleto.premio = ganado
                         coroutineScope.launch {
-                            if (ganado != null) {
-                                if (premio != null) {
-                                    boletoModel.updatePremio(premio)
-                                }
-                                boletoModel.insertPremio(ganado)
-
+                            if (ganado != null){
+                                boletoModel.updatePremio(boleto)
                             }
                         }
                         onDismiss()
 
-                    }) {
+                    }
+                    ) {
                         Text(text = "OK", color = Color.White, fontSize = 18.sp)
                     }
 
@@ -371,9 +373,6 @@ fun InfoDialog(
         onDismiss = { showBorrar = false },
         onConfirm = {
             boletoModel.deleteOneBoleto(boleto)
-            if (premio != null) {
-                boletoModel.deletePremio(premio)
-            }
             showBorrar = false
             onDismiss()
             Toast.makeText(context, "Se ha borrado el boleto", Toast.LENGTH_SHORT).show()

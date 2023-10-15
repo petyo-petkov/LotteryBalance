@@ -10,15 +10,7 @@ data class BoletoEntity(
     val fecha: Long,
     val precio: Double,
     val combinaciones: List<String>,
-    val reintegro: String
+    val reintegro: String,
+    var premio: Double?
 
 )
-
-
-@Entity(tableName = "premio_table")
-data class PremioEntity(
-    @PrimaryKey val boletoId: Long,
-    val premio: Double?
-
-)
-

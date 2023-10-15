@@ -6,10 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.lotterybalance.database.dao.BoletoDao
-import com.example.lotterybalance.database.dao.PremioDao
-import com.example.lotterybalance.database.entities.BoletoConPremio
 import com.example.lotterybalance.database.entities.BoletoEntity
-import com.example.lotterybalance.database.entities.PremioEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
@@ -20,7 +17,7 @@ import javax.inject.Inject
 class BoletoViewModel @Inject constructor(
 
     private val boletoDao: BoletoDao,
-    private val premioDao: PremioDao,
+    //private val premioDao: PremioDao,
 
     ) : ViewModel() {
 
@@ -34,15 +31,16 @@ class BoletoViewModel @Inject constructor(
             precio = 0.0,
             fecha = 0,
             combinaciones = listOf(),
-            reintegro = ""
+            reintegro = "",
+            premio = 0.0
         )
     )
         private set
 
-    var boletosPremio by mutableStateOf<List<BoletoConPremio>>(listOf())
+    var sortidoBoletos by mutableStateOf<List<BoletoEntity>>(listOf())
         private set
-
-    var sortidoBoletos by mutableStateOf<List<BoletoConPremio>>(listOf())
+/*
+    var boletosPremio by mutableStateOf<List<BoletoConPremio>>(listOf())
         private set
 
 
@@ -50,12 +48,18 @@ class BoletoViewModel @Inject constructor(
    var premios by mutableStateOf<List<PremioEntity>>(listOf())
         private set
 
+
     var premio by mutableStateOf(PremioEntity(boletoId = 0L, premio = 0.0))
         private set
 
+    var premioId by mutableStateOf(PremioEntity(boletoId = 0L, premio = 0.0))
+        private set
+
+ */
+
 
     // FUNC BOLETO
-    fun getBoletoEntity() {
+    fun getAllBoletos() {
         viewModelScope.launch {
             boletoDao.getAllBoletos()
                 .flowOn(Dispatchers.IO)
@@ -66,7 +70,6 @@ class BoletoViewModel @Inject constructor(
                 }
         }
     }
-
 
     fun sortBoletosByDate(startDay: Long, endDay: Long) {
         viewModelScope.launch {
@@ -79,8 +82,6 @@ class BoletoViewModel @Inject constructor(
                 }
         }
     }
-
-
 
     fun loadBoletoByID(id: Long) {
         viewModelScope.launch {
@@ -102,6 +103,7 @@ class BoletoViewModel @Inject constructor(
                         boletos = result
                     }
                 }
+
         }
 
     }
@@ -120,7 +122,14 @@ class BoletoViewModel @Inject constructor(
         }
 
     }
+    fun updatePremio(boleto: BoletoEntity){
+        viewModelScope.launch{
+            boletoDao.updatePremio(boleto)
+        }
+    }
 
+
+/*
     fun getAllboletosConPremios() {
         viewModelScope.launch {
             boletoDao.getAllBoletosConPremio()
@@ -134,6 +143,7 @@ class BoletoViewModel @Inject constructor(
     }
 
 
+
     // FUNC PREMIO
     suspend fun insertPremio(data: Double) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -143,17 +153,20 @@ class BoletoViewModel @Inject constructor(
 
     }
 
+
     fun loadPremioById(id: Long) {
         viewModelScope.launch {
             premioDao.loadPremioByID(id)
                 .flowOn(Dispatchers.IO)
                 .collect { result ->
-                    premio = result
-
+                    if (result != null){
+                        premioId = result
+                    }
                 }
         }
-
     }
+
+
 
     suspend fun updatePremio(premio: PremioEntity) {
         viewModelScope.launch {
@@ -215,7 +228,6 @@ class BoletoViewModel @Inject constructor(
         return data?.let { PremioEntity(premio = it, boletoId = boleto.numeroSerie) }
     }
 
-
-
+ */
 
 }

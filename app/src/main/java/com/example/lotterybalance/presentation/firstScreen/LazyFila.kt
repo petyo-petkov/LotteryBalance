@@ -35,8 +35,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.lotterybalance.database.entities.BoletoConPremio
+import com.example.lotterybalance.database.entities.BoletoEntity
 import com.example.lotterybalance.viewModels.BoletoViewModel
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -45,24 +44,21 @@ import java.util.Locale
 @SuppressLint("SimpleDateFormat")
 @Composable
 fun LazyFila(
-    lista: List<BoletoConPremio>,
-    boletoModel: BoletoViewModel = hiltViewModel(),
+    lista: List<BoletoEntity>,
+    boletoModel: BoletoViewModel
     ) {
 
     val formatter = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
 
-
     // Dialogo al pulsar el icono "info"
     var showInfo by rememberSaveable { mutableStateOf(false) }
     val boleto = boletoModel.boleto
-    val premio = boletoModel.premio
-
 
     // Lista horizontal de boletos
     LazyRow(
         modifier = Modifier.padding(1.dp, 6.dp)
     ) {
-        items(lista) { boletoPremio ->
+        items(lista) {boleto ->
 
             Card(
                 modifier = Modifier
@@ -85,7 +81,7 @@ fun LazyFila(
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = boletoPremio.boleto.tipo,
+                            text = boleto.tipo,
                             fontWeight = FontWeight.Bold,
                             style = MaterialTheme.typography.titleMedium,
                             color = Color(0xFFF8EDD5),
@@ -105,13 +101,13 @@ fun LazyFila(
 
                         MostrarFecha(
                             texto = "Fecha:",
-                            valor = formatter.format(boletoPremio.boleto.fecha)
+                            valor = formatter.format(boleto.fecha)
 
                         )
 
                         Spacer(modifier = Modifier.height(40.dp))
 
-                        MostrarPrecio(valor = boletoPremio.boleto.precio)
+                        MostrarPrecio(valor = boleto.precio)
                     }
 
 
@@ -125,27 +121,26 @@ fun LazyFila(
                         // Botones
                         IconButton(
                             onClick = {
-
                                 showInfo = true
-                                boletoModel.loadBoletoByID(boletoPremio.boleto.numeroSerie)
-                                boletoModel.loadPremioById(boletoPremio.boleto.numeroSerie)
-
+                                boletoModel.loadBoletoByID(boleto.numeroSerie)
                             },
                             modifier = Modifier.padding(end = 12.dp),
                             colors = IconButtonDefaults.iconButtonColors(contentColor = Color(0xFFF8EDD5))
                         ) {
                             Icon(Icons.Outlined.Info, contentDescription = "info")
                         }
-
                     }
-
                 }
             }
         }
     }
-    InfoDialog(show = showInfo,
-        onDismiss = { showInfo = false },
-        boleto = boleto,
-        premio = premio
+
+    if (boleto != null){
+        InfoDialog(
+            show = showInfo,
+            onDismiss = { showInfo = false },
+            boleto = boleto,
+            boletoModel = boletoModel
         )
+    }
 }
