@@ -56,7 +56,7 @@ fun SecScreenContent(
             )
     )
     {
-        Spacer(modifier = Modifier.padding(10.dp))
+        Spacer(modifier = Modifier.padding(20.dp))
 
         BalanceCard(gastado = gastado, ganado = ganado)
 
@@ -67,9 +67,7 @@ fun SecScreenContent(
             text = "Desde:  ${formatter.format(startDay)}" +
                     "   -   " +
                     "Hasta:  ${formatter.format(endDay)}",
-            modifier = Modifier
-
-                .padding(8.dp),
+            modifier = Modifier,
             textAlign = TextAlign.Center,
             fontWeight = FontWeight.Bold,
             style = MaterialTheme.typography.titleMedium

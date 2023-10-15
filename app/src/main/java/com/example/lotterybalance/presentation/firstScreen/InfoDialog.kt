@@ -372,7 +372,7 @@ fun InfoDialog(
         show = showBorrar,
         onDismiss = { showBorrar = false },
         onConfirm = {
-            boletoModel.deleteOneBoleto(boleto)
+            boletoModel.deleteOneBoleto()
             boletoModel.getAllBoletos()
             showBorrar = false
             onDismiss()
