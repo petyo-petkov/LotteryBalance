@@ -47,7 +47,7 @@ fun Content( boletoModel: BoletoViewModel ) {
             )
     )
     {
-        Spacer(modifier = Modifier.padding(10.dp))
+        Spacer(modifier = Modifier.padding(20.dp))
 
         BalanceCard(gastado = gastado, ganado = ganado)
 

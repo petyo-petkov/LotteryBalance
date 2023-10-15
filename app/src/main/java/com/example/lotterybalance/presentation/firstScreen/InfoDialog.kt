@@ -373,6 +373,7 @@ fun InfoDialog(
         onDismiss = { showBorrar = false },
         onConfirm = {
             boletoModel.deleteOneBoleto(boleto)
+            boletoModel.getAllBoletos()
             showBorrar = false
             onDismiss()
             Toast.makeText(context, "Se ha borrado el boleto", Toast.LENGTH_SHORT).show()

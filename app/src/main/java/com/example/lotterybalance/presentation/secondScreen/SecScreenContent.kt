@@ -17,6 +17,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.example.lotterybalance.presentation.firstScreen.BalanceCard
 import com.example.lotterybalance.presentation.firstScreen.LazyFila
 import com.example.lotterybalance.viewModels.BoletoViewModel
 import java.text.SimpleDateFormat
@@ -30,8 +31,8 @@ fun SecScreenContent(
     endDay: Long,
 
 ) {
-    boletoModel.sortBoletosByDate(startDay, endDay)
     boletoModel.getAllBoletos()
+    boletoModel.sortBoletosByDate(startDay, endDay)
 
     val formatter = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
     val listaSortidoBoletos = boletoModel.sortidoBoletos
@@ -57,7 +58,7 @@ fun SecScreenContent(
     {
         Spacer(modifier = Modifier.padding(10.dp))
 
-        InfoBalanceCard(gastado = gastado, ganado = ganado)
+        BalanceCard(gastado = gastado, ganado = ganado)
 
         Spacer(modifier = Modifier.padding(vertical = 24.dp))
 
