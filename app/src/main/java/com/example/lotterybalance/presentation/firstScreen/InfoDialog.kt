@@ -264,7 +264,7 @@ fun InfoDialog(
                         // Premio Ganado
                         item {
                             Text(
-                                text = "Ganado:",
+                                text = "Premio:",
                                 fontSize = 16.sp,
                                 fontWeight = FontWeight.ExtraBold
                             )
@@ -313,13 +313,9 @@ fun InfoDialog(
                                         focusedLabelColor = Color(0xFFFFCCBC),
                                         focusedLeadingIconColor = Color(0xFFFFCCBC)
                                     )
-
-
                             )
                         }
-
                     }
-
                 }
                 // Botones
                 Row(
@@ -330,22 +326,6 @@ fun InfoDialog(
                     verticalAlignment = Alignment.Bottom
 
                 ) {
-                    TextButton(onClick = {
-                        boleto.premio = ganado
-                        coroutineScope.launch {
-                            if (ganado != null){
-                                boletoModel.updatePremio(boleto)
-                            }
-                        }
-                        onDismiss()
-
-                    }
-                    ) {
-                        Text(text = "OK", color = Color.White, fontSize = 18.sp)
-                    }
-
-                    Spacer(modifier = Modifier.width(160.dp))
-
                     IconButton(
                         onClick = {
                             showBorrar = true
@@ -361,6 +341,22 @@ fun InfoDialog(
 
                     }
 
+                    Spacer(modifier = Modifier.width(160.dp))
+
+                    TextButton(onClick = {
+                        boleto.premio = ganado
+                        coroutineScope.launch {
+                            if (ganado != null) {
+                                boletoModel.updatePremio(boleto)
+                            }
+                        }
+                        onDismiss()
+
+                    }
+                    ) {
+                        Text(text = "OK", color = Color.White, fontSize = 18.sp)
+                    }
+
                 }
 
             }
@@ -373,7 +369,6 @@ fun InfoDialog(
         onDismiss = { showBorrar = false },
         onConfirm = {
             boletoModel.deleteOneBoleto()
-            boletoModel.getAllBoletos()
             showBorrar = false
             onDismiss()
             Toast.makeText(context, "Se ha borrado el boleto", Toast.LENGTH_SHORT).show()

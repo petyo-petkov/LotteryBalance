@@ -6,7 +6,7 @@ import androidx.room.TypeConverters
 import com.example.lotterybalance.database.dao.BoletoDao
 import com.example.lotterybalance.database.entities.BoletoEntity
 
-@Database(entities = [BoletoEntity::class], version = 35, exportSchema = false)
+@Database(entities = [BoletoEntity::class], version = 37)
 @TypeConverters(Converters::class)
 abstract class BoletoDatabase: RoomDatabase() {
 

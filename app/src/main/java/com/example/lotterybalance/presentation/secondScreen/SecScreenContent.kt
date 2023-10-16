@@ -1,6 +1,7 @@
 package com.example.lotterybalance.presentation.secondScreen
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -31,7 +32,7 @@ fun SecScreenContent(
     endDay: Long,
 
 ) {
-    boletoModel.getAllBoletos()
+    //boletoModel.getAllBoletos()
     boletoModel.sortBoletosByDate(startDay, endDay)
 
     val formatter = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
@@ -75,7 +76,10 @@ fun SecScreenContent(
 
         Spacer(modifier = Modifier.padding(vertical = 6.dp))
 
-        LazyFila(lista = listaSortidoBoletos, boletoModel)
+
+        LazyFila(lista = listaSortidoBoletos)
+        Log.i("lista", listaSortidoBoletos.toString())
+
 
     }
 }

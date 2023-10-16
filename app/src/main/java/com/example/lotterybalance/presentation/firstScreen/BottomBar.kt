@@ -56,10 +56,15 @@ fun BottomBar(navController: NavController) {
 
     // DatePicker
     var openDialog by rememberSaveable { mutableStateOf(false) }
-    val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
-    val state = rememberDateRangePickerState()
+    val formatter = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
+
+    val state = rememberDateRangePickerState(
+        initialSelectedStartDateMillis = null,
+        initialSelectedEndDateMillis = null,
+        )
     val startDay = state.selectedStartDateMillis
     val endDay = state.selectedEndDateMillis
+
 
     BottomAppBar(
         actions = {

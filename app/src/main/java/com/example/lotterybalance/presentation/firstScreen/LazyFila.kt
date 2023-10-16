@@ -35,6 +35,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.lotterybalance.database.entities.BoletoEntity
 import com.example.lotterybalance.viewModels.BoletoViewModel
 import java.text.SimpleDateFormat
@@ -43,11 +44,9 @@ import java.util.Locale
 
 @SuppressLint("SimpleDateFormat")
 @Composable
-fun LazyFila(
-    lista: List<BoletoEntity>,
-    boletoModel: BoletoViewModel
-    ) {
+fun LazyFila( lista: List<BoletoEntity> ) {
 
+    val boletoModel: BoletoViewModel = hiltViewModel()
     val formatter = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
 
     // Dialogo al pulsar el icono "info"

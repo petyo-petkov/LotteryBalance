@@ -103,6 +103,7 @@ class BoletoViewModel @Inject constructor(
         }
 
     }
+
     fun updatePremio(boleto: BoletoEntity){
         viewModelScope.launch{
             boletoDao.updatePremio(boleto)

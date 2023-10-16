@@ -8,7 +8,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.example.lotterybalance.navigation.AppNavigation
-import com.example.lotterybalance.presentation.FirstScreen
 import com.example.lotterybalance.ui.theme.LotteryBalanceTheme
 import dagger.hilt.android.AndroidEntryPoint
 

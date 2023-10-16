@@ -63,7 +63,7 @@ fun Content( boletoModel: BoletoViewModel ) {
         )
         Spacer(modifier = Modifier.padding(6.dp))
 
-        LazyFila(lista = boletos.takeLast(10), boletoModel)
+        LazyFila(lista = boletos.takeLast(10))
 
     }
 
