@@ -102,7 +102,6 @@ class BoletoViewModel @Inject constructor(
                 }
 
         }
-
     }
 
     fun updatePremio(boleto: BoletoEntity) {

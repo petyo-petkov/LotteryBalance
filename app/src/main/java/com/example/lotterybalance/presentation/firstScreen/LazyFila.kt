@@ -44,9 +44,11 @@ import java.util.Locale
 
 @SuppressLint("SimpleDateFormat")
 @Composable
-fun LazyFila(lista: List<BoletoEntity>) {
+fun LazyFila(
+    lista: List<BoletoEntity>,
+    boletoModel: BoletoViewModel = hiltViewModel()
+){
 
-    val boletoModel: BoletoViewModel = hiltViewModel()
     val formatter = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
 
     // Dialogo al pulsar el icono "info"

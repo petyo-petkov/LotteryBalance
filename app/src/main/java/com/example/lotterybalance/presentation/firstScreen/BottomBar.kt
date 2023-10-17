@@ -26,7 +26,6 @@ import androidx.compose.material3.rememberDateRangePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -46,10 +45,11 @@ import java.util.Locale
 @SuppressLint("UnrememberedMutableState", "SimpleDateFormat", "CoroutineCreationDuringComposition")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BottomBar(navController: NavController) {
-    val boletoModel: BoletoViewModel = hiltViewModel()
+fun BottomBar(
+    navController: NavController,
+    boletoModel: BoletoViewModel = hiltViewModel()
+){
     val context = LocalContext.current
-    val coroutine = rememberCoroutineScope()
 
     // dialogo Borrar
     var showDialog by rememberSaveable { mutableStateOf(false) }

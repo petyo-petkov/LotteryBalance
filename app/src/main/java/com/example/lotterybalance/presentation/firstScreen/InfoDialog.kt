@@ -55,8 +55,8 @@ import kotlin.text.Typography.euro
 fun InfoDialog(
     show: Boolean,
     onDismiss: () -> Unit,
+    boletoModel: BoletoViewModel = hiltViewModel()
 ) {
-    val boletoModel: BoletoViewModel = hiltViewModel()
     val boleto = boletoModel.boleto
     val context = LocalContext.current
     var showBorrar by rememberSaveable { mutableStateOf(false) }
@@ -328,23 +328,6 @@ fun InfoDialog(
                 ) {
                     IconButton(
                         onClick = {
-                            showBorrar = true
-                        },
-                        modifier = Modifier,
-                        colors = IconButtonDefaults.iconButtonColors(
-                            contentColor = Color(
-                                0xFFF44336
-                            )
-                        )
-                    ) {
-                        Icon(Icons.Default.Delete, contentDescription = "delete")
-
-                    }
-
-                    Spacer(modifier = Modifier.width(160.dp))
-
-                    IconButton(
-                        onClick = {
                             boleto.premio = ganado
                             coroutineScope.launch {
                                 if (ganado != null) {
@@ -359,6 +342,23 @@ fun InfoDialog(
                         )
                     ) {
                         Icon(Icons.Default.Done, contentDescription = "done")
+
+                    }
+
+                    Spacer(modifier = Modifier.width(160.dp))
+
+                    IconButton(
+                        onClick = {
+                            showBorrar = true
+                        },
+                        modifier = Modifier,
+                        colors = IconButtonDefaults.iconButtonColors(
+                            contentColor = Color(
+                                0xFFF44336
+                            )
+                        )
+                    ) {
+                        Icon(Icons.Default.Delete, contentDescription = "delete")
 
                     }
 

@@ -9,7 +9,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
 import com.example.lotterybalance.presentation.firstScreen.BottomBar
 import com.example.lotterybalance.presentation.firstScreen.Content
-import com.example.lotterybalance.viewModels.BoletoViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable

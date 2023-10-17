@@ -27,14 +27,13 @@ import java.util.Locale
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun SecScreenContent(
-
     startDay: Long,
     endDay: Long,
+    boletoModel: BoletoViewModel = hiltViewModel()
 
 ) {
-    val boletoModel: BoletoViewModel = hiltViewModel()
-
     boletoModel.sortBoletosByDate(startDay, endDay)
+
     val formatter = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
     val listaBoletos = boletoModel.boletos
     var gastado = 0.0
@@ -77,6 +76,7 @@ fun SecScreenContent(
         Spacer(modifier = Modifier.padding(vertical = 6.dp))
 
         LazyFila( lista = listaBoletos )
+
 
     }
 }

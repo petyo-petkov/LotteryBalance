@@ -22,8 +22,10 @@ import com.example.lotterybalance.R
 import com.example.lotterybalance.viewModels.BoletoViewModel
 
 @Composable
-fun Content( ) {
-    val boletoModel: BoletoViewModel = hiltViewModel()
+fun Content(
+    boletoModel: BoletoViewModel = hiltViewModel()
+){
+
     boletoModel.getAllBoletos()
 
     val listaBoletos = boletoModel.boletos
@@ -64,7 +66,7 @@ fun Content( ) {
         )
         Spacer(modifier = Modifier.padding(6.dp))
 
-        LazyFila( lista = listaBoletos.takeLast(10) )
+        LazyFila( lista = listaBoletos.takeLast(10)  )
 
     }
 
