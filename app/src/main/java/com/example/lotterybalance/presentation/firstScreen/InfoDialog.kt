@@ -16,6 +16,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Done
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.AlertDialogDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -28,7 +29,6 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -43,7 +43,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.lotterybalance.database.entities.BoletoEntity
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.lotterybalance.viewModels.BoletoViewModel
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -53,11 +53,11 @@ import kotlin.text.Typography.euro
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun InfoDialog(
-    boletoModel: BoletoViewModel,
     show: Boolean,
     onDismiss: () -> Unit,
-    boleto: BoletoEntity,
 ) {
+    val boletoModel: BoletoViewModel = hiltViewModel()
+    val boleto = boletoModel.boleto
     val context = LocalContext.current
     var showBorrar by rememberSaveable { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()
@@ -343,18 +343,23 @@ fun InfoDialog(
 
                     Spacer(modifier = Modifier.width(160.dp))
 
-                    TextButton(onClick = {
-                        boleto.premio = ganado
-                        coroutineScope.launch {
-                            if (ganado != null) {
-                                boletoModel.updatePremio(boleto)
+                    IconButton(
+                        onClick = {
+                            boleto.premio = ganado
+                            coroutineScope.launch {
+                                if (ganado != null) {
+                                    boletoModel.updatePremio(boleto)
+                                }
                             }
-                        }
-                        onDismiss()
-
-                    }
+                            onDismiss()
+                        },
+                        modifier = Modifier,
+                        colors = IconButtonDefaults.iconButtonColors(
+                            contentColor = Color(0xFF00C853)
+                        )
                     ) {
-                        Text(text = "OK", color = Color.White, fontSize = 18.sp)
+                        Icon(Icons.Default.Done, contentDescription = "done")
+
                     }
 
                 }

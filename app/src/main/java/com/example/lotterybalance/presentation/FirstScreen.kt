@@ -13,12 +13,12 @@ import com.example.lotterybalance.viewModels.BoletoViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun FirstScreen(navController: NavController, boletoModel: BoletoViewModel)
+fun FirstScreen(navController: NavController)
 {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         containerColor = Color(0xFF4D4646),
-        content = { Content(boletoModel) },
+        content = { Content() },
         bottomBar = { BottomBar(navController) },
 
     )

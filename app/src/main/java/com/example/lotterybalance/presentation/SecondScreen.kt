@@ -15,14 +15,13 @@ import com.example.lotterybalance.viewModels.BoletoViewModel
 @Composable
 fun SecondScreen(
     navController: NavController,
-    boletoModel: BoletoViewModel,
     startDay: Long,
     endDay: Long
 ){
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         containerColor = Color(0xFF4D4646),
-        content = { SecScreenContent(boletoModel, startDay, endDay) },
+        content = { SecScreenContent( startDay, endDay) },
         floatingActionButton = {  SecFAB(navController) }
 
         )

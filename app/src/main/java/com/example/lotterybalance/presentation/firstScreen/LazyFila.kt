@@ -44,20 +44,19 @@ import java.util.Locale
 
 @SuppressLint("SimpleDateFormat")
 @Composable
-fun LazyFila( lista: List<BoletoEntity> ) {
+fun LazyFila(lista: List<BoletoEntity>) {
 
     val boletoModel: BoletoViewModel = hiltViewModel()
     val formatter = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
 
     // Dialogo al pulsar el icono "info"
     var showInfo by rememberSaveable { mutableStateOf(false) }
-    val boleto = boletoModel.boleto
 
     // Lista horizontal de boletos
     LazyRow(
         modifier = Modifier.padding(1.dp, 6.dp)
     ) {
-        items(lista) {boleto ->
+        items(lista) { boleto ->
 
             Card(
                 modifier = Modifier
@@ -124,7 +123,11 @@ fun LazyFila( lista: List<BoletoEntity> ) {
                                 boletoModel.loadBoletoByID(boleto.numeroSerie)
                             },
                             modifier = Modifier.padding(end = 12.dp),
-                            colors = IconButtonDefaults.iconButtonColors(contentColor = Color(0xFFF8EDD5))
+                            colors = IconButtonDefaults.iconButtonColors(
+                                contentColor = Color(
+                                    0xFFF8EDD5
+                                )
+                            )
                         ) {
                             Icon(Icons.Outlined.Info, contentDescription = "info")
                         }
@@ -133,13 +136,13 @@ fun LazyFila( lista: List<BoletoEntity> ) {
             }
         }
     }
-
-    if (boleto != null){
+    if (boletoModel.boleto != null){
         InfoDialog(
             show = showInfo,
             onDismiss = { showInfo = false },
-            boleto = boleto,
-            boletoModel = boletoModel
         )
     }
+
+
 }
+

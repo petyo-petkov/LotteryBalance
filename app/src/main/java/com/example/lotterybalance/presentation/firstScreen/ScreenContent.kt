@@ -17,20 +17,21 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.lotterybalance.R
 import com.example.lotterybalance.viewModels.BoletoViewModel
 
 @Composable
-fun Content( boletoModel: BoletoViewModel ) {
-
+fun Content( ) {
+    val boletoModel: BoletoViewModel = hiltViewModel()
     boletoModel.getAllBoletos()
 
-    val boletos = boletoModel.boletos
+    val listaBoletos = boletoModel.boletos
 
     var gastado = 0.0
     var ganado = 0.0
 
-    boletos.forEach { boleto ->
+    listaBoletos.forEach { boleto ->
         gastado += boleto.precio
         if (boleto.premio != null){
             ganado += boleto.premio!!
@@ -63,7 +64,7 @@ fun Content( boletoModel: BoletoViewModel ) {
         )
         Spacer(modifier = Modifier.padding(6.dp))
 
-        LazyFila(lista = boletos.takeLast(10))
+        LazyFila( lista = listaBoletos.takeLast(10) )
 
     }
 

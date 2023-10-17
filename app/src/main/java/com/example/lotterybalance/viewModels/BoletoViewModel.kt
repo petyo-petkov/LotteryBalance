@@ -22,6 +22,7 @@ class BoletoViewModel @Inject constructor(
 
     var boletos by mutableStateOf<List<BoletoEntity>>(listOf())
         private set
+
     var boleto by mutableStateOf(
         BoletoEntity(
             numeroSerie = 0,
@@ -58,7 +59,7 @@ class BoletoViewModel @Inject constructor(
                 .flowOn(Dispatchers.IO)
                 .collect { result ->
                     if (result.isNotEmpty()) {
-                        sortidoBoletos = result
+                        boletos = result
                     }
                 }
         }
@@ -68,7 +69,7 @@ class BoletoViewModel @Inject constructor(
         viewModelScope.launch {
             boletoDao.loadBoletoByID(id)
                 .flowOn(Dispatchers.IO)
-                .collect{ result ->
+                .collect { result ->
                     boleto = result
                 }
         }
@@ -104,8 +105,8 @@ class BoletoViewModel @Inject constructor(
 
     }
 
-    fun updatePremio(boleto: BoletoEntity){
-        viewModelScope.launch{
+    fun updatePremio(boleto: BoletoEntity) {
+        viewModelScope.launch {
             boletoDao.updatePremio(boleto)
         }
     }

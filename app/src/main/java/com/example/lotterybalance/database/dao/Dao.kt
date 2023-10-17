@@ -12,16 +12,16 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface BoletoDao {
 
-    @Query("SELECT * FROM boletos_table WHERE fecha BETWEEN :startDay AND :endDay")
+    @Query("SELECT * FROM boletoDB WHERE fecha BETWEEN :startDay AND :endDay")
     fun getSelectedDates(startDay: Long, endDay: Long): Flow<List<BoletoEntity>>
 
-    @Query("SELECT * FROM boletos_table")
+    @Query("SELECT * FROM boletoDB")
     fun getAllBoletos(): Flow<List<BoletoEntity>>
 
-    @Query("SELECT * FROM boletos_table")
+    @Query("SELECT * FROM boletoDB")
     fun loadOneBoleto(): Flow<BoletoEntity>
 
-    @Query("SELECT * FROM boletos_table WHERE numeroSerie=:id")
+    @Query("SELECT * FROM boletoDB WHERE numeroSerie=:id")
     fun loadBoletoByID(id: Long): Flow<BoletoEntity>
 
 

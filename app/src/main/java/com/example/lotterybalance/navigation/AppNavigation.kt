@@ -14,7 +14,6 @@ import com.example.lotterybalance.viewModels.BoletoViewModel
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()
-    val boletoModel: BoletoViewModel = hiltViewModel()
 
     NavHost(
         navController = navController,
@@ -22,7 +21,7 @@ fun AppNavigation() {
     ){
 
         composable(route = AppScreens.FirstScreen.route) {
-            FirstScreen(navController, boletoModel)
+            FirstScreen(navController)
 
         }
         composable(
@@ -36,7 +35,7 @@ fun AppNavigation() {
             val endDay = it.arguments?.getLong("endDay")
             requireNotNull(startDay)
             requireNotNull(endDay)
-            SecondScreen(navController, boletoModel, startDay, endDay)
+            SecondScreen(navController, startDay, endDay)
 
         }
     }

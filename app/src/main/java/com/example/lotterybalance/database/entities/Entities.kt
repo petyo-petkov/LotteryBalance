@@ -3,7 +3,7 @@ package com.example.lotterybalance.database.entities
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "boletos_table")
+@Entity(tableName = "boletoDB")
 data class BoletoEntity(
     @PrimaryKey val numeroSerie: Long,
     val tipo: String,
