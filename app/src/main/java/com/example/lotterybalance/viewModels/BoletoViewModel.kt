@@ -18,25 +18,6 @@ class BoletoViewModel @Inject constructor(
     private val boletoDao: BoletoDao,
 
     ) : ViewModel() {
-    /*
-        var boletosState by mutableStateOf<List<BoletoEntity>>(listOf())
-            private set
-
-
-        var boletoState by mutableStateOf(
-            BoletoEntity(
-                numeroSerie = 0,
-                tipo = "",
-                precio = 0.0,
-                fecha = 0,
-                combinaciones = listOf(),
-                reintegro = 0,
-                premio = 0.0
-            )
-        )
-            private set
-
-     */
 
     private val _boletosState = mutableStateOf(BoletosListState())
     val boletosState: State<BoletosListState> = _boletosState
