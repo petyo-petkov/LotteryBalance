@@ -1,6 +1,5 @@
 package com.example.lotterybalance.database.dao
 
-import androidx.compose.runtime.State
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -8,8 +7,6 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.example.lotterybalance.database.entities.BoletoEntity
-import com.example.lotterybalance.viewModels.BoletoState
-import com.example.lotterybalance.viewModels.BoletosListState
 import kotlinx.coroutines.flow.Flow
 
 @Dao
