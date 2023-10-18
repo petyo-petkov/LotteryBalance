@@ -27,7 +27,7 @@ fun Content(
 
     boletoModel.getAllBoletos()
 
-    val listaBoletos = boletoModel.boletosState
+    val listaBoletos = boletoModel.boletosState.value.boletosState
 
     var gastado = 0.0
     var ganado = 0.0

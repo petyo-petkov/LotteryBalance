@@ -49,6 +49,7 @@ fun BottomBar(
     navController: NavController,
 ){
     val context = LocalContext.current
+    val boletos = boletoModel.boletosState.value.boletosState
 
     // dialogo Borrar
     var showDialog by rememberSaveable { mutableStateOf(false) }
@@ -180,7 +181,7 @@ fun BottomBar(
         showDialog,
         { showDialog = false },
         {
-            boletoModel.deleteAllBoletos()
+            boletoModel.deleteAllBoletos(boletos)
             Toast.makeText(context, "Se han borrado todos los boletos", Toast.LENGTH_SHORT)
                 .show()
         }

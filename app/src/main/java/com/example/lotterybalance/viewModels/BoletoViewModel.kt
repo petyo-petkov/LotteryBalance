@@ -1,8 +1,7 @@
 package com.example.lotterybalance.viewModels
 
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.lotterybalance.database.dao.BoletoDao
@@ -19,27 +18,35 @@ class BoletoViewModel @Inject constructor(
     private val boletoDao: BoletoDao,
 
     ) : ViewModel() {
+    /*
+        var boletosState by mutableStateOf<List<BoletoEntity>>(listOf())
+            private set
 
-    var boletosState by mutableStateOf<List<BoletoEntity>>(listOf())
-        private set
 
-
-    var boletoState by mutableStateOf(
-        BoletoEntity(
-            numeroSerie = 0,
-            tipo = "",
-            precio = 0.0,
-            fecha = 0,
-            combinaciones = listOf(),
-            reintegro = 0,
-            premio = 0.0
+        var boletoState by mutableStateOf(
+            BoletoEntity(
+                numeroSerie = 0,
+                tipo = "",
+                precio = 0.0,
+                fecha = 0,
+                combinaciones = listOf(),
+                reintegro = 0,
+                premio = 0.0
+            )
         )
-    )
-        private set
+            private set
+
+     */
+
+    private val _boletosState = mutableStateOf(BoletosListState())
+    val boletosState: State<BoletosListState> = _boletosState
+
+    private val _boletoState = mutableStateOf(BoletoState())
+    val boletoState: State<BoletoState> = _boletoState
 
 
-    var sortidoBoletos by mutableStateOf<List<BoletoEntity>>(listOf())
-        private set
+    private val _sortidoState = mutableStateOf(SortidoListState())
+        val sortidoState: State<SortidoListState> = _sortidoState
 
 
     fun getAllBoletos() {
@@ -48,7 +55,9 @@ class BoletoViewModel @Inject constructor(
                 .flowOn(Dispatchers.IO)
                 .collect { result ->
                     if (result.isNotEmpty()) {
-                        boletosState = result
+                        _boletosState.value = boletosState.value.copy(
+                            boletosState = result
+                        )
 
                     }
                 }
@@ -61,7 +70,13 @@ class BoletoViewModel @Inject constructor(
                 .flowOn(Dispatchers.IO)
                 .collect { result ->
                     if (result.isNotEmpty()) {
-                        sortidoBoletos = result
+                        _sortidoState.value = sortidoState.value.copy(
+                            sortidoState = result
+                        )
+                    }else { boletoDao.getSelectedDates(startDay = 0, endDay = 0)
+                        _sortidoState.value = sortidoState.value.copy(
+                            sortidoState = result
+                        )
                     }
                 }
         }
@@ -72,19 +87,26 @@ class BoletoViewModel @Inject constructor(
             boletoDao.loadBoletoByID(id)
                 .flowOn(Dispatchers.IO)
                 .collect { result ->
-                    boletoState = result
+                    if (result != null){
+                        _boletoState.value = boletoState.value.copy(
+                            boletoState = result
+                        )
+                    }
+
                 }
         }
     }
 
-    fun deleteAllBoletos() {
+    fun deleteAllBoletos(boletos: List<BoletoEntity>) {
         viewModelScope.launch {
-            boletoDao.deleteAllBoletos(boletosState)
+            boletoDao.deleteAllBoletos(boletos)
             boletoDao.getAllBoletos()
                 .flowOn(Dispatchers.IO)
                 .collect { result ->
                     if (result.isEmpty()) {
-                        boletosState = result
+                        _boletosState.value = boletosState.value.copy(
+                            boletosState = result
+                        )
                     }
                 }
 
@@ -92,14 +114,16 @@ class BoletoViewModel @Inject constructor(
 
     }
 
-    fun deleteOneBoleto() {
+    fun deleteOneBoleto(boleto: BoletoEntity) {
         viewModelScope.launch {
-            boletoDao.deleteBoleto(boletoState)
+            boletoDao.deleteBoleto(boleto)
             boletoDao.getAllBoletos()
                 .flowOn(Dispatchers.IO)
                 .collect { result ->
                     if (result.isEmpty()) {
-                        boletosState = result
+                        _boletosState.value = boletosState.value.copy(
+                            boletosState = result
+                        )
 
                     }
                 }

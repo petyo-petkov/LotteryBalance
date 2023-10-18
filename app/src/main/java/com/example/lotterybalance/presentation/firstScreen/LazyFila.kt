@@ -138,14 +138,11 @@ fun LazyFila(
             }
         }
     }
-    if (boletoModel.boletoState != null){
-        InfoDialog(
-            boletoModel,
-            show = showInfo,
-            onDismiss = { showInfo = false },
-        )
-    }
-
+    InfoDialog(
+        boletoModel,
+        show = showInfo,
+        onDismiss = { showInfo = false },
+    )
 
 
 }

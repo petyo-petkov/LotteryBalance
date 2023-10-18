@@ -57,13 +57,13 @@ fun InfoDialog(
     onDismiss: () -> Unit
 
 ) {
-    val boleto = boletoModel.boletoState
+    val boleto = boletoModel.boletoState.value.boletoState
     val context = LocalContext.current
     var showBorrar by rememberSaveable { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()
     val formatter = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
 
-    if (show) {
+    if (show && boleto != null) {
 
         var valor by rememberSaveable { mutableStateOf("") }
         val ganado = valor.toDoubleOrNull()
@@ -375,7 +375,7 @@ fun InfoDialog(
         show = showBorrar,
         onDismiss = { showBorrar = false },
         onConfirm = {
-            boletoModel.deleteOneBoleto()
+            boletoModel.deleteOneBoleto(boleto)
             showBorrar = false
             onDismiss()
             Toast.makeText(context, "Se ha borrado el boleto", Toast.LENGTH_SHORT).show()

@@ -18,7 +18,7 @@ object RoomModule {
 
     @Singleton
     @Provides
-    fun provadeRoom(@ApplicationContext context: Context) =
+    fun provideRoom(@ApplicationContext context: Context) =
         Room.databaseBuilder(context, BoletoDatabase::class.java, BOLETO_DATABASE_NAME)
             .fallbackToDestructiveMigration()
             .build()
@@ -29,3 +29,22 @@ object RoomModule {
 
 
 }
+
+/*
+@Module
+@InstallIn(ViewModelComponent::class)
+object RoomModule {
+
+    @Provides
+    @ViewModelScoped
+    fun provideRoom(@ApplicationContext context: Context) =
+        Room.databaseBuilder(context, BoletoDatabase::class.java, "boletoDB")
+            .fallbackToDestructiveMigration()
+            .build()
+
+    @Provides
+    @ViewModelScoped
+    fun provideBoletoDao(db: BoletoDatabase) = db.BoletoDao()
+
+}
+*/
