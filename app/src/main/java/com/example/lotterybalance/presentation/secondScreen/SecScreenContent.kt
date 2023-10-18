@@ -17,7 +17,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.lotterybalance.presentation.firstScreen.BalanceCard
 import com.example.lotterybalance.presentation.firstScreen.LazyFila
 import com.example.lotterybalance.viewModels.BoletoViewModel
@@ -27,15 +26,14 @@ import java.util.Locale
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun SecScreenContent(
+    boletoModel: BoletoViewModel,
     startDay: Long,
     endDay: Long,
-    boletoModel: BoletoViewModel = hiltViewModel()
-
 ) {
     boletoModel.sortBoletosByDate(startDay, endDay)
 
     val formatter = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
-    val listaBoletos = boletoModel.boletos
+    val listaBoletos = boletoModel.sortidoBoletos
     var gastado = 0.0
     var ganado = 0.0
 
@@ -75,7 +73,7 @@ fun SecScreenContent(
 
         Spacer(modifier = Modifier.padding(vertical = 6.dp))
 
-        LazyFila( lista = listaBoletos )
+        LazyFila(boletoModel, lista = listaBoletos )
 
 
     }

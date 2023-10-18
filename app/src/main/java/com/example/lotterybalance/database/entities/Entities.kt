@@ -10,7 +10,7 @@ data class BoletoEntity(
     val fecha: Long,
     val precio: Double,
     val combinaciones: List<String>,
-    val reintegro: String,
+    var reintegro: Int? ,
     var premio: Double?
 
 )

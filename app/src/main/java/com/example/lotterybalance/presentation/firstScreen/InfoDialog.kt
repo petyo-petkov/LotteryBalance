@@ -43,7 +43,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.lotterybalance.viewModels.BoletoViewModel
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -53,11 +52,12 @@ import kotlin.text.Typography.euro
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun InfoDialog(
+    boletoModel: BoletoViewModel,
     show: Boolean,
-    onDismiss: () -> Unit,
-    boletoModel: BoletoViewModel = hiltViewModel()
+    onDismiss: () -> Unit
+
 ) {
-    val boleto = boletoModel.boleto
+    val boleto = boletoModel.boletoState
     val context = LocalContext.current
     var showBorrar by rememberSaveable { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()
@@ -234,7 +234,7 @@ fun InfoDialog(
                         }
 
                         // Reintegro
-                        if (boleto.reintegro.isEmpty()) {
+                        if (boleto.reintegro != null) {
                             item {
                                 Text(
                                     text = "Reintegro:",
@@ -247,10 +247,11 @@ fun InfoDialog(
                             }
                             item {
                                 Text(
-                                    text = boleto.reintegro,
+                                    text = boleto.reintegro.toString(),
                                     fontSize = 20.sp,
                                     fontWeight = FontWeight.Bold
                                 )
+
                             }
                             item {
                                 HorizontalDivider(
@@ -260,6 +261,7 @@ fun InfoDialog(
                                 )
                             }
                         }
+
 
                         // Premio Ganado
                         item {

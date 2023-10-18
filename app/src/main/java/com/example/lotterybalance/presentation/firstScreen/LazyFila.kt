@@ -35,7 +35,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.lotterybalance.database.entities.BoletoEntity
 import com.example.lotterybalance.viewModels.BoletoViewModel
 import java.text.SimpleDateFormat
@@ -45,9 +44,10 @@ import java.util.Locale
 @SuppressLint("SimpleDateFormat")
 @Composable
 fun LazyFila(
-    lista: List<BoletoEntity>,
-    boletoModel: BoletoViewModel = hiltViewModel()
-){
+    boletoModel: BoletoViewModel,
+    lista: List<BoletoEntity>
+
+) {
 
     val formatter = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
 
@@ -138,12 +138,14 @@ fun LazyFila(
             }
         }
     }
-    if (boletoModel.boleto != null){
+    if (boletoModel.boletoState != null){
         InfoDialog(
+            boletoModel,
             show = showInfo,
             onDismiss = { showInfo = false },
         )
     }
+
 
 
 }

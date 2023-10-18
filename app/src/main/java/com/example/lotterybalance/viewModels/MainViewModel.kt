@@ -67,13 +67,13 @@ class MainViewModel @Inject constructor(
         var precio = 0.0
         var tipo = ""
         var numeroLoteria = mutableListOf<String>()
-        var reintegro = ""
+        var reintegro: Int? = 0
         var numerosSeparados = mutableListOf<String>()
-        var premio = 0.0
+        val premio = 0.0
 
         info.forEach { i ->
             if(i.startsWith("R=")){
-                reintegro = i.last().toString()
+                reintegro = i.last().toString().toInt()
             }
             if (i.startsWith("N=")){
                 numeroLoteria = listOf(i).toMutableList()

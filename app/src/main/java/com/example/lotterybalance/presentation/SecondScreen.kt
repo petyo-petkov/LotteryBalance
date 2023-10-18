@@ -9,19 +9,20 @@ import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
 import com.example.lotterybalance.presentation.secondScreen.SecFAB
 import com.example.lotterybalance.presentation.secondScreen.SecScreenContent
+import com.example.lotterybalance.viewModels.BoletoViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun SecondScreen(
+    boletoModel: BoletoViewModel,
     navController: NavController,
     startDay: Long,
     endDay: Long
 ){
-
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         containerColor = Color(0xFF4D4646),
-        content = { SecScreenContent(startDay, endDay) },
+        content = { SecScreenContent(boletoModel, startDay, endDay) },
         floatingActionButton = {  SecFAB(navController) }
 
         )
