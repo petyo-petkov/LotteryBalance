@@ -57,8 +57,11 @@ class BoletoViewModel @Inject constructor(
             boletoDao.getSelectedDates(startDay, endDay)
                 .flowOn(Dispatchers.IO)
                 .collect { result ->
-                    if (result.isNotEmpty()) {
-                        sortidoBoletos = result
+                    sortidoBoletos = if (result.isNotEmpty()) {
+                        result
+                    }else {
+                        boletoDao.getSelectedDates(startDay = 0, endDay = 0)
+                        result
                     }
                 }
         }
