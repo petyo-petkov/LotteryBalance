@@ -20,10 +20,10 @@ class BoletoViewModel @Inject constructor(
     ) : ViewModel() {
 
     private val _boletosState = mutableStateOf(BoletosListState())
-    val boletosState: State<BoletosListState> = _boletosState
+        val boletosState: State<BoletosListState> = _boletosState
 
     private val _boletoState = mutableStateOf(BoletoState())
-    val boletoState: State<BoletoState> = _boletoState
+        val boletoState: State<BoletoState> = _boletoState
 
 
     private val _sortidoState = mutableStateOf(SortidoListState())
@@ -54,7 +54,7 @@ class BoletoViewModel @Inject constructor(
                         _sortidoState.value = sortidoState.value.copy(
                             sortidoState = result
                         )
-                    }else { boletoDao.getSelectedDates(startDay = 0, endDay = 0)
+                    } else { boletoDao.getSelectedDates(startDay = 0, endDay = 0)
                         _sortidoState.value = sortidoState.value.copy(
                             sortidoState = result
                         )
