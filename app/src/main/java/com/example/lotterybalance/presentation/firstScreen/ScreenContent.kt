@@ -1,5 +1,6 @@
 package com.example.lotterybalance.presentation.firstScreen
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,14 +11,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.paint
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.example.lotterybalance.R
 import com.example.lotterybalance.viewModels.BoletoViewModel
 
 @Composable
@@ -43,10 +39,11 @@ fun Content(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxSize()
-            .paint(
-                painter = painterResource(id = R.drawable.fondo1),
-                contentScale = ContentScale.FillBounds
-            )
+            .background(MaterialTheme.colorScheme.background)
+           // .paint(
+           //     painter = painterResource(id = R.drawable.fondo1),
+           //     contentScale = ContentScale.FillBounds
+           // )
     )
     {
         Spacer(modifier = Modifier.padding(20.dp))
@@ -56,7 +53,7 @@ fun Content(
         Spacer(modifier = Modifier.padding(24.dp))
 
         Text(
-            color = Color(0xFFF8EDD5),
+            color = MaterialTheme.colorScheme.tertiary,
             text = "Últimos Boletos :",
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Center,
@@ -68,6 +65,7 @@ fun Content(
         LazyFila(boletoModel, lista = listaBoletos.takeLast(10)  )
 
     }
+
 
 
 }

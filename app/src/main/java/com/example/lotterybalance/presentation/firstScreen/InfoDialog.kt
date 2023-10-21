@@ -1,7 +1,6 @@
 package com.example.lotterybalance.presentation.firstScreen
 
 import android.widget.Toast
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,6 +23,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.ShapeDefaults
@@ -78,10 +78,10 @@ fun InfoDialog(
             Surface(
                 modifier = Modifier,
                 shape = ShapeDefaults.ExtraLarge,
-                color = Color(0xFF413535),
-                contentColor = Color(0xFFF8EDD5),
+                color = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.tertiary,
                 tonalElevation = AlertDialogDefaults.TonalElevation,
-                border = BorderStroke(width = 2.dp, Color(0xFF665454))
+                //border = BorderStroke(width = 2.dp, MaterialTheme.colorScheme.secondary)
             ) {
                 Column(
                     modifier = Modifier
@@ -101,7 +101,7 @@ fun InfoDialog(
                             HorizontalDivider(
                                 modifier = Modifier.padding(12.dp),
                                 thickness = 0.5.dp,
-                                color = Color.White
+                                color = MaterialTheme.colorScheme.tertiary
                             )
                         }
                         item {
@@ -122,7 +122,7 @@ fun InfoDialog(
                             HorizontalDivider(
                                 modifier = Modifier.padding(12.dp),
                                 thickness = 0.5.dp,
-                                color = Color.White
+                                color = MaterialTheme.colorScheme.tertiary
                             )
                         }
 
@@ -148,7 +148,7 @@ fun InfoDialog(
                             HorizontalDivider(
                                 modifier = Modifier.padding(12.dp),
                                 thickness = 0.5.dp,
-                                color = Color.White
+                                color = MaterialTheme.colorScheme.tertiary
                             )
                         }
 
@@ -174,7 +174,7 @@ fun InfoDialog(
                             HorizontalDivider(
                                 modifier = Modifier.padding(12.dp),
                                 thickness = 0.5.dp,
-                                color = Color.White
+                                color = MaterialTheme.colorScheme.tertiary
                             )
                         }
 
@@ -200,7 +200,7 @@ fun InfoDialog(
                             HorizontalDivider(
                                 modifier = Modifier.padding(12.dp),
                                 thickness = 0.5.dp,
-                                color = Color.White
+                                color = MaterialTheme.colorScheme.tertiary
                             )
                         }
 
@@ -229,7 +229,7 @@ fun InfoDialog(
                             HorizontalDivider(
                                 modifier = Modifier.padding(12.dp),
                                 thickness = 0.5.dp,
-                                color = Color.White
+                                color = MaterialTheme.colorScheme.tertiary
                             )
                         }
 
@@ -257,7 +257,7 @@ fun InfoDialog(
                                 HorizontalDivider(
                                     modifier = Modifier.padding(12.dp),
                                     thickness = 0.5.dp,
-                                    color = Color.White
+                                    color = MaterialTheme.colorScheme.tertiary
                                 )
                             }
                         }

@@ -1,9 +1,7 @@
 package com.example.lotterybalance.viewModels
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -27,7 +25,6 @@ class MainViewModel @Inject constructor(
 
     private val repo: MainRepo,
     private val dao: BoletoDao,
-    private val context: Context,
 
     ) : ViewModel() {
 
@@ -39,8 +36,7 @@ class MainViewModel @Inject constructor(
                 .flowOn(Dispatchers.IO)
                 .catch { error ->
                     Log.i("tag", "Error: ${error.message}")
-                    Toast.makeText(context, "codigo no compatible o ya existe", Toast.LENGTH_LONG)
-                        .show()
+
 
                 }
                 .flowOn(Dispatchers.IO)

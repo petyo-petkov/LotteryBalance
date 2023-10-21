@@ -31,7 +31,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -65,7 +64,7 @@ fun LazyFila(
                     .size(180.dp, 280.dp)
                     .padding(4.dp),
                 shape = AbsoluteRoundedCornerShape(20.dp),
-                colors = CardDefaults.cardColors(containerColor = Color(0xFF413535))
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary)
             ) {
                 Column(
                     modifier = Modifier
@@ -84,7 +83,7 @@ fun LazyFila(
                             text = boleto.tipo,
                             fontWeight = FontWeight.Bold,
                             style = MaterialTheme.typography.titleMedium,
-                            color = Color(0xFFF8EDD5),
+                            color = MaterialTheme.colorScheme.tertiary,
                             textAlign = TextAlign.Center
                         )
                     }
@@ -92,7 +91,7 @@ fun LazyFila(
                     // Multimedia
                     Column(
                         modifier = Modifier
-                            .background(color = Color(0xFF665454))
+                            .background(color = MaterialTheme.colorScheme.secondary)
                             .fillMaxWidth()
                             .size(180.dp),
                         verticalArrangement = Arrangement.Center
@@ -126,9 +125,7 @@ fun LazyFila(
                             },
                             modifier = Modifier.padding(end = 12.dp),
                             colors = IconButtonDefaults.iconButtonColors(
-                                contentColor = Color(
-                                    0xFFF8EDD5
-                                )
+                                contentColor = MaterialTheme.colorScheme.tertiary
                             )
                         ) {
                             Icon(Icons.Outlined.Info, contentDescription = "info")

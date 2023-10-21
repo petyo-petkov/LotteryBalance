@@ -31,6 +31,8 @@ class MainRepo @Inject constructor(
                 }
                 .addOnFailureListener {
                     Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "codigo no compatible o ya existe", Toast.LENGTH_LONG)
+                        .show()
                 }
             awaitClose { }
         }

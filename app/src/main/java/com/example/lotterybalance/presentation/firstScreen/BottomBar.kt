@@ -20,6 +20,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDateRangePickerState
@@ -77,12 +78,9 @@ fun BottomBar(
             }
 
             // sel. fechas
-            IconButton(onClick = { openDialog = true },
-                colors = IconButtonDefaults.iconButtonColors(
-                    contentColor = Color(0xFFF8EDD5)
-                )
-
-            ){
+            IconButton(onClick = { openDialog = true }
+            )
+            {
                 Icon(Icons.Outlined.DateRange, contentDescription = null)
             }
 
@@ -98,8 +96,8 @@ fun BottomBar(
         },
         modifier = Modifier,
         floatingActionButton = { FAB() },
-        containerColor = Color(0xFF413535),
-        contentColor = Color(0xFFF8EDD5),
+        containerColor = MaterialTheme.colorScheme.primary,
+        contentColor = MaterialTheme.colorScheme.tertiary,
         contentPadding = PaddingValues(horizontal = 12.dp)
     )
 
@@ -116,7 +114,7 @@ fun BottomBar(
                     },
                     enabled = state.selectedEndDateMillis != null
                 ) {
-                    Text(text = "Ok", color = Color.White)
+                    Text(text = "Ok", color = MaterialTheme.colorScheme.tertiary)
                 }
             },
             modifier = Modifier,
@@ -126,7 +124,7 @@ fun BottomBar(
                         openDialog = false
                     }
                 ) {
-                    Text("Cancel", color = Color.White)
+                    Text("Cancel", color = MaterialTheme.colorScheme.tertiary)
                 }
             }
         ) {

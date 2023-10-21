@@ -27,10 +27,11 @@ import kotlin.text.Typography.euro
 fun BalanceCard(gastado: Double, ganado: Double) {
 
     val balance = ganado - gastado
+    @Composable
     fun cambiarColor(valor: Double): Color {
         val colorMayor = Color(0xFF00C853)
         val colorMenor = Color(0xFFEF5350)
-        val colorNeutro = Color(0xFFF8EDD5)
+        val colorNeutro = MaterialTheme.colorScheme.tertiary
 
         val colorBalance: Color = if (valor > 0.0) {
             colorMayor
@@ -47,20 +48,20 @@ fun BalanceCard(gastado: Double, ganado: Double) {
             .size(360.dp, 210.dp)
             .alpha(0.75F),
         shape = ShapeDefaults.Large,
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF413535))
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary)
 
     ) {
 
         Fila(
             texto = "GANADO",
             valor = String.format(locale = Locale.ENGLISH, "%.2f", ganado),
-            color = Color.White
+            color = MaterialTheme.colorScheme.tertiary
         )
 
         Fila(
             texto = "GASTADO",
             valor = String.format(locale = Locale.ENGLISH, "%.2f", gastado),
-            color = Color.White
+            color = MaterialTheme.colorScheme.tertiary
         )
 
         Fila(
@@ -91,7 +92,7 @@ fun Fila(texto: String, valor: String, color: Color) {
             fontSize = 18.sp,
             textAlign = TextAlign.Start,
             fontWeight = FontWeight.Bold,
-            color = Color.White,
+            color = MaterialTheme.colorScheme.tertiary,
             style = MaterialTheme.typography.bodyLarge
         )
         Spacer(modifier = Modifier.padding(horizontal = 70.dp))

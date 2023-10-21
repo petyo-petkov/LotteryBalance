@@ -6,7 +6,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -19,7 +18,7 @@ fun MostrarFecha(texto: String, valor: String){
     Text(
         text = texto,
         fontWeight = FontWeight.Bold,
-        color = Color(0xFFF8EDD5),
+        color = MaterialTheme.colorScheme.tertiary,
         textAlign = TextAlign.Center,
         modifier = Modifier
             .fillMaxWidth()
@@ -32,7 +31,7 @@ fun MostrarFecha(texto: String, valor: String){
         fontWeight = FontWeight.SemiBold,
         modifier = Modifier.fillMaxWidth(),
         textAlign = TextAlign.Center,
-        color = Color(0xFFF8EDD5),
+        color = MaterialTheme.colorScheme.tertiary,
         style = MaterialTheme.typography.bodyMedium
 
     )
@@ -43,7 +42,7 @@ fun MostrarPrecio(valor: Double){
     Text(
         text = "Precio:",
         fontWeight = FontWeight.Bold,
-        color = Color(0xFFF8EDD5),
+        color = MaterialTheme.colorScheme.tertiary,
         textAlign = TextAlign.Center,
         modifier = Modifier
             .fillMaxWidth()
@@ -56,7 +55,7 @@ fun MostrarPrecio(valor: Double){
         fontWeight = FontWeight.SemiBold,
         modifier = Modifier.fillMaxWidth(),
         textAlign = TextAlign.Center,
-        color = Color(0xFFF8EDD5),
+        color = MaterialTheme.colorScheme.tertiary,
         style = MaterialTheme.typography.bodyMedium
 
         )
