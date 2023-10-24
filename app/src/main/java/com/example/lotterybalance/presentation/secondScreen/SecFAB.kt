@@ -23,7 +23,7 @@ fun SecFAB(navController: NavController) {
         },
         modifier = Modifier.padding(bottom = 24.dp, end = 18.dp),
         containerColor = MaterialTheme.colorScheme.secondary,
-        contentColor = MaterialTheme.colorScheme.tertiary,
+        contentColor = MaterialTheme.colorScheme.onPrimary,
         elevation = FloatingActionButtonDefaults.elevation(4.dp)
 
     ) {

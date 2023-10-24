@@ -39,7 +39,7 @@ fun Content(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
+            .background(MaterialTheme.colorScheme.surface)
            // .paint(
            //     painter = painterResource(id = R.drawable.fondo1),
            //     contentScale = ContentScale.FillBounds
@@ -53,7 +53,7 @@ fun Content(
         Spacer(modifier = Modifier.padding(24.dp))
 
         Text(
-            color = MaterialTheme.colorScheme.tertiary,
+            color = MaterialTheme.colorScheme.onPrimary,
             text = "Últimos Boletos :",
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Center,

@@ -15,28 +15,18 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Chocolate,
-    secondary = Cacao,
-    tertiary = Texto,
-    background = backgroundOscuro,
-
+    primary = OscPrim,
+    onPrimary = OscText,
+    secondary = OscSec,
+    surface = OscFondo
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Clarito,
-    secondary = Banana,
-    tertiary = TextoOscuro,
-    background = backgroundClaro
-/*
-    background = Color(0xFF272727),
-    surface = Chocolate,
-    onPrimary = Color.White,
-    onSecondary = Color.Black,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
+    primary = ClaroPrim,
+    onPrimary = ClaroText,
+    secondary = ClaroSec,
+    surface = ClaroFondo
 
- */
 
 )
 
@@ -62,7 +52,6 @@ fun LotteryBalanceTheme(
             val window = (view.context as Activity).window
             window.statusBarColor = colorScheme.primary.toArgb()
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
-
         }
     }
 

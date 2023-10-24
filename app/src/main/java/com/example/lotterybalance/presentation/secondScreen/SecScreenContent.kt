@@ -45,7 +45,7 @@ fun SecScreenContent(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
+            .background(MaterialTheme.colorScheme.surface)
             //.paint(
             //    painter = painterResource(id = com.example.lotterybalance.R.drawable.fondo1),
             //    contentScale = ContentScale.FillBounds
@@ -59,7 +59,7 @@ fun SecScreenContent(
         Spacer(modifier = Modifier.padding(vertical = 24.dp))
 
         Text(
-            color = MaterialTheme.colorScheme.tertiary,
+            color = MaterialTheme.colorScheme.onPrimary,
             text = "Desde:  ${formatter.format(startDay)}" +
                     "   -   " +
                     "Hasta:  ${formatter.format(endDay)}",

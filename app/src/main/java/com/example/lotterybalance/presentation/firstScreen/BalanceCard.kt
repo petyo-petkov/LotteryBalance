@@ -31,7 +31,7 @@ fun BalanceCard(gastado: Double, ganado: Double) {
     fun cambiarColor(valor: Double): Color {
         val colorMayor = Color(0xFF00C853)
         val colorMenor = Color(0xFFEF5350)
-        val colorNeutro = MaterialTheme.colorScheme.tertiary
+        val colorNeutro = MaterialTheme.colorScheme.onPrimary
 
         val colorBalance: Color = if (valor > 0.0) {
             colorMayor
@@ -45,8 +45,7 @@ fun BalanceCard(gastado: Double, ganado: Double) {
 
     Card(
         modifier = Modifier
-            .size(360.dp, 210.dp)
-            .alpha(0.75F),
+            .size(360.dp, 210.dp),
         shape = ShapeDefaults.Large,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary)
 
@@ -55,13 +54,13 @@ fun BalanceCard(gastado: Double, ganado: Double) {
         Fila(
             texto = "GANADO",
             valor = String.format(locale = Locale.ENGLISH, "%.2f", ganado),
-            color = MaterialTheme.colorScheme.tertiary
+            color = MaterialTheme.colorScheme.onPrimary
         )
 
         Fila(
             texto = "GASTADO",
             valor = String.format(locale = Locale.ENGLISH, "%.2f", gastado),
-            color = MaterialTheme.colorScheme.tertiary
+            color = MaterialTheme.colorScheme.onPrimary
         )
 
         Fila(
@@ -92,7 +91,7 @@ fun Fila(texto: String, valor: String, color: Color) {
             fontSize = 18.sp,
             textAlign = TextAlign.Start,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.tertiary,
+            color = MaterialTheme.colorScheme.onPrimary,
             style = MaterialTheme.typography.bodyLarge
         )
         Spacer(modifier = Modifier.padding(horizontal = 70.dp))

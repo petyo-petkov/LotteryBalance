@@ -78,8 +78,8 @@ fun InfoDialog(
             Surface(
                 modifier = Modifier,
                 shape = ShapeDefaults.ExtraLarge,
-                color = MaterialTheme.colorScheme.primary,
-                contentColor = MaterialTheme.colorScheme.tertiary,
+                color = MaterialTheme.colorScheme.surface,
+                contentColor = MaterialTheme.colorScheme.onPrimary,
                 tonalElevation = AlertDialogDefaults.TonalElevation,
                 //border = BorderStroke(width = 2.dp, MaterialTheme.colorScheme.secondary)
             ) {
@@ -101,7 +101,7 @@ fun InfoDialog(
                             HorizontalDivider(
                                 modifier = Modifier.padding(12.dp),
                                 thickness = 0.5.dp,
-                                color = MaterialTheme.colorScheme.tertiary
+                                color = MaterialTheme.colorScheme.onPrimary
                             )
                         }
                         item {
@@ -122,7 +122,7 @@ fun InfoDialog(
                             HorizontalDivider(
                                 modifier = Modifier.padding(12.dp),
                                 thickness = 0.5.dp,
-                                color = MaterialTheme.colorScheme.tertiary
+                                color = MaterialTheme.colorScheme.onPrimary
                             )
                         }
 
@@ -148,7 +148,7 @@ fun InfoDialog(
                             HorizontalDivider(
                                 modifier = Modifier.padding(12.dp),
                                 thickness = 0.5.dp,
-                                color = MaterialTheme.colorScheme.tertiary
+                                color = MaterialTheme.colorScheme.onPrimary
                             )
                         }
 
@@ -174,7 +174,7 @@ fun InfoDialog(
                             HorizontalDivider(
                                 modifier = Modifier.padding(12.dp),
                                 thickness = 0.5.dp,
-                                color = MaterialTheme.colorScheme.tertiary
+                                color = MaterialTheme.colorScheme.onPrimary
                             )
                         }
 
@@ -200,7 +200,7 @@ fun InfoDialog(
                             HorizontalDivider(
                                 modifier = Modifier.padding(12.dp),
                                 thickness = 0.5.dp,
-                                color = MaterialTheme.colorScheme.tertiary
+                                color = MaterialTheme.colorScheme.onPrimary
                             )
                         }
 
@@ -229,7 +229,7 @@ fun InfoDialog(
                             HorizontalDivider(
                                 modifier = Modifier.padding(12.dp),
                                 thickness = 0.5.dp,
-                                color = MaterialTheme.colorScheme.tertiary
+                                color = MaterialTheme.colorScheme.onPrimary
                             )
                         }
 
@@ -257,7 +257,7 @@ fun InfoDialog(
                                 HorizontalDivider(
                                     modifier = Modifier.padding(12.dp),
                                     thickness = 0.5.dp,
-                                    color = MaterialTheme.colorScheme.tertiary
+                                    color = MaterialTheme.colorScheme.onPrimary
                                 )
                             }
                         }

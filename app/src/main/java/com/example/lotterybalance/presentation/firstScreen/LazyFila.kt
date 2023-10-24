@@ -83,7 +83,7 @@ fun LazyFila(
                             text = boleto.tipo,
                             fontWeight = FontWeight.Bold,
                             style = MaterialTheme.typography.titleMedium,
-                            color = MaterialTheme.colorScheme.tertiary,
+                            color = MaterialTheme.colorScheme.onPrimary,
                             textAlign = TextAlign.Center
                         )
                     }
@@ -125,7 +125,7 @@ fun LazyFila(
                             },
                             modifier = Modifier.padding(end = 12.dp),
                             colors = IconButtonDefaults.iconButtonColors(
-                                contentColor = MaterialTheme.colorScheme.tertiary
+                                contentColor = MaterialTheme.colorScheme.onPrimary
                             )
                         ) {
                             Icon(Icons.Outlined.Info, contentDescription = "info")

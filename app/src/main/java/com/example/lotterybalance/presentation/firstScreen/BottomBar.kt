@@ -97,7 +97,7 @@ fun BottomBar(
         modifier = Modifier,
         floatingActionButton = { FAB() },
         containerColor = MaterialTheme.colorScheme.primary,
-        contentColor = MaterialTheme.colorScheme.tertiary,
+        contentColor = MaterialTheme.colorScheme.onPrimary,
         contentPadding = PaddingValues(horizontal = 12.dp)
     )
 
@@ -114,7 +114,7 @@ fun BottomBar(
                     },
                     enabled = state.selectedEndDateMillis != null
                 ) {
-                    Text(text = "Ok", color = MaterialTheme.colorScheme.tertiary)
+                    Text(text = "Ok", color = MaterialTheme.colorScheme.onPrimary)
                 }
             },
             modifier = Modifier,
@@ -124,7 +124,7 @@ fun BottomBar(
                         openDialog = false
                     }
                 ) {
-                    Text("Cancel", color = MaterialTheme.colorScheme.tertiary)
+                    Text("Cancel", color = MaterialTheme.colorScheme.onPrimary)
                 }
             }
         ) {

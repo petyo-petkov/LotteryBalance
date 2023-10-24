@@ -22,13 +22,13 @@ fun DialogoBorrarUno(
                     onConfirm()
                     onDismiss()
                 },) {
-                    Text(text = "BORRAR", color = MaterialTheme.colorScheme.tertiary)
+                    Text(text = "BORRAR", color = MaterialTheme.colorScheme.onPrimary)
                 }
             },
             dismissButton = {
                 TextButton(onClick = { onDismiss() }) {
                     Text(text = "CANCELAR",
-                        color = MaterialTheme.colorScheme.tertiary)
+                        color = MaterialTheme.colorScheme.onPrimary)
 
                 }
             },

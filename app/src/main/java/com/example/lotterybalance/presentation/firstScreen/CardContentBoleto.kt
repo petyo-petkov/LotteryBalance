@@ -18,7 +18,7 @@ fun MostrarFecha(texto: String, valor: String){
     Text(
         text = texto,
         fontWeight = FontWeight.Bold,
-        color = MaterialTheme.colorScheme.tertiary,
+        color = MaterialTheme.colorScheme.onPrimary,
         textAlign = TextAlign.Center,
         modifier = Modifier
             .fillMaxWidth()
@@ -31,7 +31,7 @@ fun MostrarFecha(texto: String, valor: String){
         fontWeight = FontWeight.SemiBold,
         modifier = Modifier.fillMaxWidth(),
         textAlign = TextAlign.Center,
-        color = MaterialTheme.colorScheme.tertiary,
+        color = MaterialTheme.colorScheme.onPrimary,
         style = MaterialTheme.typography.bodyMedium
 
     )
@@ -42,7 +42,7 @@ fun MostrarPrecio(valor: Double){
     Text(
         text = "Precio:",
         fontWeight = FontWeight.Bold,
-        color = MaterialTheme.colorScheme.tertiary,
+        color = MaterialTheme.colorScheme.onPrimary,
         textAlign = TextAlign.Center,
         modifier = Modifier
             .fillMaxWidth()
@@ -55,7 +55,7 @@ fun MostrarPrecio(valor: Double){
         fontWeight = FontWeight.SemiBold,
         modifier = Modifier.fillMaxWidth(),
         textAlign = TextAlign.Center,
-        color = MaterialTheme.colorScheme.tertiary,
+        color = MaterialTheme.colorScheme.onPrimary,
         style = MaterialTheme.typography.bodyMedium
 
         )
