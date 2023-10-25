@@ -18,7 +18,7 @@ private val DarkColorScheme = darkColorScheme(
     primary = OscPrim,
     onPrimary = OscText,
     secondary = OscSec,
-    tertiary = OscSec,
+    tertiary = OscTet,
     surface = OscFondo
 )
 
