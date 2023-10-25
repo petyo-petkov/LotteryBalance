@@ -18,6 +18,7 @@ private val DarkColorScheme = darkColorScheme(
     primary = OscPrim,
     onPrimary = OscText,
     secondary = OscSec,
+    tertiary = OscSec,
     surface = OscFondo
 )
 
@@ -25,6 +26,7 @@ private val LightColorScheme = lightColorScheme(
     primary = ClaroPrim,
     onPrimary = ClaroText,
     secondary = ClaroSec,
+    tertiary = ClaroTet,
     surface = ClaroFondo
 
 

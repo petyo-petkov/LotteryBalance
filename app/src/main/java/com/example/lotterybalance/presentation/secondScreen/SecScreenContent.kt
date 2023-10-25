@@ -73,6 +73,5 @@ fun SecScreenContent(
 
         LazyFila(boletoModel, lista = listaBoletos )
 
-
     }
 }

@@ -26,9 +26,7 @@ class MainRepo @Inject constructor(
                         send(barcode.rawValue)
                     }
                 }
-                .addOnCanceledListener {
-                    Toast.makeText(context, "Cancelado", Toast.LENGTH_SHORT).show()
-                }
+                .addOnCanceledListener { }
                 .addOnFailureListener {
                     Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
                     Toast.makeText(context, "codigo no compatible o ya existe", Toast.LENGTH_LONG)
