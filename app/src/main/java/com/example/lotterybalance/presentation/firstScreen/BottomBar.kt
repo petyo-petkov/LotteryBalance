@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.outlined.DateRange
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.BottomAppBar
@@ -164,9 +163,7 @@ fun BottomBar(
                                 state.selectedEndDateMillis?.let { formatter.format(it) }
                             else "Fecha final")?.let { Text(text = it, fontSize = 16.sp) }
                         }
-                        Box(Modifier.weight(0.2f)) {
-                            Icon(imageVector = Icons.Default.Done, contentDescription = "Okk")
-                        }
+
                     }
                 },
 

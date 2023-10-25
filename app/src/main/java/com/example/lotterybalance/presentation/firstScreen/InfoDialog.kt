@@ -71,9 +71,7 @@ fun InfoDialog(
 
         AlertDialog(
             modifier = Modifier,
-            onDismissRequest = {
-                onDismiss()
-            }
+            onDismissRequest = { onDismiss() }
         ) {
             Surface(
                 modifier = Modifier,
@@ -81,7 +79,6 @@ fun InfoDialog(
                 color = MaterialTheme.colorScheme.surface,
                 contentColor = MaterialTheme.colorScheme.onPrimary,
                 tonalElevation = AlertDialogDefaults.TonalElevation,
-                //border = BorderStroke(width = 2.dp, MaterialTheme.colorScheme.secondary)
             ) {
                 Column(
                     modifier = Modifier
