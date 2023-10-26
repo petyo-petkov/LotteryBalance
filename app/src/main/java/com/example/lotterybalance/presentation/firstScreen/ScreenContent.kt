@@ -40,10 +40,7 @@ fun Content(
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.surface)
-           // .paint(
-           //     painter = painterResource(id = R.drawable.fondo1),
-           //     contentScale = ContentScale.FillBounds
-           // )
+
     )
     {
         Spacer(modifier = Modifier.padding(20.dp))
