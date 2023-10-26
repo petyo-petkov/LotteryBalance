@@ -10,13 +10,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.lotterybalance.navigation.AppScreens
-import com.example.lotterybalance.viewModels.BoletoViewModel
 
 @Composable
-fun SecFAB(navController: NavController, boletoModel: BoletoViewModel = hiltViewModel()) {
+fun SecFAB(navController: NavController) {
     FloatingActionButton(
         onClick = {
             navController.navigate(route = AppScreens.FirstScreen.route) {
@@ -33,5 +31,4 @@ fun SecFAB(navController: NavController, boletoModel: BoletoViewModel = hiltView
         Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
 
     }
-
 }
