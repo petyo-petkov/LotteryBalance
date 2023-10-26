@@ -32,6 +32,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -61,7 +62,7 @@ fun InfoDialog(
     val context = LocalContext.current
     var showBorrar by rememberSaveable { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()
-    val formatter = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
+    val formatter = remember { SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH) }
 
     if (show && boleto != null) {
 
@@ -95,198 +96,68 @@ fun InfoDialog(
 
                         // Tipo de Boleto
                         item {
-                            HorizontalDivider(
-                                modifier = Modifier.padding(12.dp),
-                                thickness = 0.5.dp,
-                                color = MaterialTheme.colorScheme.onPrimary
-                            )
-                        }
-                        item {
-                            Text(
-                                text = "Boleto:",
-                                fontSize = 16.sp,
-                                fontWeight = FontWeight.ExtraBold
-                            )
-                        }
-                        item {
-                            Spacer(modifier = Modifier.height(10.dp))
-                        }
-                        item {
-                            Text(text = boleto.tipo, fontSize = 20.sp, fontWeight = FontWeight.Bold)
-
-                        }
-                        item {
-                            HorizontalDivider(
-                                modifier = Modifier.padding(12.dp),
-                                thickness = 0.5.dp,
-                                color = MaterialTheme.colorScheme.onPrimary
+                            ItemContent(
+                                nombre = "Boleto: ",
+                                valor = boleto.tipo,
+                                lista = null
                             )
                         }
 
                         // Numero de Serie
                         item {
-                            Text(
-                                text = "Numero de serie:",
-                                fontSize = 16.sp,
-                                fontWeight = FontWeight.ExtraBold
-                            )
-                        }
-                        item {
-                            Spacer(modifier = Modifier.height(10.dp))
-                        }
-                        item {
-                            Text(
-                                text = boleto.numeroSerie.toString(),
-                                fontSize = 20.sp,
-                                fontWeight = FontWeight.Bold
-                            )
-                        }
-                        item {
-                            HorizontalDivider(
-                                modifier = Modifier.padding(12.dp),
-                                thickness = 0.5.dp,
-                                color = MaterialTheme.colorScheme.onPrimary
+                            ItemContent(
+                                nombre = "Número de serie: ",
+                                valor = boleto.numeroSerie.toString(),
+                                lista = null
                             )
                         }
 
                         // Fecha
                         item {
-                            Text(
-                                text = "Fecha:",
-                                fontSize = 16.sp,
-                                fontWeight = FontWeight.ExtraBold
-                            )
-                        }
-                        item {
-                            Spacer(modifier = Modifier.height(10.dp))
-                        }
-                        item {
-                            Text(
-                                text = formatter.format(boleto.fecha),
-                                fontSize = 20.sp,
-                                fontWeight = FontWeight.Bold
-                            )
-                        }
-                        item {
-                            HorizontalDivider(
-                                modifier = Modifier.padding(12.dp),
-                                thickness = 0.5.dp,
-                                color = MaterialTheme.colorScheme.onPrimary
+                            ItemContent(
+                                nombre = "Fecha: ",
+                                valor = formatter.format(boleto.fecha),
+                                lista = null
                             )
                         }
 
                         // Precio
                         item {
-                            Text(
-                                text = "Precio:",
-                                fontSize = 16.sp,
-                                fontWeight = FontWeight.ExtraBold
-                            )
-                        }
-                        item {
-                            Spacer(modifier = Modifier.height(10.dp))
-                        }
-                        item {
-                            Text(
-                                text = "${boleto.precio} $euro ",
-                                fontSize = 20.sp,
-                                fontWeight = FontWeight.Bold
-                            )
-                        }
-                        item {
-                            HorizontalDivider(
-                                modifier = Modifier.padding(12.dp),
-                                thickness = 0.5.dp,
-                                color = MaterialTheme.colorScheme.onPrimary
+                            ItemContent(
+                                nombre = "Precio: ",
+                                valor = "${boleto.precio} $euro ",
+                                lista = null
                             )
                         }
 
                         // Combinaciones
                         item {
-                            Text(
-                                text = "Numeros:",
-                                fontSize = 16.sp,
-                                fontWeight = FontWeight.ExtraBold
-                            )
-                        }
-                        item {
-                            Spacer(modifier = Modifier.height(10.dp))
-                        }
-                        item {
-                            boleto.combinaciones.forEach { item ->
-                                Text(
-                                    text = item,
-                                    fontSize = 20.sp,
-                                    fontWeight = FontWeight.Bold
-                                )
-                            }
-
-                        }
-                        item {
-                            HorizontalDivider(
-                                modifier = Modifier.padding(12.dp),
-                                thickness = 0.5.dp,
-                                color = MaterialTheme.colorScheme.onPrimary
+                            ItemContent(
+                                nombre = "Combinacíones: ",
+                                valor = null,
+                                lista = boleto.combinaciones
                             )
                         }
 
                         // Reintegro
-                        if (boleto.reintegro != null) {
+                        boleto.reintegro?.let { reintegro ->
                             item {
-                                Text(
-                                    text = "Reintegro:",
-                                    fontSize = 16.sp,
-                                    fontWeight = FontWeight.ExtraBold
-                                )
-                            }
-                            item {
-                                Spacer(modifier = Modifier.height(10.dp))
-                            }
-                            item {
-                                Text(
-                                    text = boleto.reintegro.toString(),
-                                    fontSize = 20.sp,
-                                    fontWeight = FontWeight.Bold
-                                )
-
-                            }
-                            item {
-                                HorizontalDivider(
-                                    modifier = Modifier.padding(12.dp),
-                                    thickness = 0.5.dp,
-                                    color = MaterialTheme.colorScheme.onPrimary
+                                ItemContent(
+                                    nombre = "Reintegro: ",
+                                    valor = boleto.reintegro.toString(),
+                                    lista = null
                                 )
                             }
                         }
-
 
                         // Premio Ganado
                         item {
-                            Text(
-                                text = "Premio:",
-                                fontSize = 16.sp,
-                                fontWeight = FontWeight.ExtraBold
+                            val texto = boleto.premio?.toString() ?: "0.0"
+                            ItemContent(
+                                nombre = "Premio: ",
+                                valor = "$texto $euro",
+                                lista = null
                             )
-                        }
-                        item {
-                            Spacer(modifier = Modifier.height(10.dp))
-                        }
-                        item {
-                            var texto = "0.0"
-                            if (boleto.premio != null) {
-                                texto = boleto.premio.toString()
-                            }
-
-                            Text(
-                                text = "$texto $euro",
-                                fontSize = 20.sp,
-                                fontWeight = FontWeight.ExtraBold
-                            )
-                        }
-                        item {
-                            Spacer(modifier = Modifier.height(10.dp))
-                        }
-                        item {
                             OutlinedTextField(
                                 leadingIcon = {
                                     Icon(
@@ -308,9 +179,9 @@ fun InfoDialog(
                                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
                                 colors = OutlinedTextFieldDefaults
                                     .colors(
-                                        focusedBorderColor = Color(0xFFFFCCBC),
-                                        focusedLabelColor = Color(0xFFFFCCBC),
-                                        focusedLeadingIconColor = Color(0xFFFFCCBC)
+                                        focusedBorderColor = Color.White,
+                                        focusedLabelColor = Color.White,
+                                        focusedLeadingIconColor = Color.White
                                     )
                             )
                         }
@@ -378,6 +249,42 @@ fun InfoDialog(
             Toast.makeText(context, "Se ha borrado el boleto", Toast.LENGTH_SHORT).show()
         }
     )
+
+}
+
+@Composable
+fun ItemContent(nombre: String, valor: String?, lista: List<String>?) {
+    HorizontalDivider(
+        modifier = Modifier.padding(12.dp),
+        thickness = 0.5.dp,
+        color = MaterialTheme.colorScheme.onPrimary
+    )
+    Text(
+        text = nombre,
+        fontSize = 16.sp,
+        fontWeight = FontWeight.ExtraBold
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+
+    if (lista != null) {
+        lista.forEach {
+            Text(
+                text = it,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
+
+    } else {
+        if (valor != null) {
+            Text(
+                text = valor,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
+    }
+
 
 }
 
