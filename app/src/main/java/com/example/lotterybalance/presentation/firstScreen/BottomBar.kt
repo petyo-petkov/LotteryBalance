@@ -24,8 +24,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDateRangePickerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -47,58 +49,19 @@ import java.util.Locale
 fun BottomBar(
     boletoModel: BoletoViewModel,
     navController: NavController,
-){
+) {
     val context = LocalContext.current
-    val boletos = boletoModel.boletosState.value.boletosState
+    val boletos = boletoModel.boletoListState.value.boletosState
 
     // dialogo Borrar
     var showDialog by rememberSaveable { mutableStateOf(false) }
 
     // DatePicker
     var openDialog by rememberSaveable { mutableStateOf(false) }
-    val formatter = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
-
-    val state = rememberDateRangePickerState(
-        initialSelectedStartDateMillis = null,
-        initialSelectedEndDateMillis = null,
-        )
+    val formatter = remember { SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH) }
+    val state = rememberDateRangePickerState()
     val startDay = state.selectedStartDateMillis
     val endDay = state.selectedEndDateMillis
-
-
-    BottomAppBar(
-        actions = {
-            // info
-            IconButton(onClick = {
-                Toast.makeText(context, "Lottery Balance App v.1.0", Toast.LENGTH_LONG).show()
-            }
-            ) {
-                Icon(Icons.Outlined.Info, contentDescription = null)
-            }
-
-            // sel. fechas
-            IconButton(onClick = { openDialog = true }
-            )
-            {
-                Icon(Icons.Outlined.DateRange, contentDescription = null)
-            }
-
-            // delete
-            IconButton(onClick = { showDialog = true },
-                colors = IconButtonDefaults.iconButtonColors(
-                    contentColor = Color(0xFFF44336)
-                )
-            ) {
-                Icon(Icons.Filled.Delete, contentDescription = null)
-            }
-
-        },
-        modifier = Modifier,
-        floatingActionButton = { FAB() },
-        containerColor = MaterialTheme.colorScheme.primary,
-        contentColor = MaterialTheme.colorScheme.onPrimary,
-        contentPadding = PaddingValues(horizontal = 12.dp)
-    )
 
     if (openDialog) {
         DatePickerDialog(
@@ -109,7 +72,7 @@ fun BottomBar(
                 TextButton(
                     onClick = {
                         openDialog = false
-                        navController.navigate(route = "${AppScreens.SecondScreen.route}/${startDay}/${endDay}" )
+                        navController.navigate(route = "${AppScreens.SecondScreen.route}/${startDay}/${endDay}")
                     },
                     enabled = state.selectedEndDateMillis != null
                 ) {
@@ -167,9 +130,45 @@ fun BottomBar(
                     }
                 },
 
-            )
+                )
         }
     }
+
+
+    BottomAppBar(
+        actions = {
+            // info
+            IconButton(onClick = {
+                Toast.makeText(context, "Balance Loteria v.1.0", Toast.LENGTH_LONG).show()
+            }
+            ) {
+                Icon(Icons.Outlined.Info, contentDescription = null)
+            }
+
+            // sel. fechas
+            IconButton(onClick = { openDialog = true }
+            )
+            {
+                Icon(Icons.Outlined.DateRange, contentDescription = null)
+            }
+
+            // delete
+            IconButton(
+                onClick = { showDialog = true },
+                colors = IconButtonDefaults.iconButtonColors(
+                    contentColor = Color(0xFFF44336)
+                )
+            ) {
+                Icon(Icons.Filled.Delete, contentDescription = null)
+            }
+
+        },
+        modifier = Modifier,
+        floatingActionButton = { FAB() },
+        containerColor = MaterialTheme.colorScheme.primary,
+        contentColor = MaterialTheme.colorScheme.onPrimary,
+        contentPadding = PaddingValues(horizontal = 12.dp)
+    )
 
 
     DialogoBorrar(
@@ -183,3 +182,4 @@ fun BottomBar(
     )
 
 }
+

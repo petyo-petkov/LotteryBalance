@@ -23,7 +23,7 @@ fun Content(
 
     boletoModel.getAllBoletos()
 
-    val listaBoletos = boletoModel.boletosState.value.boletosState
+    val listaBoletos = boletoModel.boletoListState.value.boletosState
 
     var gastado = 0.0
     var ganado = 0.0
@@ -62,7 +62,7 @@ fun Content(
         )
         Spacer(modifier = Modifier.padding(6.dp))
 
-        LazyFila(boletoModel, lista = listaBoletos.takeLast(10)  )
+        LazyFila(boletoModel, lista = listaBoletos.takeLast(10).sortedBy { it.fecha }  )
 
     }
 

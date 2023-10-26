@@ -46,10 +46,7 @@ fun SecScreenContent(
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.surface)
-            //.paint(
-            //    painter = painterResource(id = com.example.lotterybalance.R.drawable.fondo1),
-            //    contentScale = ContentScale.FillBounds
-            //)
+
     )
     {
         Spacer(modifier = Modifier.padding(20.dp))
@@ -71,7 +68,7 @@ fun SecScreenContent(
 
         Spacer(modifier = Modifier.padding(vertical = 6.dp))
 
-        LazyFila(boletoModel, lista = listaBoletos )
+        LazyFila(boletoModel, lista = listaBoletos.sortedBy { it.fecha } )
 
     }
 }

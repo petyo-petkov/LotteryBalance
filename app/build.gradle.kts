@@ -43,7 +43,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.3-dev-k1.9.10-593b4c95fce"
+        kotlinCompilerExtensionVersion = "1.5.4-dev-k1.9.20-RC2-93f1625925e"
     }
     packaging {
         resources {
@@ -56,7 +56,7 @@ dependencies {
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
-    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.ui:ui:")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.navigation:navigation-compose:2.7.4")
@@ -72,7 +72,7 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
     implementation ("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
     implementation("androidx.activity:activity-compose:1.8.0")
-    implementation(platform("androidx.compose:compose-bom:2023.09.02"))
+    implementation(platform("androidx.compose:compose-bom:2023.10.01"))
 
     // google camera scanner
     implementation ("com.google.android.gms:play-services-code-scanner:16.1.0")
