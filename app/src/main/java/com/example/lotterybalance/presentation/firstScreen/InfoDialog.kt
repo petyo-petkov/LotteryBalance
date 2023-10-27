@@ -58,7 +58,7 @@ fun InfoDialog(
     onDismiss: () -> Unit
 
 ) {
-    val boleto = boletoModel.boletoState.value.boletoState
+    val boleto = boletoModel.boletoState.value.estadoBoleto
     val context = LocalContext.current
     var showBorrar by rememberSaveable { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()

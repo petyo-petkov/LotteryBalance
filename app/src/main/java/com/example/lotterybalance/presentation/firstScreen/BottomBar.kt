@@ -24,7 +24,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDateRangePickerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -51,7 +50,7 @@ fun BottomBar(
     navController: NavController,
 ) {
     val context = LocalContext.current
-    val boletos = boletoModel.boletoListState.value.boletosState
+    val boletos = boletoModel.boletosListState.value.estadoBoletos
 
     // dialogo Borrar
     var showDialog by rememberSaveable { mutableStateOf(false) }

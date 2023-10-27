@@ -3,7 +3,7 @@ package com.example.lotterybalance.viewModels
 import com.example.lotterybalance.database.entities.BoletoEntity
 
 data class BoletoState(
-    val boletoState: BoletoEntity = BoletoEntity(
+    val estadoBoleto: BoletoEntity = BoletoEntity(
         numeroSerie = 0,
         tipo = "",
         precio = 0.0,

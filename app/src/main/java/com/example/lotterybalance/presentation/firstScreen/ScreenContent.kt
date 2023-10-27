@@ -23,7 +23,7 @@ fun Content(
 
     boletoModel.getAllBoletos()
 
-    val listaBoletos = boletoModel.boletoListState.value.boletosState
+    val listaBoletos = boletoModel.boletosListState.value.estadoBoletos
 
     var gastado = 0.0
     var ganado = 0.0
@@ -43,7 +43,7 @@ fun Content(
 
     )
     {
-        Spacer(modifier = Modifier.padding(20.dp))
+        Spacer(modifier = Modifier.padding(12.dp))
 
         BalanceCard(gastado = gastado, ganado = ganado)
 

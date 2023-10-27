@@ -2,7 +2,6 @@ package com.example.lotterybalance.presentation.firstScreen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -44,8 +43,8 @@ fun BalanceCard(gastado: Double, ganado: Double) {
 
     ElevatedCard(
         modifier = Modifier
-            .size(360.dp, 210.dp),
-        shape = ShapeDefaults.Large,
+            .size(380.dp, 210.dp),
+        shape = ShapeDefaults.ExtraLarge,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary),
         elevation = CardDefaults.elevatedCardElevation(4.dp)
 
@@ -81,20 +80,19 @@ fun Fila(texto: String, valor: String, color: Color) {
         modifier = Modifier
             .size(360.dp, 68.dp)
             .fillMaxWidth(),
-        horizontalArrangement = Arrangement.Center,
+        horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
             text = texto,
             modifier = Modifier
-                .padding(0.dp),
+                .padding(24.dp),
             fontSize = 18.sp,
             textAlign = TextAlign.Start,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.onPrimary,
             style = MaterialTheme.typography.bodyLarge
         )
-        Spacer(modifier = Modifier.padding(horizontal = 70.dp))
         Text(
             text = "$valor $euro",
             modifier = Modifier

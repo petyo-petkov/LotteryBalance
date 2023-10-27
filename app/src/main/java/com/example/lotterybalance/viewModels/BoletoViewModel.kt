@@ -21,8 +21,8 @@ class BoletoViewModel @Inject constructor(
 
     ) : ViewModel() {
 
-    private val _boletoListState = mutableStateOf(BoletosListState())
-    val boletoListState: State<BoletosListState> = _boletoListState
+    private val _boletosListState = mutableStateOf(BoletosListState())
+    val boletosListState: State<BoletosListState> = _boletosListState
 
     private val _boletoState = mutableStateOf(BoletoState())
     val boletoState: State<BoletoState> = _boletoState
@@ -41,8 +41,8 @@ class BoletoViewModel @Inject constructor(
                 }
                 .collect { result ->
                     if (result.isNotEmpty()) {
-                        _boletoListState.value = boletoListState.value.copy(
-                            boletosState = result
+                        _boletosListState.value = boletosListState.value.copy(
+                            estadoBoletos = result
                         )
 
                     }
@@ -81,9 +81,9 @@ class BoletoViewModel @Inject constructor(
                     Log.i("error", error.message.toString())
                 }
                 .collect { result ->
-                    if (result != null) {
+                    result?.let {
                         _boletoState.value = boletoState.value.copy(
-                            boletoState = result
+                            estadoBoleto = result
                         )
                     }
 
@@ -94,61 +94,20 @@ class BoletoViewModel @Inject constructor(
     fun deleteAllBoletos(boletos: List<BoletoEntity>) {
         viewModelScope.launch {
             boletoDao.deleteAllBoletos(boletos)
-            val currentBoletos = _boletoListState.value.boletosState
-            val newBoletos = currentBoletos - boletos
-            _boletoListState.value = boletoListState.value.copy(boletosState = newBoletos)
+            _boletosListState.value = boletosListState.value.copy(
+                estadoBoletos = boletosListState.value.estadoBoletos - boletos.toSet()
+            )
         }
     }
 
     fun deleteOneBoleto(boleto: BoletoEntity) {
         viewModelScope.launch {
             boletoDao.deleteBoleto(boleto)
-            val currentBoletos = _boletoListState.value.boletosState
-            if (currentBoletos.contains(boleto)) {
-                val newBoletos = currentBoletos - boleto
-                _boletoListState.value = boletoListState.value.copy(boletosState = newBoletos)
-            }
+            _boletosListState.value = boletosListState.value.copy(
+                estadoBoletos = boletosListState.value.estadoBoletos - boleto
+            )
         }
     }
-
-
-
-    /*
-        fun deleteAllBoletos(boletos: List<BoletoEntity>) {
-            viewModelScope.launch {
-                boletoDao.deleteAllBoletos(boletos)
-                boletoDao.getAllBoletos()
-                    .flowOn(Dispatchers.IO)
-                    .collect { result ->
-                        if (result.isEmpty()) {
-                            _boletosState.value = boletosState.value.copy(
-                                boletosState = result
-                            )
-                        }
-                    }
-
-            }
-
-        }
-
-        fun deleteOneBoleto(boleto: BoletoEntity) {
-            viewModelScope.launch {
-                boletoDao.deleteBoleto(boleto)
-                boletoDao.getAllBoletos()
-                    .flowOn(Dispatchers.IO)
-                    .collect { result ->
-                        if (result.isEmpty()) {
-                            _boletosState.value = boletosState.value.copy(
-                                boletosState = result
-                            )
-
-                        }
-                    }
-
-            }
-        }
-
-     */
 
     suspend fun updatePremio(boleto: BoletoEntity) {
         viewModelScope.launch {

@@ -49,7 +49,7 @@ fun SecScreenContent(
 
     )
     {
-        Spacer(modifier = Modifier.padding(20.dp))
+        Spacer(modifier = Modifier.padding(12.dp))
 
         BalanceCard(gastado = gastado, ganado = ganado)
 
