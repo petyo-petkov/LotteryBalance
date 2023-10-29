@@ -27,10 +27,11 @@ fun SecScreenContent(
     startDay: Long,
     endDay: Long,
 ) {
-    boletoModel.sortBoletosByDate(startDay, endDay)
+    boletoModel.getBoletosByDates(startDay, endDay)
 
     val formatter = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
     val listaBoletos = boletoModel.sortidoState.value.sortidoState
+
     var gastado = 0.0
     var ganado = 0.0
 

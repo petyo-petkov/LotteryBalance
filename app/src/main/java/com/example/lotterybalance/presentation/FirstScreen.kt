@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
 import com.example.lotterybalance.presentation.firstScreen.BottomBar
-import com.example.lotterybalance.presentation.firstScreen.Content
+import com.example.lotterybalance.presentation.firstScreen.ScreenContent
 import com.example.lotterybalance.viewModels.BoletoViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -18,7 +18,7 @@ fun FirstScreen(boletoModel: BoletoViewModel, navController: NavController)
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         containerColor = Color(0xFF4D4646),
-        content = { Content(boletoModel) },
+        content = { ScreenContent(boletoModel) },
         bottomBar = { BottomBar(boletoModel, navController) },
 
     )

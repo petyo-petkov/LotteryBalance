@@ -14,7 +14,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object RoomModule {
 
-    private val BOLETO_DATABASE_NAME = "boletoDB"
+    private const val BOLETO_DATABASE_NAME = "boletoDB"
 
     @Singleton
     @Provides
@@ -29,22 +29,3 @@ object RoomModule {
 
 
 }
-
-/*
-@Module
-@InstallIn(ViewModelComponent::class)
-object RoomModule {
-
-    @Provides
-    @ViewModelScoped
-    fun provideRoom(@ApplicationContext context: Context) =
-        Room.databaseBuilder(context, BoletoDatabase::class.java, "boletoDB")
-            .fallbackToDestructiveMigration()
-            .build()
-
-    @Provides
-    @ViewModelScoped
-    fun provideBoletoDao(db: BoletoDatabase) = db.BoletoDao()
-
-}
-*/

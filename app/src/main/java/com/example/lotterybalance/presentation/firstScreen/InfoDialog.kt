@@ -64,11 +64,10 @@ fun InfoDialog(
     val coroutineScope = rememberCoroutineScope()
     val formatter = remember { SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH) }
 
-    if (show && boleto != null) {
-
+    if (show) {
         var valor by rememberSaveable { mutableStateOf("") }
-        val ganado = valor.toDoubleOrNull()
 
+        val ganado = valor.toDoubleOrNull()
 
         AlertDialog(
             modifier = Modifier,
@@ -107,7 +106,7 @@ fun InfoDialog(
                         item {
                             ItemContent(
                                 nombre = "Número de serie: ",
-                                valor = boleto.numeroSerie.toString(),
+                                valor = "${ boleto.numeroSerie }",
                                 lista = null
                             )
                         }
@@ -140,11 +139,11 @@ fun InfoDialog(
                         }
 
                         // Reintegro
-                        boleto.reintegro?.let { reintegro ->
+                        boleto.reintegro?.let {
                             item {
                                 ItemContent(
                                     nombre = "Reintegro: ",
-                                    valor = boleto.reintegro.toString(),
+                                    valor = "${ boleto.reintegro }",
                                     lista = null
                                 )
                             }
@@ -200,9 +199,7 @@ fun InfoDialog(
                         onClick = {
                             boleto.premio = ganado
                             coroutineScope.launch {
-                                if (ganado != null) {
-                                    boletoModel.updatePremio(boleto)
-                                }
+                                ganado?.let { boletoModel.insertOneBoleto(boleto) }
                             }
                             onDismiss()
                         },
@@ -237,14 +234,16 @@ fun InfoDialog(
             }
 
         }
+
+
     }
 
     DialogoBorrarUno(
         show = showBorrar,
         onDismiss = { showBorrar = false },
         onConfirm = {
-            boletoModel.deleteOneBoleto(boleto)
             showBorrar = false
+            boletoModel.deleteOneBoleto(boleto)
             onDismiss()
             Toast.makeText(context, "Se ha borrado el boleto", Toast.LENGTH_SHORT).show()
         }
@@ -254,6 +253,7 @@ fun InfoDialog(
 
 @Composable
 fun ItemContent(nombre: String, valor: String?, lista: List<String>?) {
+
     HorizontalDivider(
         modifier = Modifier.padding(12.dp),
         thickness = 0.5.dp,
@@ -284,7 +284,6 @@ fun ItemContent(nombre: String, valor: String?, lista: List<String>?) {
             )
         }
     }
-
 
 }
 

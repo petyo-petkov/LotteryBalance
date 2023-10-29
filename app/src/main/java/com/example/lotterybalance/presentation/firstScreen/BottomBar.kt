@@ -20,6 +20,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDateRangePickerState
@@ -35,6 +36,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.lotterybalance.navigation.AppScreens
 import com.example.lotterybalance.viewModels.BoletoViewModel
@@ -45,10 +47,8 @@ import java.util.Locale
 @SuppressLint("UnrememberedMutableState", "SimpleDateFormat", "CoroutineCreationDuringComposition")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BottomBar(
-    boletoModel: BoletoViewModel,
-    navController: NavController,
-) {
+fun BottomBar(boletoModel: BoletoViewModel, navController: NavController) {
+
     val context = LocalContext.current
     val boletos = boletoModel.boletosListState.value.estadoBoletos
 
@@ -59,10 +59,12 @@ fun BottomBar(
     var openDialog by rememberSaveable { mutableStateOf(false) }
     val formatter = remember { SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH) }
     val state = rememberDateRangePickerState()
-    val startDay = state.selectedStartDateMillis
-    val endDay = state.selectedEndDateMillis
+
 
     if (openDialog) {
+        val startDay = state.selectedStartDateMillis
+        val endDay = state.selectedEndDateMillis
+
         DatePickerDialog(
             onDismissRequest = {
                 openDialog = false
@@ -87,19 +89,20 @@ fun BottomBar(
                 ) {
                     Text("Cancel", color = MaterialTheme.colorScheme.onPrimary)
                 }
-            }
+            },
+            shape = ShapeDefaults.Medium,
         ) {
             DateRangePicker(
                 state = state,
                 modifier = Modifier.weight(1f),
+                showModeToggle = false,
                 colors = DatePickerDefaults.colors(
-                    todayContentColor = Color(0xFFF8EDD5),
-                    todayDateBorderColor = Color(0xFFF8EDD5),
-                    selectedDayContainerColor = Color(0xFFF8EDD5),
-                    dayInSelectionRangeContainerColor = Color(0xFFF8EDD5),
-                    dayInSelectionRangeContentColor = Color(0xFF5F5D5D),
-
-                    ),
+                    todayContentColor = MaterialTheme.colorScheme.onPrimary,
+                    todayDateBorderColor = MaterialTheme.colorScheme.onPrimary,
+                    selectedDayContainerColor = MaterialTheme.colorScheme.secondary,
+                    dayInSelectionRangeContainerColor = MaterialTheme.colorScheme.tertiary,
+                    dayInSelectionRangeContentColor = MaterialTheme.colorScheme.onPrimary
+                ),
                 title = {
                     Text(
                         text = "Selecionar el rango de fechas", modifier = Modifier
@@ -115,30 +118,31 @@ fun BottomBar(
                             .fillMaxWidth()
                             .padding(16.dp)
                     ) {
-                        Box(Modifier.weight(1f)) {
+                        Box(Modifier.padding(horizontal = 12.dp)) {
                             (if (state.selectedStartDateMillis != null)
                                 state.selectedStartDateMillis?.let { formatter.format(it) }
                             else "Fecha inicial")?.let { Text(text = it, fontSize = 16.sp) }
                         }
-                        Box(Modifier.weight(1f)) {
+                        Box(Modifier.padding(horizontal = 12.dp)) {
                             (if (state.selectedEndDateMillis != null)
                                 state.selectedEndDateMillis?.let { formatter.format(it) }
                             else "Fecha final")?.let { Text(text = it, fontSize = 16.sp) }
                         }
 
                     }
-                },
+                }
 
-                )
+            )
         }
-    }
 
+
+    }
 
     BottomAppBar(
         actions = {
             // info
             IconButton(onClick = {
-                Toast.makeText(context, "Balance Loteria v.1.0", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Gastos Loteria v1.0", Toast.LENGTH_LONG).show()
             }
             ) {
                 Icon(Icons.Outlined.Info, contentDescription = null)

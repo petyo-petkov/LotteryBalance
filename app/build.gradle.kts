@@ -25,7 +25,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -64,6 +64,7 @@ dependencies {
     implementation("androidx.compose.material3:material3:1.2.0-alpha09")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     implementation("androidx.compose.runtime:runtime-livedata:1.6.0-alpha07")
+    implementation("androidx.compose.foundation:foundation:1.5.4")
 
     // Gson
     implementation ("com.google.code.gson:gson:2.10.1")

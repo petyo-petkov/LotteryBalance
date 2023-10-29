@@ -17,13 +17,10 @@ import androidx.compose.ui.unit.dp
 import com.example.lotterybalance.viewModels.BoletoViewModel
 
 @Composable
-fun Content(
-    boletoModel: BoletoViewModel
-){
-
-    boletoModel.getAllBoletos()
+fun ScreenContent(boletoModel: BoletoViewModel) {
 
     val listaBoletos = boletoModel.boletosListState.value.estadoBoletos
+
 
     var gastado = 0.0
     var ganado = 0.0
