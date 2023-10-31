@@ -4,8 +4,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import com.example.lotterybalance.navigation.AppNavigation
 import com.example.lotterybalance.ui.theme.LotteryBalanceTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,7 +20,8 @@ class MainActivity : ComponentActivity() {
             LotteryBalanceTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.surface
                 ) {
                     AppNavigation()
                 }

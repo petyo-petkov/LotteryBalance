@@ -4,7 +4,16 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.FloatingActionButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ShapeDefaults
+import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -33,26 +42,51 @@ fun LazyFila(
     // Dialogo al pulsar el icono "info"
     var showInfo by rememberSaveable { mutableStateOf(false) }
 
-    // Lista horizontal de boletos
-    LazyRow(
-        modifier = Modifier.padding(2.dp, 6.dp)
-    ) {
-        items(lista, key = {it.numeroSerie}) { boleto ->
+    // lazyRow
+    val listState = rememberLazyListState(initialFirstVisibleItemIndex = 1)
+    val showScrollButton by remember {
+        derivedStateOf { listState.firstVisibleItemIndex > 1 }
+    }
 
-           BoletoCard(
-               tipo = boleto.tipo,
-               fecha = formatter.format(boleto.fecha),
-               precio = boleto.precio,
-               onConfirm = {
-                   showInfo = true
-                   coroutine.launch {
-                       boletoModel.loadBoletoByID(boleto.numeroSerie)
-                   }
-               }
-           )
+    LazyRow(
+        modifier = Modifier.padding(2.dp, 6.dp),
+        state = listState
+    ) {
+        items(lista, key = { it.numeroSerie }) { boleto ->
+            BoletoCard(
+                tipo = boleto.tipo,
+                fecha = formatter.format(boleto.fecha),
+                precio = boleto.precio,
+                onConfirm = {
+                    showInfo = true
+                    coroutine.launch {
+                        boletoModel.loadBoletoByID(boleto.numeroSerie)
+                    }
+                }
+            )
 
         }
+
     }
+    // LazyRow Back Button
+    if (showScrollButton) {
+        SmallFloatingActionButton(
+            onClick = {
+                coroutine.launch { listState.animateScrollToItem(0) }
+            },
+            modifier = Modifier,
+            shape = ShapeDefaults.ExtraLarge,
+            containerColor = MaterialTheme.colorScheme.secondary,
+            contentColor = MaterialTheme.colorScheme.onPrimary,
+            elevation = FloatingActionButtonDefaults.elevation(8.dp)
+        )
+        {
+            Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
+        }
+
+
+    }
+
     InfoDialog(
         boletoModel,
         show = showInfo,

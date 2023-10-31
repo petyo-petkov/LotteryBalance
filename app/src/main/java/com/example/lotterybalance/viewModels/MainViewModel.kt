@@ -1,9 +1,7 @@
 package com.example.lotterybalance.viewModels
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -75,9 +73,8 @@ class MainViewModel @Inject constructor(
                 val combinaciones = info[4].split(".").drop(1)
                 var precio = 0.0
                 var tipo = ""
-                var numeroLoteria = mutableListOf<String>()
                 var reintegro: Int? = 0
-                var numerosSeparados = mutableListOf<String>()
+                val numerosSeparados = mutableListOf<String>()
                 val premio = 0.0
 
 
@@ -85,9 +82,7 @@ class MainViewModel @Inject constructor(
                     if (i.startsWith("R=")) {
                         reintegro = i.last().toString().toInt()
                     }
-                    if (i.startsWith("N=")) {
-                        numeroLoteria = listOf(i).toMutableList()
-                    }
+
                 }
 
                 combinaciones.forEach { combinacion ->
@@ -111,7 +106,6 @@ class MainViewModel @Inject constructor(
                 val fechaEng = rawFecha.replace(Regex("[A-Z]{3}")) {
                     meses[it.value] ?: it.value
                 }
-
                 val formatter = SimpleDateFormat("ddMMMyy", Locale.ENGLISH)
                 val fecha = formatter.parse(fechaEng)
                 val fechaMili = fecha!!.time
@@ -137,12 +131,6 @@ class MainViewModel @Inject constructor(
                         precio = ((combinaciones.size * 2.5) * semana)
                     }
 
-                    "P=10" -> {
-                        tipo = "Loteria Nacional"
-                        precio = 3.0
-                        numerosSeparados = numeroLoteria
-                    }
-
                 }
                 boleto = BoletoEntity(
                     numeroSerie = numeroSerie,
@@ -156,22 +144,36 @@ class MainViewModel @Inject constructor(
             }
 
             info.size == 1 && info[0].length == 20 -> {
-
                 val rawNumero = info[0].slice(0..9)
                 val numeroSerie = rawNumero.toLong()
                 val numeroLoteria = info[0].slice(11..15)
                 val numeroSorteo = info[0].slice(2..3).toInt()
+                val precio: Double
+                val fechaInicio: LocalDate
+                val fechaInicioJUeves = LocalDate.of(2023, 1, 5)
+                val fechaInicioSabado = LocalDate.of(2023, 1, 7)
 
-                val fechaInicio = LocalDate.of(2023, 1, 5)
-                val diasTranscurridos = (((numeroSorteo - 1) * 7) / 2)
-                val fechaSorteo = fechaInicio.plusDays(diasTranscurridos.toLong())
+               when {
+                   numeroSorteo %2 == 0 -> {
+                       fechaInicio = fechaInicioSabado
+                       precio = 6.0
+                   }
+                   else -> {
+                       fechaInicio = fechaInicioJUeves
+                       precio = 3.0
+                   }
+               }
+
+                val diasTranscurridos = ((((numeroSorteo -1) / 2) ) * 7)
+                val fechaSorteo = fechaInicio.minusDays(0).plusDays(diasTranscurridos.toLong())
                 val fecha = fechaSorteo.toEpochDay() * 24 * 60 * 60 * 1000
+
 
                 boleto = BoletoEntity(
                     numeroSerie = numeroSerie,
                     tipo = "Loteria Nacional",
                     fecha = fecha,
-                    precio = 3.0,
+                    precio = precio,
                     combinaciones = listOf(numeroLoteria),
                     reintegro = null,
                     premio = 0.0

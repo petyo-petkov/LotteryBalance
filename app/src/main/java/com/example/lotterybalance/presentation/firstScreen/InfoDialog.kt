@@ -11,9 +11,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material3.AlertDialog
@@ -75,7 +75,7 @@ fun InfoDialog(
         ) {
             Surface(
                 modifier = Modifier,
-                shape = ShapeDefaults.ExtraLarge,
+                shape = ShapeDefaults.Large,
                 color = MaterialTheme.colorScheme.surface,
                 contentColor = MaterialTheme.colorScheme.onPrimary,
                 tonalElevation = AlertDialogDefaults.TonalElevation,
@@ -88,6 +88,7 @@ fun InfoDialog(
                         modifier = Modifier
                             .padding(12.dp)
                             .fillMaxWidth(),
+                        state = remember { LazyListState() },
                         verticalArrangement = Arrangement.Top,
                         horizontalAlignment = Alignment.CenterHorizontally
                     )
@@ -158,12 +159,6 @@ fun InfoDialog(
                                 lista = null
                             )
                             OutlinedTextField(
-                                leadingIcon = {
-                                    Icon(
-                                        imageVector = Icons.Default.Create,
-                                        contentDescription = null
-                                    )
-                                },
                                 value = valor,
                                 onValueChange = {
                                     if (it.isEmpty() || it.toDoubleOrNull() != null) {
@@ -178,9 +173,9 @@ fun InfoDialog(
                                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
                                 colors = OutlinedTextFieldDefaults
                                     .colors(
-                                        focusedBorderColor = Color.White,
-                                        focusedLabelColor = Color.White,
-                                        focusedLeadingIconColor = Color.White
+                                        focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
+                                        focusedLabelColor = MaterialTheme.colorScheme.onPrimary,
+                                        focusedLeadingIconColor = MaterialTheme.colorScheme.onPrimary
                                     )
                             )
                         }
@@ -234,7 +229,6 @@ fun InfoDialog(
             }
 
         }
-
 
     }
 
