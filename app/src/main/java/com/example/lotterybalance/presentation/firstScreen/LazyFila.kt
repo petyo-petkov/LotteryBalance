@@ -2,6 +2,7 @@ package com.example.lotterybalance.presentation.firstScreen
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -43,7 +44,7 @@ fun LazyFila(
     var showInfo by rememberSaveable { mutableStateOf(false) }
 
     // lazyRow
-    val listState = rememberLazyListState(initialFirstVisibleItemIndex = 1)
+    val listState = rememberLazyListState(initialFirstVisibleItemIndex = 10)
     val showScrollButton by remember {
         derivedStateOf { listState.firstVisibleItemIndex > 1 }
     }
@@ -74,11 +75,13 @@ fun LazyFila(
             onClick = {
                 coroutine.launch { listState.animateScrollToItem(0) }
             },
-            modifier = Modifier,
+            modifier = Modifier
+                .padding(20.dp)
+                .size(60.dp, 24.dp),
             shape = ShapeDefaults.ExtraLarge,
             containerColor = MaterialTheme.colorScheme.secondary,
             contentColor = MaterialTheme.colorScheme.onPrimary,
-            elevation = FloatingActionButtonDefaults.elevation(8.dp)
+            elevation = FloatingActionButtonDefaults.elevation(4.dp)
         )
         {
             Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
