@@ -29,14 +29,15 @@ fun BoletoCard(
     tipo: String,
     fecha: String,
     precio: Double,
+    modifier: Modifier,
     onConfirm: () -> Unit,
 ) {
     ElevatedCard(
-        Modifier
+        modifier
             .clickable { onConfirm() }
             .size(160.dp, 240.dp)
             .padding(4.dp),
-        shape = ShapeDefaults.ExtraLarge,
+        shape = ShapeDefaults.Large,
         elevation = CardDefaults.elevatedCardElevation(4.dp)
     ) {
         Box(

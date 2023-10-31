@@ -11,7 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
@@ -30,6 +30,7 @@ import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -62,12 +63,13 @@ fun InfoDialog(
     val context = LocalContext.current
     var showBorrar by rememberSaveable { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()
-    val formatter = remember { SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH) }
+    val formatter = rememberSaveable{ SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH) }
+    val listState = rememberLazyListState()
 
     if (show) {
         var valor by rememberSaveable { mutableStateOf("") }
-
-        val ganado = valor.toDoubleOrNull()
+        //val ganado = valor.toDoubleOrNull()
+        val ganado by remember { derivedStateOf{ valor.toDoubleOrNull() } }
 
         AlertDialog(
             modifier = Modifier,
@@ -88,7 +90,7 @@ fun InfoDialog(
                         modifier = Modifier
                             .padding(12.dp)
                             .fillMaxWidth(),
-                        state = remember { LazyListState() },
+                        state = listState,
                         verticalArrangement = Arrangement.Top,
                         horizontalAlignment = Alignment.CenterHorizontally
                     )

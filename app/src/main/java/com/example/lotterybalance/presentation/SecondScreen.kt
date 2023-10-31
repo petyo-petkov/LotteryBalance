@@ -26,4 +26,5 @@ fun SecondScreen(
         floatingActionButton = {  SecFAB(navController) }
 
         )
+
 }
