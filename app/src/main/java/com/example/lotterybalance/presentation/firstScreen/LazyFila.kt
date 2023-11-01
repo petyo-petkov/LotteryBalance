@@ -15,7 +15,6 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -49,14 +48,13 @@ fun LazyFila(
 
     // lazyRow
     val listState = rememberLazyListState(initialFirstVisibleItemIndex = 10)
-    val showScrollButton by remember { derivedStateOf { listState.firstVisibleItemIndex > 2 } }
     var selectedKey by rememberSaveable { mutableIntStateOf(0) }
 
     LazyRow(
         modifier = Modifier.padding(2.dp, 6.dp),
         state = listState
     ) {
-        itemsIndexed(lista) { index, boleto ->
+        itemsIndexed(lista.sortedBy { it.fecha }) { index, boleto ->
             selectedKey = index
 
             BoletoCard(
@@ -95,30 +93,6 @@ fun LazyFila(
             )
         }
     }
-
-
-/*
-    // LazyRow Back Button
-    if (showScrollButton) {
-        SmallFloatingActionButton(
-            onClick = {
-                coroutine.launch { listState.animateScrollToItem(0) }
-            },
-            modifier = Modifier
-                .padding(20.dp)
-                .size(60.dp, 24.dp),
-            shape = ShapeDefaults.ExtraLarge,
-            containerColor = MaterialTheme.colorScheme.secondary,
-            contentColor = MaterialTheme.colorScheme.onPrimary,
-            elevation = FloatingActionButtonDefaults.elevation(4.dp)
-        )
-        {
-            Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
-        }
-    }
-
- */
-
 
     InfoDialog(
         boletoModel,

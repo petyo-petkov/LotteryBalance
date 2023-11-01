@@ -56,10 +56,8 @@ fun ScreenContent(boletoModel: BoletoViewModel) {
         )
         Spacer(modifier = Modifier.padding(6.dp))
 
-        LazyFila(boletoModel, lista = listaBoletos.sortedBy { it.fecha }.takeLast(10)  )
+        Pager()
+       // LazyFila(boletoModel, lista = listaBoletos.takeLast(10)  )
 
     }
-
-
-
 }
