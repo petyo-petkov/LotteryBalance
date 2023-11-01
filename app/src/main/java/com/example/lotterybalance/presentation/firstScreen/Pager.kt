@@ -17,7 +17,6 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.Text
@@ -37,7 +36,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.lotterybalance.viewModels.BoletoViewModel
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -48,7 +46,7 @@ import kotlin.math.absoluteValue
 @Composable
 fun Pager(
     modifier: Modifier = Modifier,
-    boletoModel: BoletoViewModel = hiltViewModel(),
+    boletoModel: BoletoViewModel
 
     ) {
     val formatter = remember { SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH) }
@@ -98,7 +96,6 @@ fun Pager(
 
                 },
             shape = ShapeDefaults.Large,
-            elevation = CardDefaults.elevatedCardElevation(4.dp)
         ) {
             Box(
                 modifier = Modifier

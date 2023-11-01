@@ -56,7 +56,7 @@ fun ScreenContent(boletoModel: BoletoViewModel) {
         )
         Spacer(modifier = Modifier.padding(6.dp))
 
-        Pager()
+        Pager(boletoModel = boletoModel)
        // LazyFila(boletoModel, lista = listaBoletos.takeLast(10)  )
 
     }
