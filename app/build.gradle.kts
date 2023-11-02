@@ -62,6 +62,7 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.7.4")
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.material3:material3:1.2.0-alpha09")
+    implementation("androidx.compose.material:material-icons-extended")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     implementation("androidx.compose.runtime:runtime-livedata:1.6.0-alpha07")
     implementation("androidx.compose.foundation:foundation:1.5.4")

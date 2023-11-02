@@ -1,6 +1,9 @@
 package com.example.lotterybalance.presentation.firstScreen
 
 import android.widget.Toast
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -66,7 +69,12 @@ fun InfoDialog(
     val formatter = rememberSaveable{ SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH) }
     val listState = rememberLazyListState()
 
-    if (show) {
+    AnimatedVisibility (
+        visible = show,
+        enter = slideInVertically(),
+        exit = slideOutVertically()
+
+    ) {
         var valor by rememberSaveable { mutableStateOf("") }
         //val ganado = valor.toDoubleOrNull()
         val ganado by remember { derivedStateOf{ valor.toDoubleOrNull() } }

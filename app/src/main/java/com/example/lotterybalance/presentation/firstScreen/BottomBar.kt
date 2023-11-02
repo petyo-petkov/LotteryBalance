@@ -2,6 +2,9 @@ package com.example.lotterybalance.presentation.firstScreen
 
 import android.annotation.SuppressLint
 import android.widget.Toast
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -25,6 +28,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDateRangePickerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -60,9 +64,13 @@ fun BottomBar(boletoModel: BoletoViewModel, navController: NavController) {
     val state = rememberDateRangePickerState()
 
 
-    if (openDialog) {
-        val startDay = state.selectedStartDateMillis
-        val endDay = state.selectedEndDateMillis
+    AnimatedVisibility (
+        visible = openDialog,
+        enter = slideInVertically(),
+        exit = slideOutVertically()
+    ) {
+        val startDay by remember(openDialog) { derivedStateOf{ state.selectedStartDateMillis }}
+        val endDay by remember(openDialog) { derivedStateOf{ state.selectedEndDateMillis }}
 
         DatePickerDialog(
             onDismissRequest = {
@@ -84,6 +92,7 @@ fun BottomBar(boletoModel: BoletoViewModel, navController: NavController) {
                 TextButton(
                     onClick = {
                         openDialog = false
+                        state.setSelection(startDateMillis = null, endDateMillis = null)
                     }
                 ) {
                     Text("Cancel", color = MaterialTheme.colorScheme.onPrimary)
@@ -174,9 +183,9 @@ fun BottomBar(boletoModel: BoletoViewModel, navController: NavController) {
 
 
     DialogoBorrar(
-        showDialog,
-        { showDialog = false },
-        {
+       show =  showDialog,
+       onDismiss =  { showDialog = false },
+       onConfirm =  {
             boletoModel.deleteAllBoletos(boletos)
             Toast.makeText(context, "Se han borrado todos los boletos", Toast.LENGTH_SHORT)
                 .show()

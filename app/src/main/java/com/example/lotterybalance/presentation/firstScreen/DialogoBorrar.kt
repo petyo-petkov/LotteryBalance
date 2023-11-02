@@ -1,5 +1,8 @@
 package com.example.lotterybalance.presentation.firstScreen
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -12,7 +15,11 @@ fun DialogoBorrar(
     onDismiss: () -> Unit,
     onConfirm: () -> Unit
 ) {
-    if (show) {
+    AnimatedVisibility (
+        visible = show,
+        enter = slideInVertically(),
+        exit = slideOutVertically()
+        ) {
         AlertDialog(
             onDismissRequest = { onDismiss() },
             confirmButton = {
