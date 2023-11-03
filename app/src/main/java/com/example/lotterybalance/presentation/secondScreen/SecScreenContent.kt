@@ -15,7 +15,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.lotterybalance.presentation.firstScreen.BalanceCard
-import com.example.lotterybalance.presentation.firstScreen.LazyFila
+import com.example.lotterybalance.presentation.firstScreen.Pager
 import com.example.lotterybalance.viewModels.BoletoViewModel
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -23,6 +23,7 @@ import java.util.Locale
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun SecScreenContent(
+    modifier: Modifier,
     boletoModel: BoletoViewModel,
     startDay: Long,
     endDay: Long,
@@ -37,39 +38,39 @@ fun SecScreenContent(
 
     listaBoletos.forEach { boleto ->
         gastado += boleto.precio
-        if (boleto.premio != null){
+        if (boleto.premio != null) {
             ganado += boleto.premio!!
         }
     }
 
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.surface)
+            .background(MaterialTheme.colorScheme.surface),
+        horizontalAlignment = Alignment.CenterHorizontally
 
     )
     {
-        Spacer(modifier = Modifier.padding(12.dp))
+        Spacer(modifier = modifier.padding(12.dp))
 
-        BalanceCard(gastado = gastado, ganado = ganado)
+        BalanceCard(modifier = modifier, gastado = gastado, ganado = ganado)
 
-        Spacer(modifier = Modifier.padding(vertical = 24.dp))
+        Spacer(modifier = modifier.padding(vertical = 24.dp))
 
         Text(
+            modifier = modifier.padding(0.dp),
             color = MaterialTheme.colorScheme.onPrimary,
             text = "Desde:  ${formatter.format(startDay)}" +
                     "   -   " +
                     "Hasta:  ${formatter.format(endDay)}",
-            modifier = Modifier,
             textAlign = TextAlign.Center,
             fontWeight = FontWeight.Bold,
             style = MaterialTheme.typography.titleMedium
         )
 
-        Spacer(modifier = Modifier.padding(vertical = 6.dp))
+        Spacer(modifier = modifier.padding(vertical = 6.dp))
 
-        LazyFila(boletoModel, lista = listaBoletos.takeLast(10))
+        Pager(boletoModel = boletoModel, lista = listaBoletos)
 
     }
 }

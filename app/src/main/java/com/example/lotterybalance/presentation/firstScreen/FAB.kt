@@ -13,11 +13,14 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.lotterybalance.viewModels.MainViewModel
 
 @Composable
-fun FAB(viewModel: MainViewModel = hiltViewModel()) {
+fun FAB(
+    modifier: Modifier,
+    viewModel: MainViewModel = hiltViewModel()
+){
 
     FloatingActionButton(
         onClick = { viewModel.startScanning() },
-        modifier = Modifier,
+        modifier = modifier,
         containerColor = MaterialTheme.colorScheme.secondary,
         contentColor = MaterialTheme.colorScheme.onPrimary,
         elevation = FloatingActionButtonDefaults.elevation(8.dp)

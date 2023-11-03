@@ -17,7 +17,10 @@ import androidx.compose.ui.unit.dp
 import com.example.lotterybalance.viewModels.BoletoViewModel
 
 @Composable
-fun ScreenContent(boletoModel: BoletoViewModel) {
+fun ScreenContent(
+    modifier: Modifier,
+    boletoModel: BoletoViewModel
+) {
 
     val listaBoletos = boletoModel.boletosListState.value.estadoBoletos
 
@@ -34,30 +37,29 @@ fun ScreenContent(boletoModel: BoletoViewModel) {
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.surface)
 
     )
     {
-        Spacer(modifier = Modifier.padding(12.dp))
+        Spacer(modifier = modifier.padding(12.dp))
 
-        BalanceCard(gastado = gastado, ganado = ganado)
+        BalanceCard(modifier = modifier, gastado = gastado, ganado = ganado)
 
-        Spacer(modifier = Modifier.padding(24.dp))
+        Spacer(modifier = modifier.padding(24.dp))
 
         Text(
             color = MaterialTheme.colorScheme.onPrimary,
             text = "Últimos Boletos :",
-            modifier = Modifier.fillMaxWidth(),
+            modifier = modifier.fillMaxWidth(),
             textAlign = TextAlign.Center,
             fontWeight = FontWeight.Bold,
             style = MaterialTheme.typography.titleMedium
         )
-        Spacer(modifier = Modifier.padding(6.dp))
+        Spacer(modifier = modifier.padding(6.dp))
 
-        Pager(boletoModel = boletoModel)
-       // LazyFila(boletoModel, lista = listaBoletos.takeLast(10)  )
+        Pager(boletoModel = boletoModel, lista = listaBoletos.takeLast(10))
 
     }
 }

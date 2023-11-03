@@ -57,6 +57,7 @@ import kotlin.text.Typography.euro
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun InfoDialog(
+    modifier: Modifier,
     boletoModel: BoletoViewModel,
     show: Boolean,
     onDismiss: () -> Unit
@@ -66,10 +67,10 @@ fun InfoDialog(
     val context = LocalContext.current
     var showBorrar by rememberSaveable { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()
-    val formatter = rememberSaveable{ SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH) }
+    val formatter = rememberSaveable { SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH) }
     val listState = rememberLazyListState()
 
-    AnimatedVisibility (
+    AnimatedVisibility(
         visible = show,
         enter = slideInVertically(),
         exit = slideOutVertically()
@@ -77,25 +78,25 @@ fun InfoDialog(
     ) {
         var valor by rememberSaveable { mutableStateOf("") }
         //val ganado = valor.toDoubleOrNull()
-        val ganado by remember { derivedStateOf{ valor.toDoubleOrNull() } }
+        val ganado by remember { derivedStateOf { valor.toDoubleOrNull() } }
 
         AlertDialog(
-            modifier = Modifier,
+            modifier = modifier,
             onDismissRequest = { onDismiss() }
         ) {
             Surface(
-                modifier = Modifier,
+                modifier = modifier,
                 shape = ShapeDefaults.Large,
                 color = MaterialTheme.colorScheme.surface,
                 contentColor = MaterialTheme.colorScheme.onPrimary,
                 tonalElevation = AlertDialogDefaults.TonalElevation,
             ) {
                 Column(
-                    modifier = Modifier
+                    modifier = modifier
                         .size(320.dp, 460.dp)
                 ) {
                     LazyColumn(
-                        modifier = Modifier
+                        modifier = modifier
                             .padding(12.dp)
                             .fillMaxWidth(),
                         state = listState,
@@ -117,7 +118,7 @@ fun InfoDialog(
                         item {
                             ItemContent(
                                 nombre = "Número de serie: ",
-                                valor = "${ boleto.numeroSerie }",
+                                valor = "${boleto.numeroSerie}",
                                 lista = null
                             )
                         }
@@ -154,7 +155,7 @@ fun InfoDialog(
                             item {
                                 ItemContent(
                                     nombre = "Reintegro: ",
-                                    valor = "${ boleto.reintegro }",
+                                    valor = "${boleto.reintegro}",
                                     lista = null
                                 )
                             }
@@ -175,7 +176,7 @@ fun InfoDialog(
                                         valor = it
                                     }
                                 },
-                                modifier = Modifier.padding(bottom = 8.dp),
+                                modifier = modifier.padding(bottom = 8.dp),
                                 label = { Text(text = "Ingresar o corregir premio:") },
                                 placeholder = { Text(text = "0.00 $euro") },
                                 shape = ShapeDefaults.Large,
@@ -193,7 +194,7 @@ fun InfoDialog(
                 }
                 // Botones
                 Row(
-                    modifier = Modifier
+                    modifier = modifier
                         .fillMaxWidth()
                         .padding(top = 460.dp, bottom = 24.dp),
                     horizontalArrangement = Arrangement.Center,
@@ -208,7 +209,7 @@ fun InfoDialog(
                             }
                             onDismiss()
                         },
-                        modifier = Modifier,
+                        modifier = modifier,
                         colors = IconButtonDefaults.iconButtonColors(
                             contentColor = Color(0xFF00C853)
                         )
@@ -217,13 +218,13 @@ fun InfoDialog(
 
                     }
 
-                    Spacer(modifier = Modifier.width(160.dp))
+                    Spacer(modifier = modifier.width(160.dp))
 
                     IconButton(
                         onClick = {
                             showBorrar = true
                         },
-                        modifier = Modifier,
+                        modifier = modifier,
                         colors = IconButtonDefaults.iconButtonColors(
                             contentColor = Color(
                                 0xFFF44336
@@ -256,10 +257,15 @@ fun InfoDialog(
 }
 
 @Composable
-fun ItemContent(nombre: String, valor: String?, lista: List<String>?) {
+fun ItemContent(
+    modifier: Modifier = Modifier,
+    nombre: String,
+    valor: String?,
+    lista: List<String>?
+) {
 
     HorizontalDivider(
-        modifier = Modifier.padding(12.dp),
+        modifier = modifier.padding(12.dp),
         thickness = 0.5.dp,
         color = MaterialTheme.colorScheme.onPrimary
     )
@@ -268,7 +274,7 @@ fun ItemContent(nombre: String, valor: String?, lista: List<String>?) {
         fontSize = 16.sp,
         fontWeight = FontWeight.ExtraBold
     )
-    Spacer(modifier = Modifier.height(10.dp))
+    Spacer(modifier = modifier.height(10.dp))
 
     if (lista != null) {
         lista.forEach {

@@ -22,7 +22,11 @@ import java.util.Locale
 import kotlin.text.Typography.euro
 
 @Composable
-fun BalanceCard(gastado: Double, ganado: Double) {
+fun BalanceCard(
+    modifier: Modifier,
+    gastado: Double,
+    ganado: Double
+){
 
     val balance = ganado - gastado
     @Composable
@@ -42,7 +46,7 @@ fun BalanceCard(gastado: Double, ganado: Double) {
     }
 
     ElevatedCard(
-        modifier = Modifier
+        modifier = modifier
             .size(380.dp, 210.dp),
         shape = ShapeDefaults.ExtraLarge,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary),
@@ -51,18 +55,21 @@ fun BalanceCard(gastado: Double, ganado: Double) {
     ) {
 
         Fila(
+            modifier = modifier,
             texto = "GANADO",
             valor = String.format(locale = Locale.ENGLISH, "%.2f", ganado),
             color = MaterialTheme.colorScheme.onPrimary
         )
 
         Fila(
+            modifier = modifier,
             texto = "GASTADO",
             valor = String.format(locale = Locale.ENGLISH, "%.2f", gastado),
             color = MaterialTheme.colorScheme.onPrimary
         )
 
         Fila(
+            modifier = modifier,
             texto = "BALANCE",
             valor = String.format(locale = Locale.ENGLISH, "%.2f", (ganado - gastado)),
             color = cambiarColor(balance)
@@ -74,10 +81,15 @@ fun BalanceCard(gastado: Double, ganado: Double) {
 }
 
 @Composable
-fun Fila(texto: String, valor: String, color: Color) {
+fun Fila(
+    modifier: Modifier,
+    texto: String,
+    valor: String,
+    color: Color
+){
 
     Row(
-        modifier = Modifier
+        modifier = modifier
             .size(360.dp, 68.dp)
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -85,7 +97,7 @@ fun Fila(texto: String, valor: String, color: Color) {
     ) {
         Text(
             text = texto,
-            modifier = Modifier
+            modifier = modifier
                 .padding(24.dp),
             fontSize = 18.sp,
             textAlign = TextAlign.Start,
@@ -95,7 +107,7 @@ fun Fila(texto: String, valor: String, color: Color) {
         )
         Text(
             text = "$valor $euro",
-            modifier = Modifier
+            modifier = modifier
                 .padding(0.dp),
             fontSize = 18.sp,
             textAlign = TextAlign.End,

@@ -21,9 +21,9 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
+import androidx.compose.material3.Card
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -43,6 +43,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
 import com.example.lotterybalance.R
+import com.example.lotterybalance.database.entities.BoletoEntity
 import com.example.lotterybalance.viewModels.BoletoViewModel
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -53,17 +54,17 @@ import kotlin.math.absoluteValue
 @Composable
 fun Pager(
     modifier: Modifier = Modifier,
-    boletoModel: BoletoViewModel
+    boletoModel: BoletoViewModel,
+    lista: List<BoletoEntity>
 
 ) {
     val formatter = remember { SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH) }
     var showInfo by rememberSaveable { mutableStateOf(false) }
     val coroutine = rememberCoroutineScope()
 
-
-    val lista = boletoModel.boletosListState.value.estadoBoletos
     val pagerState = rememberPagerState(
-        pageCount = { lista.takeLast(10).size },
+        initialPage = 10,
+        pageCount = { lista.size },
         initialPageOffsetFraction = 0f
     )
     HorizontalPager(
@@ -72,17 +73,11 @@ fun Pager(
         contentPadding = PaddingValues(horizontal = 70.dp),
         pageSize = PageSize.Fixed(260.dp),
     ) { page ->
-        val boleto = lista.sortedBy { it.fecha }[page]
+        val boleto = lista[page]
 
         // Tarjeta
         Column(
             modifier = modifier
-                .clickable {
-                    showInfo = true
-                    coroutine.launch {
-                        boletoModel.loadBoletoByID(boleto.numeroSerie)
-                    }
-                }
                 .size(280.dp)
                 .padding(4.dp)
                 .graphicsLayer {
@@ -91,7 +86,6 @@ fun Pager(
                                 .currentPageOffsetFraction
                             ).absoluteValue
 
-                    // We animate the alpha, between 50% and 100%
                     alpha = lerp(
                         start = 0.8f,
                         stop = 1f,
@@ -129,7 +123,8 @@ fun Pager(
                 }
             }
 
-            OutlinedCard(
+            // CABEZERA
+            Card(
                 modifier = modifier
                     .size(260.dp, 60.dp),
                 shape = AbsoluteRoundedCornerShape(
@@ -156,8 +151,15 @@ fun Pager(
 
             Spacer(modifier = modifier.padding(vertical = 4.dp))
 
-            OutlinedCard(
+            // BODY
+            Card(
                 modifier = modifier
+                    .clickable {
+                        showInfo = true
+                        coroutine.launch {
+                            boletoModel.loadBoletoByID(boleto.numeroSerie)
+                        }
+                    }
                     .size(260.dp, 240.dp),
                 shape = AbsoluteRoundedCornerShape(
                     topLeft = 0.dp,
@@ -216,7 +218,7 @@ fun Pager(
 
     // Pager Indicator
     Row(
-        Modifier
+        modifier = modifier
             .wrapContentHeight()
             .fillMaxWidth()
             .padding(top = 20.dp),
@@ -230,7 +232,7 @@ fun Pager(
             )
 
             Box(
-                modifier = Modifier
+                modifier = modifier
                     .clickable {
                         coroutine.launch {
                             pagerState.animateScrollToPage(iteration)
@@ -244,8 +246,8 @@ fun Pager(
         }
     }
 
-
     InfoDialog(
+        modifier = Modifier,
         boletoModel,
         show = showInfo,
         onDismiss = { showInfo = false }

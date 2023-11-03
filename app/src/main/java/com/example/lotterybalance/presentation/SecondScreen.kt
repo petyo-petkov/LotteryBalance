@@ -22,7 +22,7 @@ fun SecondScreen(
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         containerColor = Color(0xFF4D4646),
-        content = { SecScreenContent(boletoModel, startDay, endDay) },
+        content = { SecScreenContent(modifier = Modifier, boletoModel, startDay, endDay) },
         floatingActionButton = {  SecFAB(navController) }
 
         )

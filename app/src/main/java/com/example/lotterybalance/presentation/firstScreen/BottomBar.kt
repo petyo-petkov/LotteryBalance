@@ -50,7 +50,11 @@ import java.util.Locale
 @SuppressLint("UnrememberedMutableState", "SimpleDateFormat", "CoroutineCreationDuringComposition")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BottomBar(boletoModel: BoletoViewModel, navController: NavController) {
+fun BottomBar(
+    modifier: Modifier,
+    boletoModel: BoletoViewModel,
+    navController: NavController
+){
 
     val context = LocalContext.current
     val boletos = boletoModel.boletosListState.value.estadoBoletos
@@ -87,7 +91,7 @@ fun BottomBar(boletoModel: BoletoViewModel, navController: NavController) {
                     Text(text = "Ok", color = MaterialTheme.colorScheme.onPrimary)
                 }
             },
-            modifier = Modifier,
+            modifier = modifier,
             dismissButton = {
                 TextButton(
                     onClick = {
@@ -102,7 +106,7 @@ fun BottomBar(boletoModel: BoletoViewModel, navController: NavController) {
         ) {
             DateRangePicker(
                 state = state,
-                modifier = Modifier.weight(1f),
+                modifier = modifier.weight(1f),
                 showModeToggle = false,
                 colors = DatePickerDefaults.colors(
                     todayContentColor = MaterialTheme.colorScheme.onPrimary,
@@ -113,7 +117,8 @@ fun BottomBar(boletoModel: BoletoViewModel, navController: NavController) {
                 ),
                 title = {
                     Text(
-                        text = "Selecionar el rango de fechas", modifier = Modifier
+                        text = "Selecionar el rango de fechas",
+                        modifier = modifier
                             .padding(16.dp)
                             .fillMaxWidth(),
                         fontSize = 20.sp,
@@ -122,16 +127,16 @@ fun BottomBar(boletoModel: BoletoViewModel, navController: NavController) {
                 },
                 headline = {
                     Row(
-                        modifier = Modifier
+                        modifier = modifier
                             .fillMaxWidth()
                             .padding(16.dp)
                     ) {
-                        Box(Modifier.padding(horizontal = 12.dp)) {
+                        Box(modifier.padding(horizontal = 12.dp)) {
                             (if (state.selectedStartDateMillis != null)
                                 state.selectedStartDateMillis?.let { formatter.format(it) }
                             else "Fecha inicial")?.let { Text(text = it, fontSize = 16.sp) }
                         }
-                        Box(Modifier.padding(horizontal = 12.dp)) {
+                        Box(modifier.padding(horizontal = 12.dp)) {
                             (if (state.selectedEndDateMillis != null)
                                 state.selectedEndDateMillis?.let { formatter.format(it) }
                             else "Fecha final")?.let { Text(text = it, fontSize = 16.sp) }
@@ -174,8 +179,8 @@ fun BottomBar(boletoModel: BoletoViewModel, navController: NavController) {
             }
 
         },
-        modifier = Modifier,
-        floatingActionButton = { FAB() },
+        modifier = modifier,
+        floatingActionButton = { FAB(modifier) },
         containerColor = MaterialTheme.colorScheme.primary,
         contentColor = MaterialTheme.colorScheme.onPrimary,
         contentPadding = PaddingValues(horizontal = 12.dp)

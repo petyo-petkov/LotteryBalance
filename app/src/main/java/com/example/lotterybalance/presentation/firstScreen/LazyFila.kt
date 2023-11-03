@@ -54,7 +54,7 @@ fun LazyFila(
         modifier = Modifier.padding(2.dp, 6.dp),
         state = listState
     ) {
-        itemsIndexed(lista.sortedBy { it.fecha }) { index, boleto ->
+        itemsIndexed(lista) { index, boleto ->
             selectedKey = index
 
             BoletoCard(
@@ -95,6 +95,7 @@ fun LazyFila(
     }
 
     InfoDialog(
+        modifier = Modifier,
         boletoModel,
         show = showInfo,
         onDismiss = { showInfo = false }

@@ -41,7 +41,7 @@ fun BoletoCard(
         elevation = CardDefaults.elevatedCardElevation(4.dp)
     ) {
         Box(
-            modifier = Modifier
+            modifier = modifier
                 .size(160.dp, 40.dp)
                 .background(MaterialTheme.colorScheme.primary),
             contentAlignment = Alignment.Center
@@ -58,7 +58,7 @@ fun BoletoCard(
         }
         // Multimedia
         Column(
-            modifier = Modifier
+            modifier = modifier
                 .background(color = MaterialTheme.colorScheme.secondary)
                 .fillMaxSize(),
             verticalArrangement = Arrangement.Center
@@ -68,7 +68,7 @@ fun BoletoCard(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.onPrimary,
                 textAlign = TextAlign.Center,
-                modifier = Modifier
+                modifier = modifier
                     .fillMaxWidth()
                     .padding(2.dp),
                 fontFamily = FontFamily.Default,
@@ -77,19 +77,19 @@ fun BoletoCard(
             Text(
                 text = fecha,
                 fontWeight = FontWeight.SemiBold,
-                modifier = Modifier.fillMaxWidth(),
+                modifier = modifier.fillMaxWidth(),
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onPrimary,
                 style = MaterialTheme.typography.bodyMedium
 
             )
-            Spacer(modifier = Modifier.height(40.dp))
+            Spacer(modifier = modifier.height(40.dp))
             Text(
                 text = "Precio:",
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.onPrimary,
                 textAlign = TextAlign.Center,
-                modifier = Modifier
+                modifier = modifier
                     .fillMaxWidth()
                     .padding(2.dp),
                 fontFamily = FontFamily.Default,
@@ -98,7 +98,7 @@ fun BoletoCard(
             Text(
                 text = "$precio ${Typography.euro}",
                 fontWeight = FontWeight.SemiBold,
-                modifier = Modifier.fillMaxWidth(),
+                modifier = modifier.fillMaxWidth(),
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onPrimary,
                 style = MaterialTheme.typography.bodyMedium

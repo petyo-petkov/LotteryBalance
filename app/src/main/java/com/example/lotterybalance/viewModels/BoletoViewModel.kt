@@ -43,7 +43,7 @@ class BoletoViewModel @Inject constructor(
                 .flowOn(Dispatchers.IO)
                 .collect { boleto ->
                     _boletosListState.value = boletosListState.value.copy(
-                        estadoBoletos = boleto
+                        estadoBoletos = boleto.sortedBy{ it.fecha }
                     )
                 }
         }
@@ -58,7 +58,7 @@ class BoletoViewModel @Inject constructor(
                     when (selection.isNotEmpty()) {
                         true ->
                             _sortidoState.value = sortidoState.value.copy(
-                                sortidoState = selection
+                                sortidoState = selection.sortedBy{ it.fecha }
                             )
 
                         false ->

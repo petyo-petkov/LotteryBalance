@@ -18,8 +18,8 @@ fun FirstScreen(boletoModel: BoletoViewModel, navController: NavController)
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         containerColor = Color(0xFF4D4646),
-        content = { ScreenContent(boletoModel) },
-        bottomBar = { BottomBar(boletoModel, navController) },
+        content = { ScreenContent(modifier = Modifier, boletoModel) },
+        bottomBar = { BottomBar(modifier = Modifier, boletoModel, navController) },
 
     )
 }
