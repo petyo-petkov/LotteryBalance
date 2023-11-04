@@ -19,6 +19,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PageSize
+import androidx.compose.foundation.pager.PagerDefaults
+import androidx.compose.foundation.pager.PagerSnapDistance
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.material3.Card
@@ -67,11 +69,19 @@ fun Pager(
         pageCount = { lista.size },
         initialPageOffsetFraction = 0f
     )
+    val fling = PagerDefaults.flingBehavior(
+        state = pagerState,
+        pagerSnapDistance = PagerSnapDistance.atMost(10)
+    )
+
     HorizontalPager(
         state = pagerState,
         modifier = modifier,
         contentPadding = PaddingValues(horizontal = 70.dp),
         pageSize = PageSize.Fixed(260.dp),
+        beyondBoundsPageCount = 2,
+        flingBehavior =  fling
+
     ) { page ->
         val boleto = lista[page]
 
@@ -100,7 +110,7 @@ fun Pager(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            var image: Painter = painterResource( id = R.drawable.new_logo)
+            var image: Painter = painterResource(id = R.drawable.new_logo)
             when (boleto.tipo) {
                 "Primitiva" -> {
                     image = painterResource(id = R.drawable.la_primitiva)
