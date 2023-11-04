@@ -100,7 +100,7 @@ fun Pager(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            var image: Painter = painterResource(id = R.drawable.new_logo)
+            var image: Painter = painterResource( id = R.drawable.new_logo)
             when (boleto.tipo) {
                 "Primitiva" -> {
                     image = painterResource(id = R.drawable.la_primitiva)

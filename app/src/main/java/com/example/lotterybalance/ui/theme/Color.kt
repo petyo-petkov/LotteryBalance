@@ -2,11 +2,11 @@ package com.example.lotterybalance.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val OscPrim = Color(0xFF424949)
+val OscPrim = Color(0xFF333333)
 val OscText = Color(0xFFe6e6e6)
-val OscSec = Color(0xFF616A6B)
+val OscSec = Color(0xFF4d4d4d)
 val OscTet = Color(0xFF262D30)
-val OscFondo = Color(0xFF141414)
+val OscFondo = Color(0xFF15151e)
 
 
 /*
