@@ -147,7 +147,7 @@ fun Pager(
             ) {
                 Box(
                     modifier = modifier
-                        .background(color = MaterialTheme.colorScheme.primary)
+                        .background(color = Color(0xFFFFF8E1))
                         .fillMaxSize()
                         .size(50.dp),
                     contentAlignment = Alignment.Center
