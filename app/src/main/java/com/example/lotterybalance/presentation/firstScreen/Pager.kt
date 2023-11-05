@@ -143,7 +143,7 @@ fun Pager(
                     bottomLeft = 0.dp,
                     bottomRight = 0.dp
                 ),
-                border = BorderStroke(1.dp, color = Color.Black)
+                border = BorderStroke(1.dp, color = MaterialTheme.colorScheme.tertiary)
             ) {
                 Box(
                     modifier = modifier
@@ -177,7 +177,7 @@ fun Pager(
                     bottomLeft = 20.dp,
                     bottomRight = 20.dp
                 ),
-                border = BorderStroke(1.dp, color = Color.Black)
+                border = BorderStroke(1.dp, color = MaterialTheme.colorScheme.tertiary)
 
             ) {
                 Box(
