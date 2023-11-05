@@ -130,6 +130,10 @@ class MainViewModel @Inject constructor(
                         tipo = "Euromillones"
                         precio = ((combinaciones.size * 2.5) * semana)
                     }
+                    "P=14" -> {
+                        tipo = "Euro Dreams"
+                        precio = ((combinaciones.size * 2.5) * semana)
+                    }
 
                 }
                 boleto = BoletoEntity(

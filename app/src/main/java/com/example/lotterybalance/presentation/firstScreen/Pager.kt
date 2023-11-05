@@ -131,6 +131,9 @@ fun Pager(
                 "Loteria Nacional" -> {
                     image = painterResource(id = R.drawable.loteria_nacional)
                 }
+                "Euro Dreams" -> {
+                    image = painterResource(id = R.drawable.euro_dreams)
+                }
             }
 
             // CABEZERA
@@ -147,7 +150,7 @@ fun Pager(
             ) {
                 Box(
                     modifier = modifier
-                        .background(color = Color(0xFFFFF8E1))
+                        .background(color = MaterialTheme.colorScheme.primary)
                         .fillMaxSize()
                         .size(50.dp),
                     contentAlignment = Alignment.Center
