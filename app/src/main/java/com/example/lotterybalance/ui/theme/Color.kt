@@ -5,8 +5,10 @@ import androidx.compose.ui.graphics.Color
 val OscPrim = Color(0xFF333333)
 val OscText = Color(0xFFe6e6e6)
 val OscSec = Color(0xFF4d4d4d)
-val OscTet = Color(0xFF919090)
+//val OscTet = Color(0xFF919090)
+val OscTet = Color(0xFF030303)
 val OscFondo = Color(0xFF15151e)
+//val OscFondo = Color(0xFF626567)
 
 
 /*

@@ -240,8 +240,9 @@ fun Pager(
         repeat(pagerState.pageCount) { iteration ->
             val color by animateColorAsState(
                 if (pagerState.currentPage == iteration)
-                    MaterialTheme.colorScheme.secondary
-                else MaterialTheme.colorScheme.onPrimary, label = ""
+                    MaterialTheme.colorScheme.onPrimary
+                else MaterialTheme.colorScheme.primary,
+                label = ""
             )
 
             Box(

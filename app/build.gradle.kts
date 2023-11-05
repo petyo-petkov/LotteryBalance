@@ -59,12 +59,12 @@ dependencies {
     implementation("androidx.compose.ui:ui:")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.navigation:navigation-compose:2.7.4")
+    implementation("androidx.navigation:navigation-compose:2.7.5")
     implementation("androidx.compose.material3:material3")
-    implementation("androidx.compose.material3:material3:1.2.0-alpha09")
+    implementation("androidx.compose.material3:material3:1.2.0-alpha10")
     implementation("androidx.compose.material:material-icons-extended")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
-    implementation("androidx.compose.runtime:runtime-livedata:1.6.0-alpha07")
+    implementation("androidx.compose.runtime:runtime-livedata:1.6.0-alpha08")
     implementation("androidx.compose.foundation:foundation:1.5.4")
 
     // Gson
@@ -89,8 +89,8 @@ dependencies {
     implementation ("com.google.dagger:hilt-android:2.48")
     implementation("com.google.firebase:firebase-crashlytics-buildtools:2.9.9")
     ksp ("com.google.dagger:hilt-android-compiler:2.48")
-    ksp ("androidx.hilt:hilt-compiler:1.0.0")
-    implementation ("androidx.hilt:hilt-navigation-compose:1.1.0-rc01")
+    ksp ("androidx.hilt:hilt-compiler:1.1.0")
+    implementation ("androidx.hilt:hilt-navigation-compose:1.1.0")
 
     // Room
     implementation ("androidx.room:room-runtime:2.6.0")
@@ -108,5 +108,5 @@ dependencies {
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.09.02"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
-    debugImplementation("androidx.compose.ui:ui-test-manifest:1.6.0-alpha07")
+    debugImplementation("androidx.compose.ui:ui-test-manifest:1.6.0-alpha08")
 }

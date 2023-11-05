@@ -102,7 +102,11 @@ fun BottomBar(
                     Text("Cancel", color = MaterialTheme.colorScheme.onPrimary)
                 }
             },
-            shape = ShapeDefaults.Medium,
+            shape = ShapeDefaults.Large,
+            colors = DatePickerDefaults.colors(
+                containerColor = MaterialTheme.colorScheme.surface,
+
+            )
         ) {
             DateRangePicker(
                 state = state,
@@ -112,7 +116,7 @@ fun BottomBar(
                     todayContentColor = MaterialTheme.colorScheme.onPrimary,
                     todayDateBorderColor = MaterialTheme.colorScheme.onPrimary,
                     selectedDayContainerColor = MaterialTheme.colorScheme.secondary,
-                    dayInSelectionRangeContainerColor = MaterialTheme.colorScheme.tertiary,
+                    dayInSelectionRangeContainerColor = MaterialTheme.colorScheme.secondary,
                     dayInSelectionRangeContentColor = MaterialTheme.colorScheme.onPrimary
                 ),
                 title = {
