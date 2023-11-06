@@ -18,11 +18,11 @@ interface BoletoDao {
     fun getAllBoletos(): Flow<List<BoletoEntity>>
 
     @Query("SELECT * FROM boletoDB WHERE numeroSerie=:id")
-    suspend fun loadBoletoByID(id: Long): BoletoEntity?
+    fun loadBoletoByID(id: Long): BoletoEntity?
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertOneBoleto(boleto: BoletoEntity)
+    fun insertOneBoleto(boleto: BoletoEntity)
 
 
     @Delete

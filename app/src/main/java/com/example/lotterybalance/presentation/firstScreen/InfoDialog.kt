@@ -37,7 +37,6 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -49,7 +48,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.lotterybalance.viewModels.BoletoViewModel
-import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Locale
 import kotlin.text.Typography.euro
@@ -66,7 +64,6 @@ fun InfoDialog(
     val boleto = boletoModel.boletoState.value.estadoBoleto
     val context = LocalContext.current
     var showBorrar by rememberSaveable { mutableStateOf(false) }
-    val coroutineScope = rememberCoroutineScope()
     val formatter = rememberSaveable { SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH) }
     val listState = rememberLazyListState()
 
@@ -99,7 +96,7 @@ fun InfoDialog(
                         modifier = modifier
                             .padding(12.dp)
                             .fillMaxWidth(),
-                        state = listState,
+                        state = listState ,
                         verticalArrangement = Arrangement.Top,
                         horizontalAlignment = Alignment.CenterHorizontally
                     )
@@ -204,9 +201,7 @@ fun InfoDialog(
                     IconButton(
                         onClick = {
                             boleto.premio = ganado
-                            coroutineScope.launch {
-                                ganado?.let { boletoModel.insertOneBoleto(boleto) }
-                            }
+                            ganado?.let { boletoModel.insertOneBoleto(boleto) }
                             onDismiss()
                         },
                         modifier = modifier,

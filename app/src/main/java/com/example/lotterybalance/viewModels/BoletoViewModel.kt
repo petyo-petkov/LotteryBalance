@@ -33,8 +33,10 @@ class BoletoViewModel @Inject constructor(
     }
 
 
-    suspend fun insertOneBoleto(boleto: BoletoEntity) {
-        boletoDao.insertOneBoleto(boleto)
+    fun insertOneBoleto(boleto: BoletoEntity) {
+        viewModelScope.launch(Dispatchers.IO) {
+            boletoDao.insertOneBoleto(boleto)
+        }
     }
 
     private fun getAllBoletos() {
@@ -71,12 +73,15 @@ class BoletoViewModel @Inject constructor(
 
     }
 
-    suspend fun loadBoletoByID(id: Long) {
-        boletoDao.loadBoletoByID(id)?.let { boleto ->
-            _boletoState.value = boletoState.value.copy(
-                estadoBoleto = boleto
-            )
+    fun loadBoletoByID(id: Long) {
+        viewModelScope.launch(Dispatchers.IO) {
+            boletoDao.loadBoletoByID(id)?.let { boleto ->
+                _boletoState.value = boletoState.value.copy(
+                    estadoBoleto = boleto
+                )
+            }
         }
+
     }
 
     fun deleteAllBoletos(boletos: List<BoletoEntity>) {

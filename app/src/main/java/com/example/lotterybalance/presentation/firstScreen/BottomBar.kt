@@ -54,7 +54,7 @@ fun BottomBar(
     modifier: Modifier,
     boletoModel: BoletoViewModel,
     navController: NavController
-){
+) {
 
     val context = LocalContext.current
     val boletos = boletoModel.boletosListState.value.estadoBoletos
@@ -66,15 +66,15 @@ fun BottomBar(
     var openDialog by rememberSaveable { mutableStateOf(false) }
     val formatter = remember { SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH) }
     val state = rememberDateRangePickerState()
+    val startDay by remember(openDialog) { derivedStateOf { state.selectedStartDateMillis } }
+    val endDay by remember(openDialog) { derivedStateOf { state.selectedEndDateMillis } }
 
 
-    AnimatedVisibility (
+    AnimatedVisibility(
         visible = openDialog,
         enter = slideInVertically(),
         exit = slideOutVertically()
     ) {
-        val startDay by remember(openDialog) { derivedStateOf{ state.selectedStartDateMillis }}
-        val endDay by remember(openDialog) { derivedStateOf{ state.selectedEndDateMillis }}
 
         DatePickerDialog(
             onDismissRequest = {
@@ -102,11 +102,10 @@ fun BottomBar(
                     Text("Cancel", color = MaterialTheme.colorScheme.onPrimary)
                 }
             },
-            shape = ShapeDefaults.Large,
+            shape = ShapeDefaults.ExtraLarge,
             colors = DatePickerDefaults.colors(
                 containerColor = MaterialTheme.colorScheme.surface,
-
-            )
+                )
         ) {
             DateRangePicker(
                 state = state,
@@ -152,7 +151,6 @@ fun BottomBar(
             )
         }
 
-
     }
 
     BottomAppBar(
@@ -192,9 +190,9 @@ fun BottomBar(
 
 
     DialogoBorrar(
-       show =  showDialog,
-       onDismiss =  { showDialog = false },
-       onConfirm =  {
+        show = showDialog,
+        onDismiss = { showDialog = false },
+        onConfirm = {
             boletoModel.deleteAllBoletos(boletos)
             Toast.makeText(context, "Se han borrado todos los boletos", Toast.LENGTH_SHORT)
                 .show()
@@ -202,4 +200,3 @@ fun BottomBar(
     )
 
 }
-

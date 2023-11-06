@@ -80,7 +80,7 @@ fun Pager(
         contentPadding = PaddingValues(horizontal = 70.dp),
         pageSize = PageSize.Fixed(260.dp),
         beyondBoundsPageCount = 2,
-        flingBehavior =  fling
+        flingBehavior = fling
 
     ) { page ->
         val boleto = lista[page]
@@ -131,6 +131,7 @@ fun Pager(
                 "Loteria Nacional" -> {
                     image = painterResource(id = R.drawable.loteria_nacional)
                 }
+
                 "Euro Dreams" -> {
                     image = painterResource(id = R.drawable.euro_dreams)
                 }
@@ -169,9 +170,7 @@ fun Pager(
                 modifier = modifier
                     .clickable {
                         showInfo = true
-                        coroutine.launch {
-                            boletoModel.loadBoletoByID(boleto.numeroSerie)
-                        }
+                        boletoModel.loadBoletoByID(boleto.numeroSerie)
                     }
                     .size(260.dp, 240.dp),
                 shape = AbsoluteRoundedCornerShape(
