@@ -101,6 +101,9 @@ dependencies {
     implementation ("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.7.0")
     kapt ("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.7.0")
 
+    // LocalDate
+    implementation ("org.jetbrains.kotlinx:kotlinx-datetime:0.3.1")
+
     testImplementation("junit:junit:4.13.2")
     testImplementation("androidx.room:room-testing:2.6.0")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

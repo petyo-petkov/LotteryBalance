@@ -29,7 +29,8 @@ import java.util.Locale
             var precio = 0.0
             var tipo = ""
             var reintegro: Int? = 0
-            val numerosSeparados = mutableListOf<String>()
+            val numeroLoteria = mutableListOf<String>()
+            var numerosSeparados = mutableListOf<String>()
             val premio = 0.0
 
 
@@ -88,6 +89,11 @@ import java.util.Locale
                 "P=14" -> {
                     tipo = "Euro Dreams"
                     precio = ((combinaciones.size * 2.5) * semana)
+                }
+                "P=10" -> {
+                    tipo = "Loteria Nacional"
+                    precio = 3.0
+                    numerosSeparados = numeroLoteria
                 }
 
             }

@@ -44,6 +44,7 @@ import androidx.navigation.NavController
 import com.example.lotterybalance.navigation.AppScreens
 import com.example.lotterybalance.viewModels.BoletoViewModel
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Locale
 
 
@@ -65,7 +66,11 @@ fun BottomBar(
     // DatePicker
     var openDialog by rememberSaveable { mutableStateOf(false) }
     val formatter = remember { SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH) }
-    val state = rememberDateRangePickerState()
+
+    val startYear = Calendar.getInstance().get(Calendar.YEAR).minus(3)
+    val endYear = Calendar.getInstance().get(Calendar.YEAR).plus(1)
+    val state = rememberDateRangePickerState(yearRange = startYear..endYear )
+
     val startDay by remember(openDialog) { derivedStateOf { state.selectedStartDateMillis } }
     val endDay by remember(openDialog) { derivedStateOf { state.selectedEndDateMillis } }
 
