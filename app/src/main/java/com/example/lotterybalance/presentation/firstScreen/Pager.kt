@@ -1,4 +1,4 @@
-package com.example.lotterybalance.presentation.firstScreen
+ package com.example.lotterybalance.presentation.firstScreen
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.BorderStroke

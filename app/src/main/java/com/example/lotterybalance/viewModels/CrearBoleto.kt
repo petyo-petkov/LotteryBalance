@@ -29,7 +29,7 @@ import java.util.Locale
             var precio = 0.0
             var tipo = ""
             var reintegro: Int? = 0
-            val numeroLoteria = mutableListOf<String>()
+            var numeroLoteria = mutableListOf<String>()
             var numerosSeparados = mutableListOf<String>()
             val premio = 0.0
 
@@ -37,6 +37,9 @@ import java.util.Locale
             info.forEach { i ->
                 if (i.startsWith("R=")) {
                     reintegro = i.last().toString().toInt()
+                }
+                if (i.startsWith("N=")){
+                    numeroLoteria = listOf(i).toMutableList()
                 }
 
             }
