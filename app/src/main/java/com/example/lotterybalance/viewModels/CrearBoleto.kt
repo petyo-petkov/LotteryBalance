@@ -92,11 +92,13 @@ import java.util.Locale
                 "P=14" -> {
                     tipo = "Euro Dreams"
                     precio = ((combinaciones.size * 2.5) * semana)
+                    reintegro = null
                 }
                 "P=10" -> {
                     tipo = "Loteria Nacional"
                     precio = 3.0
                     numerosSeparados = numeroLoteria
+                    reintegro = null
                 }
 
             }
