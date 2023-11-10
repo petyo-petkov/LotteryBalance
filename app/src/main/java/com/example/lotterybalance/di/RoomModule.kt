@@ -14,11 +14,11 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object RoomModule {
 
-    private val BOLETO_DATABASE_NAME = "boleto_database"
+    private const val BOLETO_DATABASE_NAME = "boletoDB"
 
     @Singleton
     @Provides
-    fun provadeRoom(@ApplicationContext context: Context) =
+    fun provideRoom(@ApplicationContext context: Context) =
         Room.databaseBuilder(context, BoletoDatabase::class.java, BOLETO_DATABASE_NAME)
             .fallbackToDestructiveMigration()
             .build()

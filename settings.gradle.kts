@@ -23,6 +23,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Lottery Balance"
+rootProject.name = "Gastos Loteria"
 include(":app")
  

@@ -14,16 +14,17 @@ import com.example.lotterybalance.viewModels.BoletoViewModel
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun SecondScreen(
-    navController: NavController,
     boletoModel: BoletoViewModel,
+    navController: NavController,
     startDay: Long,
     endDay: Long
 ){
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         containerColor = Color(0xFF4D4646),
-        content = { SecScreenContent(boletoModel, startDay, endDay) },
+        content = { SecScreenContent(modifier = Modifier, boletoModel, startDay, endDay) },
         floatingActionButton = {  SecFAB(navController) }
 
         )
+
 }

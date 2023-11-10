@@ -1,8 +1,7 @@
 package com.example.lotterybalance.viewModels
 
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.lotterybalance.database.dao.BoletoDao
@@ -20,98 +19,90 @@ class BoletoViewModel @Inject constructor(
 
     ) : ViewModel() {
 
-    var boletos by mutableStateOf<List<BoletoEntity>>(listOf())
-        private set
-    var boleto by mutableStateOf(
-        BoletoEntity(
-            numeroSerie = 0,
-            tipo = "",
-            precio = 0.0,
-            fecha = 0,
-            combinaciones = listOf(),
-            reintegro = "",
-            premio = 0.0
-        )
-    )
-        private set
+    private val _boletosListState = mutableStateOf(BoletosListState())
+    val boletosListState: State<BoletosListState> = _boletosListState
+
+    private val _boletoState = mutableStateOf(BoletoState())
+    val boletoState: State<BoletoState> = _boletoState
+
+    private val _sortidoState = mutableStateOf(SortidoListState())
+    val sortidoState: State<SortidoListState> = _sortidoState
+
+    init {
+        getAllBoletos()
+    }
 
 
-    var sortidoBoletos by mutableStateOf<List<BoletoEntity>>(listOf())
-        private set
-
-
-    fun getAllBoletos() {
-        viewModelScope.launch {
-            boletoDao.getAllBoletos()
-                .flowOn(Dispatchers.IO)
-                .collect { result ->
-                    if (result.isNotEmpty()) {
-                        boletos = result
-                    }
-                }
+    fun insertOneBoleto(boleto: BoletoEntity) {
+        viewModelScope.launch(Dispatchers.IO) {
+            boletoDao.insertOneBoleto(boleto)
         }
     }
 
-    fun sortBoletosByDate(startDay: Long, endDay: Long) {
+    private fun getAllBoletos() {
         viewModelScope.launch {
-            boletoDao.getSelectedDates(startDay, endDay)
+            boletoDao.getAllBoletos()
                 .flowOn(Dispatchers.IO)
-                .collect { result ->
-                    sortidoBoletos = if (result.isNotEmpty()) {
-                        result
-                    }else {
-                        boletoDao.getSelectedDates(startDay = 0, endDay = 0)
-                        result
+                .collect { boleto ->
+                    _boletosListState.value = boletosListState.value.copy(
+                        estadoBoletos = boleto.sortedBy{ it.fecha }
+                    )
+                }
+        }
+
+    }
+
+    fun getBoletosByDates(startDay: Long, endDay: Long) {
+        viewModelScope.launch {
+            boletoDao.getBoletosByDates(startDay, endDay)
+                .flowOn(Dispatchers.IO)
+                .collect { selection ->
+                    when (selection.isNotEmpty()) {
+                        true ->
+                            _sortidoState.value = sortidoState.value.copy(
+                                sortidoState = selection.sortedBy{ it.fecha }
+                            )
+
+                        false ->
+                            _sortidoState.value = sortidoState.value.copy(
+                                sortidoState = emptyList()
+                            )
                     }
                 }
         }
+
     }
 
     fun loadBoletoByID(id: Long) {
-        viewModelScope.launch {
-            boletoDao.loadBoletoByID(id)
-                .flowOn(Dispatchers.IO)
-                .collect{ result ->
-                    boleto = result
-                }
+        viewModelScope.launch(Dispatchers.IO) {
+            boletoDao.loadBoletoByID(id)?.let { boleto ->
+                _boletoState.value = boletoState.value.copy(
+                    estadoBoleto = boleto
+                )
+            }
         }
+
     }
 
-    fun deleteAllBoletos() {
+    fun deleteAllBoletos(boletos: List<BoletoEntity>) {
         viewModelScope.launch {
             boletoDao.deleteAllBoletos(boletos)
-            boletoDao.getAllBoletos()
-                .flowOn(Dispatchers.IO)
-                .collect { result ->
-                    if (result.isEmpty()) {
-                        boletos = result
-                    }
-                }
-
+            _boletosListState.value = boletosListState.value.copy(
+                estadoBoletos = boletosListState.value.estadoBoletos - boletos.toSet()
+            )
         }
-
     }
 
-    fun deleteOneBoleto() {
+    fun deleteOneBoleto(boleto: BoletoEntity) {
         viewModelScope.launch {
             boletoDao.deleteBoleto(boleto)
-            boletoDao.getAllBoletos()
-                .flowOn(Dispatchers.IO)
-                .collect { result ->
-                    if (result.isEmpty()) {
-                        boletos = result
-                    }
-                }
-
-        }
-
-    }
-
-    fun updatePremio(boleto: BoletoEntity){
-        viewModelScope.launch{
-            boletoDao.updatePremio(boleto)
+            _boletosListState.value = boletosListState.value.copy(
+                estadoBoletos = boletosListState.value.estadoBoletos - boleto
+            )
         }
     }
-
 
 }
+
+
+

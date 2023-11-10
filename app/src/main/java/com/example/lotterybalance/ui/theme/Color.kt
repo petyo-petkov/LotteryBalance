@@ -2,10 +2,25 @@ package com.example.lotterybalance.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Primario = Color(0xFF413535)
-val Secundario = Color(0xFF665454)
-val Contenido = Color(0xFFF8EDD5)
+val OscPrim = Color(0xFF333333)
+val OscText = Color(0xFFe6e6e6)
+val OscSec = Color(0xFF4d4d4d)
+//val OscTet = Color(0xFF919090)
+val OscTet = Color(0xFF030303)
+val OscFondo = Color(0xFF15151e)
+//val OscFondo = Color(0xFF626567)
 
-val Background = Color(0xFF4D4C4C)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+
+/*
+val OscFondo = Color(0xFF212121)
+val OscPrim = Color(0xFF424242)
+val OscSec = Color(0xFF616161)
+val OscTet = Color(0xFF262D30)
+val OscText = Color(0xFFe6e6e6)
+*/
+
+val ClaroPrim = Color(0xFFF5CBA7)
+val ClaroText = Color(0xFF263238)
+val ClaroSec = Color(0xFFFAE5D3)
+val ClaroTet = Color(0xFF263238)
+val ClaroFondo = Color(0xFFEAFAF1)
