@@ -59,7 +59,15 @@ fun ScreenContent(
         )
         Spacer(modifier = modifier.padding(6.dp))
 
-        Pager(boletoModel = boletoModel, lista = listaBoletos.takeLast(10))
+        if (listaBoletos.isEmpty()){
+            Text(
+                text = "Usa '+', para escanear tus boletos",
+                modifier = modifier.padding(top = 120.dp),
+                color = MaterialTheme.colorScheme.onPrimary,
+                style = MaterialTheme.typography.titleLarge
+            )
+        }
+            Pager(boletoModel = boletoModel, lista = listaBoletos.takeLast(10))
 
     }
 }

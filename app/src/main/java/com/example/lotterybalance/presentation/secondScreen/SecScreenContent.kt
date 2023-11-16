@@ -70,7 +70,14 @@ fun SecScreenContent(
 
         Spacer(modifier = modifier.padding(vertical = 6.dp))
 
-        Pager(boletoModel = boletoModel, lista = listaBoletos)
-
+        if (listaBoletos.isEmpty()) {
+            Text(
+                text = " No hay boletos en este rango de fechas",
+                modifier = modifier.padding(top = 120.dp),
+                color = MaterialTheme.colorScheme.onPrimary,
+                style = MaterialTheme.typography.titleLarge
+            )
+        }
+            Pager(boletoModel = boletoModel, lista = listaBoletos)
     }
 }

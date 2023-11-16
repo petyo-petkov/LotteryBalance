@@ -8,7 +8,11 @@ import java.util.Locale
 
 @SuppressLint("SimpleDateFormat")
  fun crearBoletoEntity(data: String): BoletoEntity {
-    val info = data.split(";")
+
+     val info = data.split(";")
+    var boleto = BoletoState().estadoBoleto
+
+    /*
     var boleto = BoletoEntity(
         numeroSerie = 0L,
         tipo = "",
@@ -18,6 +22,8 @@ import java.util.Locale
         reintegro = 0,
         premio = 0.0
     )
+
+     */
 
     when {
         info.size > 1 -> {
@@ -88,6 +94,7 @@ import java.util.Locale
                 "P=7" -> {
                     tipo = "Euromillones"
                     precio = ((combinaciones.size * 2.5) * semana)
+                    reintegro = null
                 }
                 "P=14" -> {
                     tipo = "Euro Dreams"
@@ -167,3 +174,4 @@ private fun convertirString(input: String): String {
 
     return numeros.joinToString(" ")
 }
+
