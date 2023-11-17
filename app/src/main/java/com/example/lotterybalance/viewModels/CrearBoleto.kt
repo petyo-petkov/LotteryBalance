@@ -13,17 +13,7 @@ fun crearBoletoEntity(data: String): BoletoEntity {
     return when {
         info.size > 1 -> crearBoletosFromQrCode(info)
         info.size == 1 && info[0].length == 20 -> crearBoletosFromBarCode(info)
-        else -> {
-            BoletoEntity(
-                numeroSerie = 0L,
-                tipo = "",
-                fecha = 0,
-                precio = 0.0,
-                combinaciones = listOf(""),
-                reintegro = 0,
-                premio = 0.0
-            )
-        }
+        else -> { BoletoState().estadoBoleto }
     }
 }
 
