@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.lotterybalance.crearBoletos.crearBoletoEntity
 import com.example.lotterybalance.database.dao.BoletoDao
 import com.example.lotterybalance.repo.MainRepo
 import dagger.hilt.android.lifecycle.HiltViewModel

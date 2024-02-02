@@ -171,6 +171,7 @@ fun Pager(
                     .clickable {
                         showInfo = true
                         boletoModel.loadBoletoByID(boleto.numeroSerie)
+                        // coroutine.launch { Gemini() }
                     }
                     .size(260.dp, 240.dp),
                 shape = AbsoluteRoundedCornerShape(
