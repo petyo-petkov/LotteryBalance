@@ -11,7 +11,7 @@ fun crearBoletosFromBarCode(info: List<String>): BoletoEntity {
     val numeroSorteo = info[0].slice(2..3).toInt()
     val precio: Double
     val fechaInicio: LocalDate
-    val fechaInicioJUeves = LocalDate.of(2024, 1, 4)
+    val fechaInicioJueves = LocalDate.of(2024, 1, 4)
     val fechaInicioSabado = LocalDate.of(2024, 1, 6)
 
     when {
@@ -21,7 +21,7 @@ fun crearBoletosFromBarCode(info: List<String>): BoletoEntity {
         }
 
         else -> {
-            fechaInicio = fechaInicioJUeves
+            fechaInicio = fechaInicioJueves
             precio = 3.0
         }
     }
