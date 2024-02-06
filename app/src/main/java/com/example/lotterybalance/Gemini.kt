@@ -2,11 +2,12 @@ package com.example.lotterybalance
 
 import com.google.ai.client.generativeai.GenerativeModel
 
+
 suspend fun Gemini() {
 
     val generativeModel = GenerativeModel(
         modelName = "gemini-pro",
-        apiKey = com.example.lotterybalance.BuildConfig.apiKey
+        apiKey = BuildConfig.apiKey
     )
 
     val prompt = "Write a story about a magic backpack."
