@@ -1,10 +1,13 @@
+import org.jetbrains.kotlin.gradle.utils.loadPropertyFromResources
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id ("dagger.hilt.android.plugin")
+    id("dagger.hilt.android.plugin")
     //id ("org.jetbrains.kotlin.kapt")
-    id ("com.google.devtools.ksp")
-    id ("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+    id("com.google.devtools.ksp")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+
 }
 
 
@@ -12,6 +15,7 @@ plugins {
 android {
     namespace = "com.example.lotterybalance"
     compileSdk = 34
+
 
     defaultConfig {
         applicationId = "com.example.lotterybalance"
@@ -25,6 +29,7 @@ android {
             useSupportLibrary = true
         }
     }
+
 
     buildTypes {
         release {
@@ -44,6 +49,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         //kotlinCompilerExtensionVersion = "1.5.4-dev-k1.9.20-RC2-93f1625925e"
