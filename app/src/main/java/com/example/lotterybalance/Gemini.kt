@@ -1,9 +1,10 @@
 package com.example.lotterybalance
 
+import android.util.Log
 import com.google.ai.client.generativeai.GenerativeModel
 
 
-suspend fun Gemini() {
+suspend fun Gemini() { // firstScreen/Pager.kt /Card..
 
     val generativeModel = GenerativeModel(
         modelName = "gemini-pro",
@@ -13,6 +14,7 @@ suspend fun Gemini() {
     val prompt = "Write a story about a magic backpack."
     val response = generativeModel.generateContent(prompt)
 
-   // response.text?.let { Log.i("prompt", it, ) }
+   response.text?.let { Log.i("prompt", it, ) }
 
 }
+
