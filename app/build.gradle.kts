@@ -1,9 +1,8 @@
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    id("dagger.hilt.android.plugin")
-    //id ("org.jetbrains.kotlin.kapt")
-    id("com.google.devtools.ksp")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.jetbrains.kotlin)
+    alias(libs.plugins.google.dagger.hilt.android)
+    alias(libs.plugins.google.devtools.ksp)
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 
 }
@@ -63,67 +62,65 @@ android {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
-    implementation("androidx.compose.ui:ui:")
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.navigation:navigation-compose:2.7.6")
-    implementation("androidx.compose.material3:material3")
-    implementation("androidx.compose.material3:material3:1.2.0")
-    implementation("androidx.compose.material:material-icons-extended")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
-    implementation("androidx.compose.runtime:runtime-livedata:1.6.1")
-    implementation("androidx.compose.foundation:foundation:1.6.1")
-
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.material3)
+    implementation(libs.material3)
+    implementation(libs.androidx.material.icons.extended)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.androidx.runtime.livedata)
+    implementation(libs.androidx.foundation)
 
     //Gemini
-    implementation("com.google.ai.client.generativeai:generativeai:0.1.2")
-
-
+    implementation(libs.generativeai)
+    
     // Gson
-    implementation ("com.google.code.gson:gson:2.10.1")
+    implementation (libs.gson)
 
     // compose
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
-    implementation ("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
-    implementation("androidx.activity:activity-compose:1.8.2")
-    implementation(platform("androidx.compose:compose-bom:2024.02.00"))
+    implementation (libs.androidx.lifecycle.viewmodel.compose)
+    implementation (libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.activity.compose)
+    implementation(platform(libs.androidx.compose.bom))
 
     // google camera scanner
-    implementation ("com.google.android.gms:play-services-code-scanner:16.1.0")
-    implementation ("com.google.android.gms:play-services-base:18.3.0")
-    implementation ("com.google.android.gms:play-services-tflite-java:16.1.0")
+    implementation (libs.play.services.code.scanner)
+    implementation (libs.play.services.base)
+    implementation (libs.play.services.tflite.java)
 
     //viewmodel
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
-    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
+    implementation (libs.androidx.lifecycle.viewmodel.ktx)
+    implementation (libs.androidx.lifecycle.livedata.ktx)
 
     //dager hilt
-    implementation ("com.google.dagger:hilt-android:2.48")
-    implementation("com.google.firebase:firebase-crashlytics-buildtools:2.9.9")
-    ksp ("com.google.dagger:hilt-android-compiler:2.48")
-    ksp ("androidx.hilt:hilt-compiler:1.1.0")
-    implementation ("androidx.hilt:hilt-navigation-compose:1.1.0")
+    implementation (libs.hilt.android)
+    implementation(libs.firebase.crashlytics.buildtools)
+    ksp (libs.hilt.android.compiler)
+    ksp (libs.androidx.hilt.compiler)
+    implementation (libs.androidx.hilt.navigation.compose)
 
     // Room
-    implementation ("androidx.room:room-runtime:2.6.1")
-    annotationProcessor("androidx.room:room-compiler:2.6.1")
-    ksp("androidx.room:room-compiler:2.6.1")
-    implementation("androidx.room:room-ktx:2.6.1")
+    implementation (libs.androidx.room.runtime)
+    annotationProcessor(libs.androidx.room.compiler)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
 
-    implementation ("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.7.0")
-    ksp("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.7.0")
+    implementation (libs.kotlinx.metadata.jvm)
+    ksp(libs.kotlinx.metadata.jvm)
 
     // LocalDate
-    implementation ("org.jetbrains.kotlinx:kotlinx-datetime:0.3.1")
+    implementation (libs.kotlinx.datetime)
 
-    testImplementation("junit:junit:4.13.2")
-    testImplementation("androidx.room:room-testing:2.6.1")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2024.02.00"))
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-    debugImplementation("androidx.compose.ui:ui-tooling")
-    debugImplementation("androidx.compose.ui:ui-test-manifest:1.6.1")
+    testImplementation(libs.junit)
+    testImplementation(libs.androidx.room.testing)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+    debugImplementation(libs.androidx.ui.tooling)
+    debugImplementation(libs.androidx.ui.test.manifest)
 }
