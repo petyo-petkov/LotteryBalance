@@ -3,20 +3,19 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin)
     alias(libs.plugins.google.dagger.hilt.android)
     alias(libs.plugins.google.devtools.ksp)
-    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+    //alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
+
+    //alias(libs.plugins.io.realm.kotlin)
 
 }
-
-
 
 android {
     namespace = "com.example.lotterybalance"
     compileSdk = 34
 
-
     defaultConfig {
         applicationId = "com.example.lotterybalance"
-        minSdk = 30
+        minSdk = 33
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -26,7 +25,6 @@ android {
             useSupportLibrary = true
         }
     }
-
 
     buildTypes {
         release {
@@ -46,18 +44,15 @@ android {
     }
     buildFeatures {
         compose = true
-        buildConfig = true
     }
     composeOptions {
-        //kotlinCompilerExtensionVersion = "1.5.4-dev-k1.9.20-RC2-93f1625925e"
-        kotlinCompilerExtensionVersion = "1.5.9-dev-k2.0.0-Beta3-7c5ec6895a0"
+        kotlinCompilerExtensionVersion = "1.5.8-dev-k1.9.22-42b6ec2b037"
     }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
-
 }
 
 dependencies {
@@ -65,19 +60,16 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.ui.graphics)
+    implementation(libs.ui.tooling.preview)
     implementation(libs.androidx.navigation.compose)
-    implementation(libs.androidx.material3)
+    implementation(libs.androidx.material3.v)
     implementation(libs.material3)
-    implementation(libs.androidx.material.icons.extended)
+    implementation(libs.material.icons.extended)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.androidx.runtime.livedata)
     implementation(libs.androidx.foundation)
 
-    //Gemini
-    implementation(libs.generativeai)
-    
     // Gson
     implementation (libs.gson)
 
@@ -97,7 +89,7 @@ dependencies {
     implementation (libs.androidx.lifecycle.livedata.ktx)
 
     //dager hilt
-    implementation (libs.hilt.android)
+    implementation (libs.hilt.android.v248)
     implementation(libs.firebase.crashlytics.buildtools)
     ksp (libs.hilt.android.compiler)
     ksp (libs.androidx.hilt.compiler)
@@ -109,8 +101,17 @@ dependencies {
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
 
+    // Gemini
+    implementation(libs.generativeai)
+
+    //Realm
+    implementation (libs.library.base)
+    implementation (libs.library.sync)
+    implementation (libs.kotlinx.coroutines.core)
+
+
     implementation (libs.kotlinx.metadata.jvm)
-    ksp(libs.kotlinx.metadata.jvm)
+    ksp (libs.kotlinx.metadata.jvm)
 
     // LocalDate
     implementation (libs.kotlinx.datetime)
@@ -120,7 +121,7 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
+    androidTestImplementation(libs.ui.test.junit4)
+    debugImplementation(libs.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }

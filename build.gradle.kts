@@ -12,5 +12,8 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin) apply false
     alias(libs.plugins.google.dagger.hilt.android) apply false
     alias(libs.plugins.google.devtools.ksp) apply false
+    alias(libs.plugins.io.realm.kotlin) apply false
+    //alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin) apply false
+
 
 }
